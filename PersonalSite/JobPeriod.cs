@@ -1,20 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PersonalSite.Domain
 {
-    public class JobPeriod : ValueObject<JobPeriod>
+    public class JobPeriod : ValueObject
     {
         public DateTime Start { get; private set; }
         public DateTime? End { get; private set; }
 
-        protected override bool EqualsCore(JobPeriod other)
-        {
-            throw new NotImplementedException();
-        }
 
-        protected override int GetHashCodeCore()
+        protected override IEnumerable<object> GetAtomicValues()
         {
-            throw new NotImplementedException();
+            yield return Start;
+            yield return End;
         }
     }
 }
