@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain;
+using PersonalSite.Domain.Entities;
+using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Persistence
 {

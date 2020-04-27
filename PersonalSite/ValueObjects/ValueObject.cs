@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PersonalSite.Domain
+namespace PersonalSite.Domain.ValueObjects
 {
     public abstract class ValueObject
     {

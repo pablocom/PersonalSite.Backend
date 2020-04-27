@@ -1,0 +1,1 @@
+Add-Migration NameOfMigration -Project PersonalSite.Persistence -StartUpProject PersonalSite.API

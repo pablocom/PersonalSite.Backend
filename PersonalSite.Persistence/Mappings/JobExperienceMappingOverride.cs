@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PersonalSite.Domain;
-using System;
+using PersonalSite.Domain.Entities;
 
-namespace PersonalSite.Persistence
+namespace PersonalSite.Persistence.Mappings
 {
     class JobExperienceMappingOverride : IEntityTypeConfiguration<JobExperience>
     {
