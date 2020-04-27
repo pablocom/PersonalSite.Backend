@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,9 +22,13 @@ namespace PersonalSite.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
             services.AddDbContext<PersonalSiteDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("PersonalSiteDatabase")));
+
+            services.AddScoped<DbContext, PersonalSiteDbContext>();
+            services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
+
+            RunContextMigrations(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +45,11 @@ namespace PersonalSite.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void RunContextMigrations(IServiceCollection services)
+        {
+            services.BuildServiceProvider().GetService<IMigrator>().Migrate();
         }
     }
 }
