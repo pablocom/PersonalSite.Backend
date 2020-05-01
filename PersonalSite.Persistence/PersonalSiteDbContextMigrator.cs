@@ -7,8 +7,8 @@ namespace PersonalSite.Persistence
 {
     public class PersonalSiteDbContextMigrator : IMigrator
     {
-        private readonly DbContext _context;
-        public PersonalSiteDbContextMigrator(DbContext context)
+        private readonly PersonalSiteDbContext _context;
+        public PersonalSiteDbContextMigrator(PersonalSiteDbContext context)
         {
             _context = context;
         }

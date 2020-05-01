@@ -25,7 +25,7 @@ namespace PersonalSite.API
             services.AddDbContext<PersonalSiteDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("PersonalSiteDatabase")));
 
-            services.AddScoped<DbContext, PersonalSiteDbContext>();
+            services.AddScoped<IPersonalSiteRepository, PersonalSiteRepository>();
             services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
 
             RunContextMigrations(services);
