@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
+using System.Threading.Tasks;
 
 namespace PersonalSite.API.Controllers
 {
@@ -13,23 +12,22 @@ namespace PersonalSite.API.Controllers
     {
         private readonly ILogger<HealthCheckController> logger;
         private readonly IPersonalSiteRepository repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public JobExperienceController(ILogger<HealthCheckController> logger, IPersonalSiteRepository repository)
+        public JobExperienceController(ILogger<HealthCheckController> logger, IPersonalSiteRepository repository, IUnitOfWork unitOfWork)
         {
             this.logger = logger;
             this.repository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
         // POST /jobexperience
         [HttpPost]
         public async Task<IActionResult> Create()
         {
-            var jobExperience =
-                new JobExperience("Ryanair", "Software developer", null, new[] {".Net Core", "EF Core"});
-
+            var jobExperience = new JobExperience("Loterias", "Backend developer", null, new[] {"Node.js", "Angular"});
             repository.Add(jobExperience);
 
-            await repository.UnitOfWork.SaveChangesAsync();
             return Ok();
         }
     }

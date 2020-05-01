@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Persistence
 {
     public class PersonalSiteRepository : IPersonalSiteRepository
     {
         private readonly PersonalSiteDbContext context;
-        public IUnitOfWork UnitOfWork => context;
 
         public PersonalSiteRepository(PersonalSiteDbContext context)
         {
@@ -32,6 +32,11 @@ namespace PersonalSite.Persistence
         public void Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             this.context.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await this.context.SaveEntitiesAsync();
         }
     }
 }

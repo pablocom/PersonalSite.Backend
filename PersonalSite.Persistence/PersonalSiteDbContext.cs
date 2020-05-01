@@ -6,7 +6,7 @@ using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Persistence
 {
-    public class PersonalSiteDbContext : DbContext, IUnitOfWork
+    public class PersonalSiteDbContext : DbContext
     {
         public PersonalSiteDbContext(DbContextOptions<PersonalSiteDbContext> options) 
             : base(options)
@@ -33,11 +33,6 @@ namespace PersonalSite.Persistence
             var result = await base.SaveChangesAsync(cancellationToken);
 
             return true;
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
         }
     }
 }
