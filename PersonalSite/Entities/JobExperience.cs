@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.ValueObjects;
 
 namespace PersonalSite.Domain.Entities
@@ -15,10 +16,18 @@ namespace PersonalSite.Domain.Entities
 
         public JobExperience(string company, string description, JobPeriod jobPeriod, ICollection<string> techStack)
         {
+            ValidateJobExperience(company, description);
+
             Company = company;
             Description = description;
             JobPeriod = jobPeriod;
             TechStack = techStack;
+        }
+
+        private void ValidateJobExperience(string company, string description)
+        {
+            if (company == null || description == null)
+                throw new DomainException("Job experience company and description must have value");
         }
     }
 }

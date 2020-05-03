@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PersonalSite.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PersonalSite.Domain.Entities;
 
 namespace PersonalSite.Persistence
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 
 namespace PersonalSite.Persistence
 {
@@ -13,8 +14,17 @@ namespace PersonalSite.Persistence
 
         public void Dispose()
         {
-            this.context.SaveChanges();
-            this.context.Dispose();
+            try
+            {
+                this.context.SaveChanges();
+                this.context.Dispose();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
     }
 }

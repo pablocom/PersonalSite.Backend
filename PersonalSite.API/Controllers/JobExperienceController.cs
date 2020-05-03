@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 using System.Threading.Tasks;
 using PersonalSite.API.Application.Dtos;
-using PersonalSite.Domain.ValueObjects;
 using PersonalSite.Services;
 
 namespace PersonalSite.API.Controllers
@@ -23,6 +23,13 @@ namespace PersonalSite.API.Controllers
             this.logger = logger;
             this.service = service;
             this.unitOfWork = unitOfWork;
+        }
+
+        // GET /jobexperience
+        [HttpGet]
+        public async Task<IEnumerable<JobExperience>> GetAll()
+        {
+            return service.GetAll();
         }
 
         // POST /jobexperience
