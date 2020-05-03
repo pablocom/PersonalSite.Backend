@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PersonalSite.Persistence;
+using PersonalSite.Services;
 
 namespace PersonalSite.API
 {
@@ -28,6 +29,7 @@ namespace PersonalSite.API
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPersonalSiteRepository, PersonalSiteRepository>();
             services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
+            services.AddScoped<IJobExperienceService, JobExperienceService>();
 
             RunContextMigrations(services);
         }

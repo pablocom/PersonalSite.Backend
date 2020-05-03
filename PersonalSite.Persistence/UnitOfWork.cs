@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace PersonalSite.Persistence
 {
@@ -14,18 +13,8 @@ namespace PersonalSite.Persistence
 
         public void Dispose()
         {
-            Task.WaitAll(this.SaveChangesAsync());
+            this.context.SaveChanges();
             this.context.Dispose();
-        }
-
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return await this.context.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return await this.context.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

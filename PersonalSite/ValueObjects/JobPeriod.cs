@@ -10,6 +10,12 @@ namespace PersonalSite.Domain.ValueObjects
 
         protected JobPeriod() { }
 
+        public JobPeriod(DateTime start, DateTime? end)
+        {
+            Start = start;
+            End = end;
+        }
+
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Start;

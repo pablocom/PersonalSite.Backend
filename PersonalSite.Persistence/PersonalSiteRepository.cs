@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using PersonalSite.Domain.Entities;
 
 namespace PersonalSite.Persistence
 {
@@ -14,29 +14,24 @@ namespace PersonalSite.Persistence
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add<TEntity>(TEntity entity) where TEntity : class
+        public void Add<TEntity>(TEntity entity) where TEntity : Entity
         {
             this.context.Set<TEntity>().Add(entity);
         }
 
-        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class
+        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : Entity
         {
             return this.context.Set<TEntity>().AsQueryable();
         }
 
-        public void Delete<TEntity>(TEntity entity) where TEntity : class
+        public void Delete<TEntity>(TEntity entity) where TEntity : Entity
         {
             this.context.Set<TEntity>().Remove(entity);
         }
 
-        public void Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        public void Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity
         {
             this.context.Set<TEntity>().RemoveRange(entities);
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await this.context.SaveEntitiesAsync();
         }
     }
 }

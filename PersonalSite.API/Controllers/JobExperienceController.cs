@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 using System.Threading.Tasks;
+using PersonalSite.API.Application.Dtos;
+using PersonalSite.Domain.ValueObjects;
+using PersonalSite.Services;
 
 namespace PersonalSite.API.Controllers
 {
@@ -11,23 +15,25 @@ namespace PersonalSite.API.Controllers
     public class JobExperienceController : ControllerBase
     {
         private readonly ILogger<HealthCheckController> logger;
-        private readonly IPersonalSiteRepository repository;
+        private readonly IJobExperienceService service;
         private readonly IUnitOfWork unitOfWork;
 
-        public JobExperienceController(ILogger<HealthCheckController> logger, IPersonalSiteRepository repository, IUnitOfWork unitOfWork)
+        public JobExperienceController(ILogger<HealthCheckController> logger, IJobExperienceService service, IUnitOfWork unitOfWork)
         {
             this.logger = logger;
-            this.repository = repository;
+            this.service = service;
             this.unitOfWork = unitOfWork;
         }
 
         // POST /jobexperience
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
         {
-            var jobExperience = new JobExperience("Loterias", "Backend developer", null, new[] {"Node.js", "Angular"});
-            repository.Add(jobExperience);
-
+            service.CreateJobExperience(dto.Company,
+                dto.Description,
+                dto.JobPeriodStart,
+                dto.JobPeriodEnd,
+                dto.TechStack.ToArray());
             return Ok();
         }
     }
