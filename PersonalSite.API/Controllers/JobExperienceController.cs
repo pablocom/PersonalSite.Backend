@@ -14,11 +14,11 @@ namespace PersonalSite.API.Controllers
     [Route("[controller]")]
     public class JobExperienceController : ControllerBase
     {
-        private readonly ILogger<HealthCheckController> logger;
+        private readonly ILogger<JobExperienceController> logger;
         private readonly IJobExperienceService service;
         private readonly IUnitOfWork unitOfWork;
 
-        public JobExperienceController(ILogger<HealthCheckController> logger, IJobExperienceService service, IUnitOfWork unitOfWork)
+        public JobExperienceController(ILogger<JobExperienceController> logger, IJobExperienceService service, IUnitOfWork unitOfWork)
         {
             this.logger = logger;
             this.service = service;
@@ -27,7 +27,7 @@ namespace PersonalSite.API.Controllers
 
         // GET /jobexperience
         [HttpGet]
-        public async Task<IEnumerable<JobExperience>> GetAll()
+        public IEnumerable<JobExperience> GetAll()
         {
             return service.GetAll();
         }
@@ -40,7 +40,7 @@ namespace PersonalSite.API.Controllers
                 dto.Description,
                 dto.JobPeriodStart,
                 dto.JobPeriodEnd,
-                dto.TechStack.ToArray());
+                dto.TechStack);
             return Ok();
         }
     }

@@ -12,6 +12,6 @@ namespace PersonalSite.API.Application.Dtos
         public string Description { get; set; }
         public DateTime JobPeriodStart { get; set; }
         public DateTime? JobPeriodEnd { get; set; }
-        public ICollection<string> TechStack { get; set; }
+        public string[] TechStack { get; set; }
     }
 }
