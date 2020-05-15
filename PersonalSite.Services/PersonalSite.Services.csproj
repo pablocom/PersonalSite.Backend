@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
     <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
-    <ProjectReference Include="..\PersonalSite\PersonalSite.Domain.csproj" />
   </ItemGroup>
 
 </Project>
