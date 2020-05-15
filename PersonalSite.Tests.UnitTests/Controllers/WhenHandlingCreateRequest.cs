@@ -9,16 +9,14 @@ using PersonalSite.Services;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
 {
+    [TestFixture]
     public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
     {
         private IJobExperienceService service;
-        private JobExperienceController controller;
 
-        [SetUp]
-        public void SetUp()
+        protected override void AdditionalSetup()
         {
             service = Substitute.For<IJobExperienceService>();
-            controller = GetController();
         }
 
         [Test]
@@ -38,16 +36,14 @@ namespace PersonalSite.Tests.UnitTests.Controllers
                 TechStack = techStack
             };
 
-            _ = controller.Create(createJobExperienceDto);
+            _ = Controller.Create(createJobExperienceDto);
 
             service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart),
                 Arg.Is(jobPeriodEnd), Arg.Is(techStack));
         }
 
-        public override JobExperienceController GetController()
-        {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
+        protected override JobExperienceController GetController() =>
+            new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
                 Substitute.For<IUnitOfWork>());
-        }
     }
 }

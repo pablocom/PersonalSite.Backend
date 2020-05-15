@@ -16,6 +16,6 @@ namespace PersonalSite.Domain.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok("Pablo Company PersonalSite's API Rest");
+        public IActionResult GetHealthStatus() => Ok("Pablo Company PersonalSite's API Rest");
     }
 }
