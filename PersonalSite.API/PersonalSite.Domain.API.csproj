@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>PersonalSite.Domain.API</AssemblyName>
+    <RootNamespace>PersonalSite.Domain.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
