@@ -29,15 +29,16 @@ namespace PersonalSite.Tests.UnitTests
             var jobPeriodStart = new DateTime(2020, 1, 1);
             var jobPeriodEnd = new DateTime(2020, 5, 1);
             var techStack = new[] {".Net Core", "NSubstitute"};
-
-            _ = controller.Create(new CreateJobExperienceDto
+            var createJobExperienceDto = new CreateJobExperienceDto
             {
                 Company = company,
                 Description = description,
                 JobPeriodStart = jobPeriodStart,
                 JobPeriodEnd = jobPeriodEnd,
                 TechStack = techStack
-            });
+            };
+
+            _ = controller.Create(createJobExperienceDto);
 
             service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart), Arg.Is(jobPeriodEnd), Arg.Is(techStack));
         }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "PersonalSite\PersonalSite.Domain.csproj", "{13178447-06FA-4652-8735-CD79E255C6F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "PersonalSite.Domain\PersonalSite.Domain.csproj", "{13178447-06FA-4652-8735-CD79E255C6F9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Persistence", "PersonalSite.Persistence\PersonalSite.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
 EndProject
