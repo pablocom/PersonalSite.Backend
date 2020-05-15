@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
-namespace PersonalSite.API.Controllers
+namespace PersonalSite.Domain.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

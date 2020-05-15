@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace PersonalSite.API
+namespace PersonalSite.Domain.API
 {
     public class Program
     {

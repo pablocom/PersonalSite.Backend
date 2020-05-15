@@ -2,14 +2,14 @@ using System;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.API.Application.Dtos;
-using PersonalSite.API.Controllers;
+using PersonalSite.Domain.API.Application.Dtos;
+using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
 using PersonalSite.Services;
 
-namespace PersonalSite.Tests.UnitTests
+namespace PersonalSite.Tests.UnitTests.Controllers
 {
-    public class WhenJobExperiencesControllerHandlesCreateRequest : ControllerTestBase<JobExperienceController>
+    public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
     {
         private IJobExperienceService service;
         private JobExperienceController controller;
@@ -40,12 +40,14 @@ namespace PersonalSite.Tests.UnitTests
 
             _ = controller.Create(createJobExperienceDto);
 
-            service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart), Arg.Is(jobPeriodEnd), Arg.Is(techStack));
+            service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart),
+                Arg.Is(jobPeriodEnd), Arg.Is(techStack));
         }
 
         public override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service, Substitute.For<IUnitOfWork>());
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
+                Substitute.For<IUnitOfWork>());
         }
     }
 }

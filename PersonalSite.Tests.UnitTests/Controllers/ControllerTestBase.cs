@@ -1,4 +1,4 @@
-namespace PersonalSite.Tests.UnitTests
+namespace PersonalSite.Tests.UnitTests.Controllers
 {
     public abstract class ControllerTestBase<TController>
     {

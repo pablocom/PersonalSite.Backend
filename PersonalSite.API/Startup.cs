@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using PersonalSite.Persistence;
 using PersonalSite.Services;
 
-namespace PersonalSite.API
+namespace PersonalSite.Domain.API
 {
     public class Startup
     {

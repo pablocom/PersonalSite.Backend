@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
-using System.Threading.Tasks;
-using PersonalSite.API.Application.Dtos;
 using PersonalSite.Services;
 
-namespace PersonalSite.API.Controllers
+namespace PersonalSite.Domain.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
