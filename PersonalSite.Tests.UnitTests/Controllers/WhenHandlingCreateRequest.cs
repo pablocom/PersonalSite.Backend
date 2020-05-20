@@ -1,11 +1,11 @@
-using System;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.API.Controllers;
-using PersonalSite.Persistence;
 using PersonalSite.Services;
+using System;
+using PersonalSite.Persistence;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
 {
@@ -42,8 +42,10 @@ namespace PersonalSite.Tests.UnitTests.Controllers
                 Arg.Is(jobPeriodEnd), Arg.Is(techStack));
         }
 
-        protected override JobExperienceController GetController() =>
-            new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
+        protected override JobExperienceController GetController()
+        {
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
                 Substitute.For<IUnitOfWork>());
+        }
     }
 }

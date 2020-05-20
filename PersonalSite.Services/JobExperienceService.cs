@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using PersonalSite.Domain.Entities;
+﻿using PersonalSite.Domain.Entities;
 using PersonalSite.Domain.ValueObjects;
 using PersonalSite.Persistence;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonalSite.Services
 {

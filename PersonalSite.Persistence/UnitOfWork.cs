@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Persistence
 {
@@ -12,19 +12,9 @@ namespace PersonalSite.Persistence
             this.context = context;
         }
 
-        public void Dispose()
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            try
-            {
-                this.context.SaveChanges();
-                this.context.Dispose();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
+            return await context.SaveChangesAsync(cancellationToken);
         }
     }
 }

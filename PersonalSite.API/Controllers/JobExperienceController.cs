@@ -35,11 +35,13 @@ namespace PersonalSite.Domain.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
         {
-            service.CreateJobExperience(dto.Company,
+            this.service.CreateJobExperience(dto.Company,
                 dto.Description,
                 dto.JobPeriodStart,
                 dto.JobPeriodEnd,
                 dto.TechStack);
+
+            await this.unitOfWork.SaveChangesAsync();
             return Ok();
         }
     }
