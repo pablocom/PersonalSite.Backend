@@ -49,7 +49,7 @@ namespace PersonalSite.Tests.UnitTests.Services
                     .Build()
             });
 
-            var jobExperiences = Repository.GetAll<JobExperience>().ToArray();
+            var jobExperiences = service.GetAll().ToArray();
 
             AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
             AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
