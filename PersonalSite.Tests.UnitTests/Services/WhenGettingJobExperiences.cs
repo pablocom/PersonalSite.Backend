@@ -51,19 +51,18 @@ namespace PersonalSite.Tests.UnitTests.Services
 
             var jobExperiences = Repository.GetAll<JobExperience>().ToArray();
 
-            var firstJobExperience = jobExperiences[0];
-            Assert.That(firstJobExperience.Company, Is.EqualTo(company));
-            Assert.That(firstJobExperience.Description, Is.EqualTo(description));
-            Assert.That(firstJobExperience.JobPeriod.Start, Is.EqualTo(startDate));
-            Assert.That(firstJobExperience.JobPeriod.End, Is.EqualTo(endDate));
-            CollectionAssert.AreEquivalent(techStack, firstJobExperience.TechStack);
+            AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
+            AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
+        }
 
-            var secondJobExperience = jobExperiences[1];
-            Assert.That(secondJobExperience.Company, Is.EqualTo(otherCompany));
-            Assert.That(secondJobExperience.Description, Is.EqualTo(otherDescription));
-            Assert.That(secondJobExperience.JobPeriod.Start, Is.EqualTo(otherStartDate));
-            Assert.That(secondJobExperience.JobPeriod.End, Is.EqualTo(otherEndDate));
-            CollectionAssert.AreEquivalent(otherTechStack, secondJobExperience.TechStack);
+        private static void AssertJobExperience(JobExperience jobExperience, string company, string description,
+            DateTime startDate, DateTime endDate, string[] techStack)
+        {
+            Assert.That(jobExperience.Company, Is.EqualTo(company));
+            Assert.That(jobExperience.Description, Is.EqualTo(description));
+            Assert.That(jobExperience.JobPeriod.Start, Is.EqualTo(startDate));
+            Assert.That(jobExperience.JobPeriod.End, Is.EqualTo(endDate));
+            CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
         }
     }
 }
