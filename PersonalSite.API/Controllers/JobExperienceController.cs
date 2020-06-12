@@ -27,7 +27,7 @@ namespace PersonalSite.Domain.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<JobExperience>> GetAll()
         {
-            return await Task.FromResult(service.GetAll());
+            return await Task.FromResult(service.GetJobExperiences());
         }
 
         [HttpPost]

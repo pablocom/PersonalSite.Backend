@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 
