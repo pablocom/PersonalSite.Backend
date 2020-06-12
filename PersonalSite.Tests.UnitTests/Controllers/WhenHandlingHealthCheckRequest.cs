@@ -17,7 +17,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
             var result = Controller.GetHealthStatus() as OkObjectResult;
 
             Assert.IsNotNull(result);
-            Assert.That(result.StatusCode, Is.EqualTo("UnexpectedValue"));
+            Assert.That(result.StatusCode, Is.EqualTo(200));
             Assert.That(result.Value, Is.EqualTo(expectedMessage));
         }
 
