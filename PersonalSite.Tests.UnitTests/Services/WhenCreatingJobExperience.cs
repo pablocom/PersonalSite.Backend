@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Services;
+using System;
+using System.Linq;
 
 namespace PersonalSite.Tests.UnitTests.Services
 {

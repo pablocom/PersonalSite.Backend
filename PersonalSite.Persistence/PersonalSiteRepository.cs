@@ -19,6 +19,11 @@ namespace PersonalSite.Persistence
             this.context.Set<TEntity>().Add(entity);
         }
 
+        public void AddAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity
+        {
+            this.context.Set<TEntity>().AddRange(entities);
+        }
+
         public IQueryable<TEntity> GetAll<TEntity>() where TEntity : Entity
         {
             return this.context.Set<TEntity>().AsQueryable();

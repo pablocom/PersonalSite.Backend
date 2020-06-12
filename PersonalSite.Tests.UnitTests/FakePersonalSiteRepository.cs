@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Entities;
+﻿using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonalSite.Tests.UnitTests
 {
@@ -18,6 +17,11 @@ namespace PersonalSite.Tests.UnitTests
         public void Add<TEntity>(TEntity entity) where TEntity : Entity
         {
             dbContext.Add(entity);
+        }
+
+        public void AddAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity
+        {
+            dbContext.Set<TEntity>().AddRange(entities);
         }
 
         public IQueryable<TEntity> GetAll<TEntity>() where TEntity : Entity

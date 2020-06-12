@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Tests.UnitTests
@@ -22,6 +23,12 @@ namespace PersonalSite.Tests.UnitTests
         public void CloseContext()
         {
             FakeDbContext.SaveChanges();
+        }
+
+        protected void AssumeDataInRepository<TEntity>(params TEntity[] entities) where TEntity : Entity
+        {
+            Repository.AddAll(entities);
+            CloseContext();
         }
 
         protected virtual void AdditionalSetup() { }
