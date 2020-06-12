@@ -5,7 +5,7 @@ using PersonalSite.Domain.Entities;
 
 namespace PersonalSite.Persistence.Mappings
 {
-    class JobExperienceMappingOverride : IEntityTypeConfiguration<JobExperience>
+    public class JobExperienceMappingOverride : IEntityTypeConfiguration<JobExperience>
     {
         public void Configure(EntityTypeBuilder<JobExperience> builder)
         {

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 using PersonalSite.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Domain.API.Controllers
 {
@@ -24,14 +24,12 @@ namespace PersonalSite.Domain.API.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET /jobexperience
         [HttpGet]
-        public IEnumerable<JobExperience> GetAll()
+        public async Task<IEnumerable<JobExperience>> GetAll()
         {
-            return service.GetAll();
+            return await Task.FromResult(service.GetAll());
         }
 
-        // POST /jobexperience
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
         {

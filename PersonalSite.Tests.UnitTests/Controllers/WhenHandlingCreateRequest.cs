@@ -5,6 +5,7 @@ using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Services;
 using System;
+using System.Threading.Tasks;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
@@ -20,7 +21,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
         }
 
         [Test]
-        public void ServiceIsCalled()
+        public async Task ServiceIsCalled()
         {
             var company = "Ryanair";
             var description = "Software Developer";
@@ -36,7 +37,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
                 TechStack = techStack
             };
 
-            _ = Controller.Create(createJobExperienceDto);
+            await Controller.Create(createJobExperienceDto);
 
             service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart),
                 Arg.Is(jobPeriodEnd), Arg.Is(techStack));

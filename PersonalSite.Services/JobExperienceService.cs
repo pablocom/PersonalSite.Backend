@@ -9,7 +9,7 @@ namespace PersonalSite.Services
 {
     public interface IJobExperienceService
     {
-        void CreateJobExperience(string company, string jobExperience, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack);
+        void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack);
         IEnumerable<JobExperience> GetAll();
     }
 
@@ -22,9 +22,9 @@ namespace PersonalSite.Services
             this.repository = repository;
         }
 
-        public void CreateJobExperience(string company, string jobExperience, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
+        public void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
         {
-            repository.Add(new JobExperience(company, jobExperience, new JobPeriod(jobPeriodStart, jobPeriodEnd), techStack));
+            repository.Add(new JobExperience(company, description, new JobPeriod(jobPeriodStart, jobPeriodEnd), techStack));
         }
 
         public IEnumerable<JobExperience> GetAll()
