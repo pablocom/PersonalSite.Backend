@@ -12,9 +12,14 @@ namespace PersonalSite.Persistence
             this.context = context;
         }
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await context.SaveChangesAsync(cancellationToken);
+        }
+
+        public int SaveChanges()
+        {
+            return context.SaveChanges();
         }
     }
 }

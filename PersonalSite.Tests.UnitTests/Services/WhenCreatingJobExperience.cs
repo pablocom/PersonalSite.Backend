@@ -32,6 +32,20 @@ namespace PersonalSite.Tests.UnitTests.Services
             AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
         }
 
+        [TestCase(null, null)]
+        [TestCase("", null)]
+        [TestCase(null, "")]
+        [TestCase("", "")]
+        public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
+        {
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                service.CreateJobExperience(company, description, new DateTime(), new DateTime(), new string[0]);
+            });
+
+            Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
+        }
+
         private void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
             DateTime endDate, string[] techStack)
         {

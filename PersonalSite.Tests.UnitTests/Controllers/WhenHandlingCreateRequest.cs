@@ -21,7 +21,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
         }
 
         [Test]
-        public async Task ServiceIsCalled()
+        public void ServiceIsCalled()
         {
             var company = "Ryanair";
             var description = "Software Developer";
@@ -37,7 +37,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
                 TechStack = techStack
             };
 
-            await Controller.Create(createJobExperienceDto);
+            Controller.Create(createJobExperienceDto);
 
             service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart),
                 Arg.Is(jobPeriodEnd), Arg.Is(techStack));

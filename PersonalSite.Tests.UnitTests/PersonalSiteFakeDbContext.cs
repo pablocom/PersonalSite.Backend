@@ -16,7 +16,6 @@ namespace PersonalSite.Tests.UnitTests
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             AddPersonalSiteMappings(modelBuilder);
         }
 

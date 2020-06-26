@@ -32,6 +32,4 @@ namespace PersonalSite.Tests.UnitTests
 
         protected virtual void AdditionalSetup() { }
     }
-
-    
 }

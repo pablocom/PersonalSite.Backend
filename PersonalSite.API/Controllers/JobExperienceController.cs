@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Application.Dtos;
-using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 using PersonalSite.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PersonalSite.Domain.API.Controllers
 {
@@ -25,21 +22,22 @@ namespace PersonalSite.Domain.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<JobExperience>> GetAll()
+        public IActionResult GetAll()
         {
-            return await Task.FromResult(service.GetJobExperiences());
+            var jobExperiences = service.GetJobExperiences();
+            return Ok(jobExperiences);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
+        public IActionResult Create([FromBody] CreateJobExperienceDto dto)
         {
-            this.service.CreateJobExperience(dto.Company,
+            service.CreateJobExperience(dto.Company,
                 dto.Description,
                 dto.JobPeriodStart,
                 dto.JobPeriodEnd,
                 dto.TechStack);
 
-            await this.unitOfWork.SaveChangesAsync();
+            unitOfWork.SaveChangesAsync();
             return Ok();
         }
     }
