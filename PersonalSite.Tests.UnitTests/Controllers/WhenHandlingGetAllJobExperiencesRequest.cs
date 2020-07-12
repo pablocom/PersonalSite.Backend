@@ -30,8 +30,7 @@ namespace PersonalSite.Tests.UnitTests.Controllers
         
         protected override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IJobExperienceService>(),
-                Substitute.For<IUnitOfWork>(), mediator);
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IUnitOfWork>(), mediator);
         }
     }
 }

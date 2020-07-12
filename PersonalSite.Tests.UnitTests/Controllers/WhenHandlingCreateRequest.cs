@@ -7,21 +7,23 @@ using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
 using PersonalSite.Services;
 using System;
+using System.Threading.Tasks;
+using PersonalSite.Domain.API.Application.Commands;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
 {
     [TestFixture]
     public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
     {
-        private IJobExperienceService service;
+        private IMediator mediator;
 
         protected override void AdditionalSetup()
         {
-            service = Substitute.For<IJobExperienceService>();
+            mediator = Substitute.For<IMediator>();
         }
 
         [Test]
-        public void ServiceIsCalled()
+        public async Task ServiceIsCalled()
         {
             var company = "Ryanair";
             var description = "Software Developer";
@@ -37,16 +39,26 @@ namespace PersonalSite.Tests.UnitTests.Controllers
                 TechStack = techStack
             };
 
-            Controller.Create(createJobExperienceDto);
+            await Controller.Create(createJobExperienceDto);
 
-            service.Received(1).CreateJobExperience(Arg.Is(company), Arg.Is(description), Arg.Is(jobPeriodStart),
-                Arg.Is(jobPeriodEnd), Arg.Is(techStack));
+            await mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
+                    AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
+        }
+
+        private bool AssertCommand(CreateJobExperienceCommand createJobExperienceCommand, string company,
+            string description, DateTime start, DateTime end, string[] teckStack)
+        {
+            Assert.That(createJobExperienceCommand.Company, Is.EqualTo(company));
+            Assert.That(createJobExperienceCommand.Description, Is.EqualTo(description));
+            Assert.That(createJobExperienceCommand.JobPeriodStart, Is.EqualTo(start));
+            Assert.That(createJobExperienceCommand.JobPeriodEnd, Is.EqualTo(end));
+            CollectionAssert.AreEquivalent(teckStack, createJobExperienceCommand.TechStack);
+            return true;
         }
 
         protected override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
-                Substitute.For<IUnitOfWork>(), Substitute.For<IMediator>());
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IUnitOfWork>(), mediator);
         }
     }
 }
