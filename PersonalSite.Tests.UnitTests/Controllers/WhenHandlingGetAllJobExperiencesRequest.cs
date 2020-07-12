@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
+using PersonalSite.Server.Queries;
 using PersonalSite.Services;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
@@ -10,25 +13,25 @@ namespace PersonalSite.Tests.UnitTests.Controllers
     [TestFixture]
     public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>
     {
-        private IJobExperienceService service;
+        private IMediator mediator;
 
         protected override void AdditionalSetup()
         {
-            service = Substitute.For<IJobExperienceService>();
+            mediator = Substitute.For<IMediator>();
         }
 
         [Test]
-        public void ServiceIsCalled()
+        public async Task ServiceIsCalled()
         {
-            Controller.GetAll();
+            await Controller.GetAll();
 
-            service.Received(1).GetJobExperiences();
+            await mediator.Received(1).Send(Arg.Is<GetJobExperiencesQuery>(x => true));
         }
         
         protected override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), service,
-                Substitute.For<IUnitOfWork>());
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IJobExperienceService>(),
+                Substitute.For<IUnitOfWork>(), mediator);
         }
     }
 }

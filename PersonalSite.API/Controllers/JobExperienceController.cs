@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Persistence;
+using PersonalSite.Server.Queries;
 using PersonalSite.Services;
 
 namespace PersonalSite.Domain.API.Controllers
@@ -13,18 +17,22 @@ namespace PersonalSite.Domain.API.Controllers
         private readonly ILogger<JobExperienceController> logger;
         private readonly IJobExperienceService service;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IMediator mediator;
 
-        public JobExperienceController(ILogger<JobExperienceController> logger, IJobExperienceService service, IUnitOfWork unitOfWork)
+        public JobExperienceController(ILogger<JobExperienceController> logger, IJobExperienceService service,
+            IUnitOfWork unitOfWork, IMediator mediator)
         {
             this.logger = logger;
             this.service = service;
             this.unitOfWork = unitOfWork;
+            this.mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var jobExperiences = service.GetJobExperiences();
+            var jobExperiences = await mediator.Send(new GetJobExperiencesQuery());
+            logger.LogInformation($"Handled GetJobExperiencesQuery; {jobExperiences.Count()} matching job experiences.");
             return Ok(jobExperiences);
         }
 

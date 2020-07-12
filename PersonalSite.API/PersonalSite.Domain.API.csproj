@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="8.0.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
     <ProjectReference Include="..\PersonalSite.Services\PersonalSite.Services.csproj" />
   </ItemGroup>

@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,8 @@ namespace PersonalSite.Domain.API
             services.AddScoped<IPersonalSiteRepository, PersonalSiteRepository>();
             services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
             services.AddScoped<IJobExperienceService, JobExperienceService>();
+
+            services.AddMediatR(typeof(Startup));
 
             RunContextMigrations(services);
         }
