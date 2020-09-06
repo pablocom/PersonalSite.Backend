@@ -1,13 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Tests.UnitTests
 {
     public class PersonalSiteFakeDbContext : DbContext
     {
-        public DbSet<JobExperience> JobExperiences { get; set; }    
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseInMemoryDatabase(databaseName: "FakePersonalSiteDbContext");

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -6,7 +5,7 @@ using NUnit.Framework;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
 using PersonalSite.Server.Queries;
-using PersonalSite.Services;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Tests.UnitTests.Controllers
 {
@@ -30,7 +29,8 @@ namespace PersonalSite.Tests.UnitTests.Controllers
         
         protected override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IUnitOfWork>(), mediator);
+            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(),
+                Substitute.For<IUnitOfWork>(), mediator);
         }
     }
 }
