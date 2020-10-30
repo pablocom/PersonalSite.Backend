@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -5,9 +6,8 @@ using NUnit.Framework;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
 using PersonalSite.Server.Queries;
-using System.Threading.Tasks;
 
-namespace PersonalSite.Tests.UnitTests.Controllers
+namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>

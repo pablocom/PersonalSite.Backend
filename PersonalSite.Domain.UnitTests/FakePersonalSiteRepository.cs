@@ -1,9 +1,9 @@
-﻿using PersonalSite.Domain.Entities;
-using PersonalSite.Persistence;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using PersonalSite.Domain.Entities;
+using PersonalSite.Persistence;
 
-namespace PersonalSite.Tests.UnitTests
+namespace PersonalSite.Domain.UnitTests
 {
     public class FakePersonalSiteRepository : IPersonalSiteRepository
     {

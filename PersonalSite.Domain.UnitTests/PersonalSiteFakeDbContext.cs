@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalSite.Persistence.Mappings;
 
-namespace PersonalSite.Tests.UnitTests
+namespace PersonalSite.Domain.UnitTests
 {
     public class PersonalSiteFakeDbContext : DbContext
     {

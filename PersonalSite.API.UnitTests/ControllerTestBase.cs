@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace PersonalSite.Tests.UnitTests.Controllers
+namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public abstract class ControllerTestBase<TController>

@@ -2,10 +2,10 @@
 using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.UnitTests.Builders;
 using PersonalSite.Services;
-using PersonalSite.Tests.UnitTests.Builders;
 
-namespace PersonalSite.Tests.UnitTests.Services
+namespace PersonalSite.Domain.UnitTests.Services
 {
     public class WhenGettingJobExperiences : PersonalSiteTestBase
     {

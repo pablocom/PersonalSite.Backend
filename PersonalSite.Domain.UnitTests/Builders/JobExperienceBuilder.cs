@@ -1,8 +1,8 @@
-﻿using PersonalSite.Domain.Entities;
-using System;
+﻿using System;
+using PersonalSite.Domain.Entities;
 using PersonalSite.Domain.ValueObjects;
 
-namespace PersonalSite.Tests.UnitTests.Builders
+namespace PersonalSite.Domain.UnitTests.Builders
 {
     public class JobExperienceBuilder
     {

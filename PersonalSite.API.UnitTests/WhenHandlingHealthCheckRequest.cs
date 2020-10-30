@@ -4,7 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Controllers;
 
-namespace PersonalSite.Tests.UnitTests.Controllers
+namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public class WhenHandlingHealthCheckRequest : ControllerTestBase<HealthCheckController>

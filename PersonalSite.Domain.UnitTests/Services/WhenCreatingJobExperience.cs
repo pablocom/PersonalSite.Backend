@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using NUnit.Framework;
 using PersonalSite.Domain.Entities;
 using PersonalSite.Services;
-using System;
-using System.Linq;
 
-namespace PersonalSite.Tests.UnitTests.Services
+namespace PersonalSite.Domain.UnitTests.Services
 {
     [TestFixture]
     public class WhenCreatingJobExperience : PersonalSiteTestBase

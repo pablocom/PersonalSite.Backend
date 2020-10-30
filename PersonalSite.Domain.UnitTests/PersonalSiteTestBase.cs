@@ -2,7 +2,7 @@
 using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.Tests.UnitTests
+namespace PersonalSite.Domain.UnitTests
 {
     public class PersonalSiteTestBase
     {

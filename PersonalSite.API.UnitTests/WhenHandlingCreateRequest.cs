@@ -1,16 +1,15 @@
+using System;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
+using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
-using PersonalSite.Services;
-using System;
-using System.Threading.Tasks;
-using PersonalSite.Domain.API.Application.Commands;
 
-namespace PersonalSite.Tests.UnitTests.Controllers
+namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
