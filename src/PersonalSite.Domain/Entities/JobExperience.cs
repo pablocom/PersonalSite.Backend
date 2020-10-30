@@ -2,6 +2,7 @@
 using PersonalSite.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using PersonalSite.Domain.Exceptions;
 
 namespace PersonalSite.Domain.Entities
 {
@@ -28,7 +29,7 @@ namespace PersonalSite.Domain.Entities
         private void CheckCompanyAndDescriptionNotNullOrEmpty(string company, string description)
         {
             if (company.IsNullOrEmpty() || description.IsNullOrEmpty())
-                throw new ArgumentException("Job experience company and description must have value");
+                throw new DomainException("Job experience company and description must have value");
         }
     }
 }

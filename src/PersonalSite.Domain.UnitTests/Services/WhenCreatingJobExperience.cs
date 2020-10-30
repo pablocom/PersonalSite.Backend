@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Exceptions;
 using PersonalSite.Services;
 
 namespace PersonalSite.Domain.UnitTests.Services
@@ -38,10 +39,12 @@ namespace PersonalSite.Domain.UnitTests.Services
         [TestCase("", "")]
         public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
         {
-            var exception = Assert.Throws<ArgumentException>(() =>
+            TestDelegate action = () => 
             {
                 service.CreateJobExperience(company, description, new DateTime(), new DateTime(), new string[0]);
-            });
+            };
+            
+            var exception = Assert.Throws<DomainException>(action);
 
             Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
         }
