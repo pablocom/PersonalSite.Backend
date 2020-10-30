@@ -1,10 +1,16 @@
+using Microsoft.Extensions.Logging;
+using NSubstitute;
 using NUnit.Framework;
+using PersonalSite.Persistence;
 
 namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public abstract class ControllerTestBase<TController>
     {
+        protected readonly ILogger<TController> Logger = Substitute.For<ILogger<TController>>();
+        protected readonly IUnitOfWork UnitOfWork = Substitute.For<IUnitOfWork>();
+        
         protected TController Controller { get; set; }
 
         [SetUp]

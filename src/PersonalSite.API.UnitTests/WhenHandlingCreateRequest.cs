@@ -1,24 +1,22 @@
 using System;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Domain.API.Controllers;
-using PersonalSite.Persistence;
 
 namespace PersonalSite.API.UnitTests
 {
     [TestFixture]
     public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
     {
-        private IMediator mediator;
+        private IMediator _mediator;
 
         protected override void AdditionalSetup()
         {
-            mediator = Substitute.For<IMediator>();
+            _mediator = Substitute.For<IMediator>();
         }
 
         [Test]
@@ -40,7 +38,7 @@ namespace PersonalSite.API.UnitTests
 
             await Controller.Create(createJobExperienceDto);
 
-            await mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
+            await _mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
                     AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
         }
 
@@ -57,7 +55,7 @@ namespace PersonalSite.API.UnitTests
 
         protected override JobExperienceController GetController()
         {
-            return new JobExperienceController(Substitute.For<ILogger<JobExperienceController>>(), Substitute.For<IUnitOfWork>(), mediator);
+            return new JobExperienceController(Logger, UnitOfWork, _mediator);
         }
     }
 }
