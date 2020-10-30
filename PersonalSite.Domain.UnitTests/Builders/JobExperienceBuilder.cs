@@ -6,11 +6,11 @@ namespace PersonalSite.Tests.UnitTests.Builders
 {
     public class JobExperienceBuilder
     {
-        private string company = "1million";
-        private string description = "Software Engineer";
+        private string company;
+        private string description;
         private string[] techStack = new string[0];
-        private DateTime startDate = new DateTime(2020, 1, 1);
-        private DateTime endDate = new DateTime(2020, 5, 1);
+        private DateTime startDate;
+        private DateTime endDate;
 
         public JobExperienceBuilder WithCompany(string company)
         {
@@ -42,6 +42,11 @@ namespace PersonalSite.Tests.UnitTests.Builders
             return this;
         }
 
+        public static JobExperienceBuilder ValidJobExperience()
+        {
+            return new JobExperienceBuilder().WithCompany("SomeCompany").WithDescription("SomeDescription");
+        }
+        
         public JobExperience Build()
         {
             return new JobExperience(company, description, new JobPeriod(startDate, endDate), techStack);
