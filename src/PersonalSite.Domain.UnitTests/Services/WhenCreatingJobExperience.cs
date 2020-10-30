@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using PersonalSite.Domain.Entities;
 using PersonalSite.Domain.Exceptions;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Services;
 
 namespace PersonalSite.Domain.UnitTests.Services
@@ -29,7 +29,7 @@ namespace PersonalSite.Domain.UnitTests.Services
             service.CreateJobExperience(company, description, startDate, endDate, techStack);
             CloseContext();
 
-            var jobExperience = Repository.GetAll<JobExperience>().Single();
+            var jobExperience = Repository.GetAllJobExperiences().Single();
             AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
         }
 

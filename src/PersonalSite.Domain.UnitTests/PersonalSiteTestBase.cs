@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.UnitTests
 {
     public class PersonalSiteTestBase
     {
-        protected IPersonalSiteRepository Repository { get; set; }
+        protected IJobExperienceRepository Repository { get; set; }
         protected PersonalSiteFakeDbContext FakeDbContext { get; set; }
 
         [SetUp]
@@ -24,9 +24,11 @@ namespace PersonalSite.Domain.UnitTests
             FakeDbContext.SaveChanges();
         }
 
-        protected void AssumeDataInRepository<TEntity>(params TEntity[] entities) where TEntity : Entity
+        protected void AssumeDataInRepository(params JobExperience[] entities)
         {
-            Repository.AddAll(entities);
+            foreach (var entity in entities) 
+                Repository.Add(entity);
+
             CloseContext();
         }
 

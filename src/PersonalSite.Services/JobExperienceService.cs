@@ -1,9 +1,8 @@
-﻿using PersonalSite.Domain.Entities;
-using PersonalSite.Domain.ValueObjects;
-using PersonalSite.Persistence;
+﻿using PersonalSite.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Services
 {
@@ -15,21 +14,21 @@ namespace PersonalSite.Services
 
     public class JobExperienceService : IJobExperienceService
     {
-        private readonly IPersonalSiteRepository repository;
+        private readonly IJobExperienceRepository _repository;
 
-        public JobExperienceService(IPersonalSiteRepository repository)
+        public JobExperienceService(IJobExperienceRepository repository)
         {
-            this.repository = repository;
+            _repository = repository;
         }
 
         public void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
         {
-            repository.Add(new JobExperience(company, description, new JobPeriod(jobPeriodStart, jobPeriodEnd), techStack));
+            _repository.Add(new JobExperience(company, description, new JobPeriod(jobPeriodStart, jobPeriodEnd), techStack));
         }
 
         public JobExperience[] GetJobExperiences()
         {
-            return repository.GetAll<JobExperience>().ToArray();
+            return _repository.GetAllJobExperiences().ToArray();
         }
     }
 }

@@ -3,9 +3,9 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
+using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
-using PersonalSite.Server.Queries;
 
 namespace PersonalSite.API.UnitTests
 {

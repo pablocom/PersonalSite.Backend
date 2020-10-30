@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Persistence;
-using PersonalSite.Server.Queries;
 using System.Threading.Tasks;
+using PersonalSite.Domain.API.Application.Queries;
 
 namespace PersonalSite.Domain.API.Controllers
 {

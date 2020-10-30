@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.UnitTests
 {
-    public class FakePersonalSiteRepository : IPersonalSiteRepository
+    public class FakePersonalSiteRepository : IJobExperienceRepository
     {
         private PersonalSiteFakeDbContext dbContext;
 
@@ -14,29 +14,14 @@ namespace PersonalSite.Domain.UnitTests
             this.dbContext = dbContext;
         }
 
-        public void Add<TEntity>(TEntity entity) where TEntity : Entity
+        public void Add(JobExperience entity)
         {
             dbContext.Add(entity);
         }
-
-        public void AddAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity
+        
+        public IQueryable<JobExperience> GetAllJobExperiences()
         {
-            dbContext.Set<TEntity>().AddRange(entities);
-        }
-
-        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : Entity
-        {
-            return dbContext.Set<TEntity>().AsQueryable();
-        }
-
-        public void Delete<TEntity>(TEntity entity) where TEntity : Entity
-        {
-            dbContext.Set<TEntity>().Remove(entity);
-        }
-
-        public void Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity
-        {
-            dbContext.Set<TEntity>().RemoveRange(entities);
+            return dbContext.Set<JobExperience>().AsQueryable();
         }
     }
 }

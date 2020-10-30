@@ -1,10 +1,8 @@
-﻿using PersonalSite.Domain.Extensions;
-using PersonalSite.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PersonalSite.Domain.Exceptions;
+using PersonalSite.Domain.Extensions;
 
-namespace PersonalSite.Domain.Entities
+namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
     public class JobExperience : Entity
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Persistence

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Server.Queries
+namespace PersonalSite.Domain.API.Application.Queries
 {
     public class GetJobExperiencesQuery : IRequest<IEnumerable<JobExperience>>
     {

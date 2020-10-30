@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Persistence.Mappings
 {

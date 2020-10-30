@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalSite.Domain.Entities
+namespace PersonalSite.Domain
 {
     public abstract class Entity : IEquatable<Entity>
     {

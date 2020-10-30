@@ -3,9 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Domain.API.Application.Commands;
-using PersonalSite.Domain.Entities;
 using PersonalSite.Persistence;
-using PersonalSite.Server.Queries;
 using PersonalSite.Services;
 
 namespace PersonalSite.Domain.API.Application.CommandHandlers

@@ -1,6 +1,5 @@
 ﻿using System;
-using PersonalSite.Domain.Entities;
-using PersonalSite.Domain.ValueObjects;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Domain.UnitTests.Builders
 {

@@ -28,7 +28,7 @@ namespace PersonalSite.Domain.API
                 options.UseMySql(Configuration.GetConnectionString("PersonalSiteDatabase")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPersonalSiteRepository, PersonalSiteRepository>();
+            services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
             services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
             services.AddScoped<IJobExperienceService, JobExperienceService>();
 

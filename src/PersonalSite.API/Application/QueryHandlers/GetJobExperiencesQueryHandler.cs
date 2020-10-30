@@ -2,24 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.API.Application.Queries;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
-using PersonalSite.Server.Queries;
 
-namespace PersonalSite.Server.Handlers
+namespace PersonalSite.Domain.API.Application.QueryHandlers
 {
     public class GetJobExperiencesQueryHandler : IRequestHandler<GetJobExperiencesQuery, IEnumerable<JobExperience>>
     {
-        private readonly IPersonalSiteRepository repository;
+        private readonly IJobExperienceRepository repository;
 
-        public GetJobExperiencesQueryHandler(IPersonalSiteRepository repository)
+        public GetJobExperiencesQueryHandler(IJobExperienceRepository repository)
         {
             this.repository = repository;
         }
 
         public async Task<IEnumerable<JobExperience>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
         {
-            return repository.GetAll<JobExperience>();
+            return repository.GetAllJobExperiences();
         }
     }
 }

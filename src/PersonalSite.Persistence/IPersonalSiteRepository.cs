@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PersonalSite.Domain.Entities;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Persistence
 {
-    public interface IPersonalSiteRepository
+    public interface IJobExperienceRepository
     {
-        void Add<TEntity>(TEntity entity) where TEntity : Entity;
-        void AddAll<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity;
-        IQueryable<TEntity> GetAll<TEntity>() where TEntity : Entity;
-        void Delete<TEntity>(TEntity entity) where TEntity : Entity;
-        void Delete<TEntity>(IEnumerable<TEntity> entities) where TEntity : Entity;
+        void Add(JobExperience entity);
+        IQueryable<JobExperience> GetAllJobExperiences();
     }
 }
