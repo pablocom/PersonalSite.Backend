@@ -7,7 +7,7 @@ namespace PersonalSite.Domain.UnitTests
     public class PersonalSiteTestBase
     {
         protected IJobExperienceRepository Repository { get; set; }
-        protected PersonalSiteFakeDbContext FakeDbContext { get; set; }
+        private PersonalSiteFakeDbContext FakeDbContext { get; set; }
 
         [SetUp]
         public void SetUp()
@@ -19,7 +19,7 @@ namespace PersonalSite.Domain.UnitTests
             AdditionalSetup();
         }
 
-        public void CloseContext()
+        protected void CloseContext()
         {
             FakeDbContext.SaveChanges();
         }
@@ -28,7 +28,7 @@ namespace PersonalSite.Domain.UnitTests
         {
             foreach (var entity in entities) 
                 Repository.Add(entity);
-
+            
             CloseContext();
         }
 

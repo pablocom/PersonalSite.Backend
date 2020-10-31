@@ -50,6 +50,7 @@ namespace PersonalSite.Domain.UnitTests.Services
 
             var jobExperiences = service.GetJobExperiences().ToArray();
 
+            Assert.That(jobExperiences.Length, Is.EqualTo(2));
             AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
             AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
         }

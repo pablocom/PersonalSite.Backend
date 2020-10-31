@@ -16,6 +16,10 @@ namespace PersonalSite.Domain.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetHealthStatus() => Ok("Pablo Company PersonalSite's API Rest");
+        public IActionResult GetHealthStatus()
+        {
+            _logger.LogInformation("Status OK...");
+            return Ok("Pablo Company PersonalSite's API Rest");
+        }
     }
 }
