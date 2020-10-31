@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+﻿using System.Linq;
 
-namespace PersonalSite.Persistence
+namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
     public interface IJobExperienceRepository
     {

@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Domain.API.Application.Commands;
-using PersonalSite.Persistence;
-using PersonalSite.Services;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Domain.API.Application.CommandHandlers
 {
-    public class CreateJobExperienceCommandHandler: IRequestHandler<CreateJobExperienceCommand, bool>
+    public class CreateJobExperienceCommandHandler : IRequestHandler<CreateJobExperienceCommand, bool>
     {
         private readonly IJobExperienceService service;
 
@@ -16,7 +14,7 @@ namespace PersonalSite.Domain.API.Application.CommandHandlers
         {
             this.service = service;
         }
-
+        
         public async Task<bool> Handle(CreateJobExperienceCommand command, CancellationToken cancellationToken)
         {
             service.CreateJobExperience(command.Company,
@@ -24,7 +22,8 @@ namespace PersonalSite.Domain.API.Application.CommandHandlers
                 command.JobPeriodStart,
                 command.JobPeriodEnd,
                 command.TechStack);
-            return true;
+
+            return await Task.FromResult(true);
         }
     }
 }

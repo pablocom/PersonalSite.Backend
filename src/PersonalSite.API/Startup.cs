@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
-using PersonalSite.Services;
 
 namespace PersonalSite.Domain.API
 {

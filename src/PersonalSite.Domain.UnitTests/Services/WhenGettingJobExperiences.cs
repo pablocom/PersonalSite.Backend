@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.UnitTests.Builders;
-using PersonalSite.Services;
 
 namespace PersonalSite.Domain.UnitTests.Services
 {

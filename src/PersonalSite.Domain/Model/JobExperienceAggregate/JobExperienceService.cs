@@ -1,10 +1,7 @@
-﻿using PersonalSite.Persistence;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Services
+namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
     public interface IJobExperienceService
     {
@@ -15,7 +12,7 @@ namespace PersonalSite.Services
     public class JobExperienceService : IJobExperienceService
     {
         private readonly IJobExperienceRepository _repository;
-
+        
         public JobExperienceService(IJobExperienceRepository repository)
         {
             _repository = repository;

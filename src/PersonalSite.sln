@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalSite.Tests", "Perso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.UnitTests", "PersonalSite.Domain.UnitTests\PersonalSite.Domain.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Services", "PersonalSite.Services\PersonalSite.Services.csproj", "{B74AF0D1-B8AF-4E82-9754-7C32EBEC79D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.API.UnitTests", "PersonalSite.API.UnitTests\PersonalSite.API.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
 EndProject
 Global
@@ -39,10 +37,6 @@ Global
 		{AFEDB244-A56C-4815-9388-837B972DDDC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFEDB244-A56C-4815-9388-837B972DDDC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFEDB244-A56C-4815-9388-837B972DDDC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B74AF0D1-B8AF-4E82-9754-7C32EBEC79D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B74AF0D1-B8AF-4E82-9754-7C32EBEC79D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B74AF0D1-B8AF-4E82-9754-7C32EBEC79D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B74AF0D1-B8AF-4E82-9754-7C32EBEC79D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D29517F6-FB8D-42CC-9520-0ADD528CA662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D29517F6-FB8D-42CC-9520-0ADD528CA662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D29517F6-FB8D-42CC-9520-0ADD528CA662}.Release|Any CPU.ActiveCfg = Release|Any CPU
