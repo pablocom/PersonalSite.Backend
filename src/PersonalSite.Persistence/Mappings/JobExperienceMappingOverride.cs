@@ -10,9 +10,13 @@ namespace PersonalSite.Persistence.Mappings
         public void Configure(EntityTypeBuilder<JobExperience> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.OwnsOne(o => o.JobPeriod);
+            builder.OwnsOne(o => o.JobPeriod,
+                x =>
+                {
+                    x.Property(j => j.Start);
+                    x.Property(j => j.End);
+                });
 
-            
             builder.Property(x => x.TechStack)
                 .HasConversion(v => string.Join(',', v),
                     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));

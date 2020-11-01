@@ -16,13 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
-    <ProjectReference Include="..\PersonalSite.Services\PersonalSite.Services.csproj" />
+    <None Remove="PersonalSite.Persistence.csproj.EntityFrameworkCore.targets" />
+    <None Remove="PersonalSite.Domain.API.EntityFrameworkCore.targets" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="PersonalSite.Persistence.csproj.EntityFrameworkCore.targets" />
-    <None Remove="PersonalSite.Domain.API.EntityFrameworkCore.targets" />
+    <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
+    <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
   </ItemGroup>
 
 

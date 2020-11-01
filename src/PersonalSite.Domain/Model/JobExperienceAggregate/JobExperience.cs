@@ -6,10 +6,10 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
     public class JobExperience : Entity
     {
-        public string Company { get; private set; }
-        public string Description { get; private set; }
-        public JobPeriod JobPeriod { get; private set; }
-        public ICollection<string> TechStack { get; private set; }
+        public string Company { get; protected set; }
+        public string Description { get; protected set; }
+        public JobPeriod JobPeriod { get; protected set; }
+        public ICollection<string> TechStack { get; protected set; }
 
         // EntityFramework required constructor
         protected JobExperience() 

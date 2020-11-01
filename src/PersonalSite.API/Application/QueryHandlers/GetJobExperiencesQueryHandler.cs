@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.API.Application.QueryHandlers
 {

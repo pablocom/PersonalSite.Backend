@@ -25,7 +25,7 @@ namespace PersonalSite.Domain.API
         {
             services.AddControllers();
             services.AddDbContext<PersonalSiteDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("PersonalSiteDatabase")));
+                options.UseNpgsql(Configuration.GetConnectionString("PersonalSiteDatabase")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
