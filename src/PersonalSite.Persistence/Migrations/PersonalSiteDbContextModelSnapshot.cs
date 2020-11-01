@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Persistence.Migrations
@@ -14,41 +15,45 @@ namespace PersonalSite.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("PersonalSite.Domain.Entities.JobExperience", b =>
+            modelBuilder.Entity("PersonalSite.Domain.Model.JobExperienceAggregate.JobExperience", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Company")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("text");
 
                     b.Property<string>("TechStack")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("JobExperiences");
                 });
 
-            modelBuilder.Entity("PersonalSite.Domain.Entities.JobExperience", b =>
+            modelBuilder.Entity("PersonalSite.Domain.Model.JobExperienceAggregate.JobExperience", b =>
                 {
-                    b.OwnsOne("PersonalSite.Domain.ValueObjects.JobPeriod", "JobPeriod", b1 =>
+                    b.OwnsOne("PersonalSite.Domain.Model.JobExperienceAggregate.JobPeriod", "JobPeriod", b1 =>
                         {
                             b1.Property<int>("JobExperienceId")
-                                .HasColumnType("int");
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                             b1.Property<DateTime?>("End")
-                                .HasColumnType("datetime(6)");
+                                .HasColumnType("timestamp without time zone");
 
                             b1.Property<DateTime>("Start")
-                                .HasColumnType("datetime(6)");
+                                .HasColumnType("timestamp without time zone");
 
                             b1.HasKey("JobExperienceId");
 
