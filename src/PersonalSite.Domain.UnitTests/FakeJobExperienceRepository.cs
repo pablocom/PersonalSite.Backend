@@ -5,11 +5,11 @@ using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.UnitTests
 {
-    public class FakePersonalSiteRepository : IJobExperienceRepository
+    public class FakeJobExperienceRepository : IJobExperienceRepository
     {
-        private PersonalSiteFakeDbContext dbContext;
+        private FakePersonalSiteDbContext dbContext;
 
-        public FakePersonalSiteRepository(PersonalSiteFakeDbContext dbContext)
+        public FakeJobExperienceRepository(FakePersonalSiteDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

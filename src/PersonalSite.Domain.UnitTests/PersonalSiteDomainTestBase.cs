@@ -4,24 +4,24 @@ using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.UnitTests
 {
-    public class PersonalSiteTestBase
+    public class PersonalSiteDomainTestBase
     {
         protected IJobExperienceRepository Repository { get; set; }
-        private PersonalSiteFakeDbContext FakeDbContext { get; set; }
+        private FakePersonalSiteDbContext DbContext { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            FakeDbContext = new PersonalSiteFakeDbContext();
-            FakeDbContext.Database.EnsureDeleted();
-            Repository = new FakePersonalSiteRepository(FakeDbContext);
+            DbContext = new FakePersonalSiteDbContext();
+            DbContext.Database.EnsureDeleted();
+            Repository = new FakeJobExperienceRepository(DbContext);
 
             AdditionalSetup();
         }
 
         protected void CloseContext()
         {
-            FakeDbContext.SaveChanges();
+            DbContext.SaveChanges();
         }
 
         protected void AssumeDataInRepository(params JobExperience[] entities)

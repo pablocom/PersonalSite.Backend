@@ -3,7 +3,7 @@ using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Domain.UnitTests
 {
-    public class PersonalSiteFakeDbContext : DbContext
+    public class FakePersonalSiteDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

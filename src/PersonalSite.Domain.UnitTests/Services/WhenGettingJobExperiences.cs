@@ -6,7 +6,7 @@ using PersonalSite.Domain.UnitTests.Builders;
 
 namespace PersonalSite.Domain.UnitTests.Services
 {
-    public class WhenGettingJobExperiences : PersonalSiteTestBase
+    public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
     {
         private IJobExperienceService service;
 

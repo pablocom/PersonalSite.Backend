@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
@@ -26,7 +27,7 @@ namespace PersonalSite.Domain.IntegrationTests
         }
         
         private void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
-            DateTime endDate, string[] techStack)
+            DateTime endDate, IEnumerable<string> techStack)
         {
             Assert.That(jobExperience.Company, Is.EqualTo(company));
             Assert.That(jobExperience.Description, Is.EqualTo(description));

@@ -7,7 +7,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 namespace PersonalSite.Domain.UnitTests.Services
 {
     [TestFixture]
-    public class WhenCreatingJobExperience : PersonalSiteTestBase
+    public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         private IJobExperienceService service;
 
@@ -44,7 +44,6 @@ namespace PersonalSite.Domain.UnitTests.Services
             };
             
             var exception = Assert.Throws<DomainException>(action);
-
             Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
         }
 
