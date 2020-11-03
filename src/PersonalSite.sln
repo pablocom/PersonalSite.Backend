@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalSite.Tests", "Perso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.UnitTests", "PersonalSite.Domain.UnitTests\PersonalSite.Domain.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.API.UnitTests", "PersonalSite.API.UnitTests\PersonalSite.API.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.API.UnitTests", "PersonalSite.Domain.API.UnitTests\PersonalSite.Domain.API.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.IntegrationTests", "PersonalSite.Domain.IntegrationTests\PersonalSite.Domain.IntegrationTests.csproj", "{09BB995A-9C5F-4FA9-893B-C91B567E0BE6}"
 EndProject
