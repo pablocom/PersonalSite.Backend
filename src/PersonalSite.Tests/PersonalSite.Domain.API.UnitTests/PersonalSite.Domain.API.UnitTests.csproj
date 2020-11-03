@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PersonalSite.Domain.API\PersonalSite.Domain.API.csproj" />
+      <ProjectReference Include="..\..\PersonalSite.Domain.API\PersonalSite.Domain.API.csproj" />
     </ItemGroup>
 
 </Project>
