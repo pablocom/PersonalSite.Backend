@@ -14,8 +14,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\PersonalSite.API\PersonalSite.Domain.API.csproj" />
+      <ProjectReference Include="..\PersonalSite.Domain.Persistence\PersonalSite.Domain.Persistence.csproj" />
       <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
-      <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

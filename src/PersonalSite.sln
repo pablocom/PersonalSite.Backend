@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "PersonalSite.Domain\PersonalSite.Domain.csproj", "{13178447-06FA-4652-8735-CD79E255C6F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Persistence", "PersonalSite.Persistence\PersonalSite.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.Persistence", "PersonalSite.Domain.Persistence\PersonalSite.Domain.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.API", "PersonalSite.API\PersonalSite.Domain.API.csproj", "{D852893F-25B6-467E-B3B6-BC4E997A2AF7}"
 EndProject
