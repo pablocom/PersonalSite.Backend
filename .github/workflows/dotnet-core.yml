@@ -35,10 +35,9 @@ jobs:
       run: dotnet restore src
     - name: Update database
       run: |
-        find / -name "PersonalSite.Domain.Persistence" -print
         dotnet tool install --global dotnet-ef
         dotnet tool restore
-        dotnet ef database update --project PersonalSite.Domain.Persistence --startup-project PersonalSite.Domain.API -d /github/workspace
+        dotnet ef database update --project PersonalSite.Domain.Persistence --startup-project PersonalSite.Domain.API -d /home/runner/work/PersonalSite.Backend/PersonalSite.Backend/src/
     - name: Build
       run: dotnet build src --configuration Release --no-restore
     - name: Test
