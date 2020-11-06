@@ -10,7 +10,6 @@ namespace PersonalSite.Domain.IntegrationTests
     public class WhenSavingJobExperience : PersonalSiteIntegrationTestBase
     {
         [Test]
-        [Ignore("WIP: creating Integration Test project.")]
         public void IsPersisted()
         {
             var company = "Ryanair";
