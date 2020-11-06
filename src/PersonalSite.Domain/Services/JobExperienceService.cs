@@ -20,7 +20,7 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
 
         public void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
         {
-            _repository.Add(new JobExperience(company, description, new JobPeriod(jobPeriodStart, jobPeriodEnd), techStack));
+            _repository.Add(new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack));
         }
 
         public JobExperience[] GetJobExperiences()

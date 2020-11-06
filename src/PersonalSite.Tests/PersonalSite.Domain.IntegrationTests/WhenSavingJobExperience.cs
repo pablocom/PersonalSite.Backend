@@ -19,7 +19,7 @@ namespace PersonalSite.Domain.IntegrationTests
             var endDate = new DateTime(2021, 07, 01);
             var techStack = new[] { ".Net", "MySQL" };
             
-            Repository.Add(new JobExperience(company, description, new JobPeriod(startDate, endDate), techStack));
+            Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
             SaveChanges();
 
             var jobExperience = Repository.GetAllJobExperiences().Single();

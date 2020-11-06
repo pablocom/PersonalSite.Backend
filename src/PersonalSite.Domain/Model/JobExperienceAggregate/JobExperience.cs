@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Extensions;
 
@@ -15,13 +16,13 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
         protected JobExperience() 
         { }
 
-        public JobExperience(string company, string description, JobPeriod jobPeriod, ICollection<string> techStack)
+        public JobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, ICollection<string> techStack)
         {
             CheckCompanyAndDescriptionNotNullOrEmpty(company, description);
 
             Company = company;
             Description = description;
-            JobPeriod = jobPeriod;
+            JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
             TechStack = techStack;
         }
 

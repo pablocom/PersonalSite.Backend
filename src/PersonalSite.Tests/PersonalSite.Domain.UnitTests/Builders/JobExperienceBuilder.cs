@@ -48,7 +48,7 @@ namespace PersonalSite.Domain.UnitTests.Builders
         
         public JobExperience Build()
         {
-            return new JobExperience(company, description, new JobPeriod(startDate, endDate), techStack);
+            return new JobExperience(company, description, startDate, endDate, techStack);
         }
     }
 }
