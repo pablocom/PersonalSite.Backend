@@ -33,6 +33,11 @@ jobs:
         dotnet-version: 3.1.101
     - name: Install dependencies
       run: dotnet restore src
+    - name: Update database
+      run: |
+        dotnet tool install --global dotnet-ef
+        dotnet tool restore
+        dotnet ef database update --p PersonalSite.Domain.Persistence --s PersonalSite.Domain.API
     - name: Build
       run: dotnet build src --configuration Release --no-restore
     - name: Test
