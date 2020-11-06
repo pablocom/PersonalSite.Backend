@@ -37,7 +37,7 @@ jobs:
       run: |
         dotnet tool install --global dotnet-ef
         dotnet tool restore
-        dotnet ef database update --p PersonalSite.Domain.Persistence --s PersonalSite.Domain.API
+        dotnet ef database update --project PersonalSite.Domain.Persistence --startup-project PersonalSite.Domain.API
     - name: Build
       run: dotnet build src --configuration Release --no-restore
     - name: Test
