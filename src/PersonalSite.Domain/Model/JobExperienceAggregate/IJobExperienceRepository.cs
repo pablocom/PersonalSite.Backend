@@ -2,7 +2,7 @@
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
-    public interface IJobExperienceRepository
+    public interface IJobExperienceRepository : IDomainRepository<JobExperience>
     {
         void Add(JobExperience entity);
         IQueryable<JobExperience> GetAllJobExperiences();
