@@ -11,6 +11,12 @@ namespace PersonalSite.Domain.UnitTests.Builders
         private DateTime startDate;
         private DateTime endDate;
 
+        
+        public JobExperience Build()
+        {
+            return new JobExperience(company, description, startDate, endDate, techStack);
+        }
+        
         public JobExperienceBuilder WithCompany(string company)
         {
             this.company = company;
@@ -39,16 +45,6 @@ namespace PersonalSite.Domain.UnitTests.Builders
         {
             this.endDate = endDate;
             return this;
-        }
-
-        public static JobExperienceBuilder ValidJobExperience()
-        {
-            return new JobExperienceBuilder().WithCompany("SomeCompany").WithDescription("SomeDescription");
-        }
-        
-        public JobExperience Build()
-        {
-            return new JobExperience(company, description, startDate, endDate, techStack);
         }
     }
 }
