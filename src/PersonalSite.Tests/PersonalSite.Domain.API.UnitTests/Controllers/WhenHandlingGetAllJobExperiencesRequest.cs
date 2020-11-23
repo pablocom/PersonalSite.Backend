@@ -7,7 +7,7 @@ using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.API.UnitTests
+namespace PersonalSite.API.UnitTests.Controllers
 {
     [TestFixture]
     public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>

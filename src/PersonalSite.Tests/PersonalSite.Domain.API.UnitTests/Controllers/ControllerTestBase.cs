@@ -3,7 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.API.UnitTests
+namespace PersonalSite.API.UnitTests.Controllers
 {
     [TestFixture]
     public abstract class ControllerTestBase<TController>
