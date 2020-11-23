@@ -9,16 +9,16 @@ namespace PersonalSite.Domain.API.Application.QueryHandlers
 {
     public class GetJobExperiencesQueryHandler : IRequestHandler<GetJobExperiencesQuery, IEnumerable<JobExperience>>
     {
-        private readonly IJobExperienceRepository repository;
+        private readonly IJobExperienceService repository;
 
-        public GetJobExperiencesQueryHandler(IJobExperienceRepository repository)
+        public GetJobExperiencesQueryHandler(IJobExperienceService repository)
         {
             this.repository = repository;
         }
 
         public async Task<IEnumerable<JobExperience>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
         {
-            return repository.GetAllJobExperiences();
+            return repository.GetJobExperiences();
         }
     }
 }
