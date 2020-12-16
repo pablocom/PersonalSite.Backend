@@ -5,6 +5,7 @@ using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Application.QueryHandlers;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
@@ -8,22 +9,24 @@ namespace PersonalSite.Domain.IntegrationTests
     public class PersonalSiteIntegrationTestBase
     {
         protected IJobExperienceRepository Repository;
-        protected PersonalSiteDbContext DbContext;
+        private PersonalSiteDbContext dbContext;
 
         protected void SaveChanges()
         {
-            DbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
         [SetUp]
         protected void Setup()
         {
+            var connectionString = Environment.GetEnvironmentVariable("PostgreSQLConnectionString");
             var options = new DbContextOptionsBuilder<PersonalSiteDbContext>()
-                .UseNpgsql("User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;")
+                .UseNpgsql(connectionString ?? "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;")
                 .EnableSensitiveDataLogging()
                 .Options;
-            DbContext = new PersonalSiteDbContext(options); 
-            Repository = new JobExperienceRepository(DbContext);
+            
+            dbContext = new PersonalSiteDbContext(options); 
+            Repository = new JobExperienceRepository(dbContext);
 
             AdditionalSetup();
         }
@@ -33,8 +36,8 @@ namespace PersonalSite.Domain.IntegrationTests
         [TearDown]
         protected void Teardown()
         {
-            DbContext.JobExperiences.RemoveRange(DbContext.JobExperiences);
-            DbContext.SaveChanges();
+            dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
+            dbContext.SaveChanges();
         }
     }
 }

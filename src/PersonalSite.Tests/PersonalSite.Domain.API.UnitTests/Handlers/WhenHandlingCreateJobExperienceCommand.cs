@@ -5,6 +5,7 @@ using NUnit.Framework;
 using PersonalSite.Domain.API.Application.CommandHandlers;
 using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {

@@ -11,8 +11,7 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
         public string Description { get; protected set; }
         public JobPeriod JobPeriod { get; protected set; }
         public ICollection<string> TechStack { get; protected set; }
-
-        // EntityFramework required constructor
+        
         protected JobExperience() 
         { }
 
@@ -20,7 +19,7 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
         {
             CheckCompanyAndDescriptionNotNullOrEmpty(company, description);
 
-            Company = company;
+            Company = company; 
             Description = description;
             JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
             TechStack = techStack;

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services;
 
 namespace PersonalSite.Domain.API.Application.QueryHandlers
 {
@@ -18,7 +19,7 @@ namespace PersonalSite.Domain.API.Application.QueryHandlers
 
         public async Task<IEnumerable<JobExperience>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
         {
-            return repository.GetJobExperiences();
+            return await Task.Run(() => repository.GetJobExperiences(), cancellationToken);
         }
     }
 }

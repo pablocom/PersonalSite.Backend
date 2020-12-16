@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.API

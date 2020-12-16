@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services;
 
 namespace PersonalSite.Domain.API.Application.CommandHandlers
 {

@@ -10,7 +10,6 @@ namespace PersonalSite.Domain.UnitTests.Builders
         private string[] techStack = new string[0];
         private DateTime startDate;
         private DateTime endDate;
-
         
         public JobExperience Build()
         {
