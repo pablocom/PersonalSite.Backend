@@ -16,7 +16,6 @@ namespace PersonalSite.Persistence
         public void Migrate(string targetMigration = null)
         {
             System.Console.WriteLine("Starting migrations...");
-            _context.Database.EnsureCreated();
             _context.Database.Migrate();
         }
 
