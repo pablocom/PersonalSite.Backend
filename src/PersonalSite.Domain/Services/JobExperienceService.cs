@@ -27,7 +27,8 @@ namespace PersonalSite.Domain.Services
 
         public JobExperienceDto[] GetJobExperiences()
         {
-            return repository.GetAllJobExperiences().Select(JobExperienceDto.From).ToArray();
+            var jobExperiences = repository.GetAllJobExperiences().ToArray();
+            return jobExperiences.Select(JobExperienceDto.From).ToArray();
         }
     }
 }
