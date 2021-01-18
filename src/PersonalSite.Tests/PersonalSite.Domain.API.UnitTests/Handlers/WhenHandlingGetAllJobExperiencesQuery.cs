@@ -4,13 +4,14 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Application.QueryHandlers;
+using PersonalSite.Domain.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {
     public class WhenHandlingGetAllJobExperiencesQuery : RequestQueryHandlerTestBase<GetJobExperiencesQueryHandler,
-        GetJobExperiencesQuery, IEnumerable<JobExperience>>
+        GetJobExperiencesQuery, IEnumerable<JobExperienceDto>>
     {
         private IJobExperienceService service;
 

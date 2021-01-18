@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using PersonalSite.Domain.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services;
 using PersonalSite.Domain.UnitTests.Builders;
@@ -56,13 +57,13 @@ namespace PersonalSite.Domain.UnitTests.Services
             AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
         }
 
-        private static void AssertJobExperience(JobExperience jobExperience, string company, string description,
+        private static void AssertJobExperience(JobExperienceDto jobExperience, string company, string description,
             DateTime startDate, DateTime endDate, string[] techStack)
         {
             Assert.That(jobExperience.Company, Is.EqualTo(company));
             Assert.That(jobExperience.Description, Is.EqualTo(description));
-            Assert.That(jobExperience.JobPeriod.Start, Is.EqualTo(startDate));
-            Assert.That(jobExperience.JobPeriod.End, Is.EqualTo(endDate));
+            Assert.That(jobExperience.JobPeriodStart, Is.EqualTo(startDate));
+            Assert.That(jobExperience.JobPeriodEnd, Is.EqualTo(endDate));
             CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
         }
     }
