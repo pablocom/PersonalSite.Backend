@@ -19,9 +19,10 @@ namespace PersonalSite.Domain.IntegrationTests
         [SetUp]
         protected void Setup()
         {
-            var connectionString = Environment.GetEnvironmentVariable("PostgreSQLConnectionString");
+            var connectionString = Environment.GetEnvironmentVariable("PersonalSiteConnectionString");
+
             var options = new DbContextOptionsBuilder<PersonalSiteDbContext>()
-                .UseNpgsql(connectionString ?? "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;")
+                .UseNpgsql(connectionString)
                 .EnableSensitiveDataLogging()
                 .Options;
             

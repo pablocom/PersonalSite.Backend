@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services;
 using PersonalSite.Persistence;
+using System;
 
 namespace PersonalSite.Domain.API
 {
@@ -26,7 +27,7 @@ namespace PersonalSite.Domain.API
         {
             services.AddControllers();
             services.AddDbContext<PersonalSiteDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PersonalSiteDatabase")));
+                options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
