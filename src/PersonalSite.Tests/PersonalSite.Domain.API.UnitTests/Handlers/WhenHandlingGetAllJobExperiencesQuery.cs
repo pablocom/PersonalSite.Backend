@@ -4,9 +4,9 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Application.QueryHandlers;
-using PersonalSite.Domain.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services;
+using PersonalSite.Domain.Services.Dtos;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {

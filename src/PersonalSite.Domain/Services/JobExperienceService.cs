@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using PersonalSite.Domain.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Services.Dtos;
 
 namespace PersonalSite.Domain.Services
 {

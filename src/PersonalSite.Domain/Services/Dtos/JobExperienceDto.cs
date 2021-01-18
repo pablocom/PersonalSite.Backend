@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.Dtos
+namespace PersonalSite.Domain.Services.Dtos
 {
     public class JobExperienceDto
     {
