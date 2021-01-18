@@ -35,6 +35,8 @@ jobs:
     - name: Install dependencies
       run: dotnet restore src
     - name: Update database
+      env: 
+        PersonalSiteConnectionString: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
       run: |
         dotnet tool install --global dotnet-ef
         dotnet tool restore
