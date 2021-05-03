@@ -17,18 +17,13 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
 
         public JobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, ICollection<string> techStack)
         {
-            CheckCompanyAndDescriptionNotNullOrEmpty(company, description);
+            if (company.IsNullOrEmpty() || description.IsNullOrEmpty())
+                throw new DomainException("Job experience company and description must have value");
 
             Company = company; 
             Description = description;
             JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
             TechStack = techStack;
-        }
-
-        private void CheckCompanyAndDescriptionNotNullOrEmpty(string company, string description)
-        {
-            if (company.IsNullOrEmpty() || description.IsNullOrEmpty())
-                throw new DomainException("Job experience company and description must have value");
         }
     }
 }
