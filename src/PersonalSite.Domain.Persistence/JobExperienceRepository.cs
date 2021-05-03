@@ -22,5 +22,10 @@ namespace PersonalSite.Persistence
         {
             return context.Set<JobExperience>().AsQueryable();
         }
+
+        public void SaveChanges()
+        {
+            context.SaveChanges();
+        }
     }
 }

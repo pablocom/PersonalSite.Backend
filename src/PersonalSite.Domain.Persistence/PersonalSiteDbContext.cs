@@ -19,6 +19,9 @@ namespace PersonalSite.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new JobExperienceMappingOverride());
+            
+            // Uncomment this line to see queries to database in output console
+            // this.ConfigureLogging(Console.WriteLine);
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = new CancellationToken())

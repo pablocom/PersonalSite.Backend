@@ -7,7 +7,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 namespace PersonalSite.Domain.IntegrationTests
 {
     [TestFixture]
-    public class WhenSavingJobExperience : PersonalSiteIntegrationTestBase
+    public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
     {
         [Test]
         public void IsPersisted()
@@ -19,7 +19,7 @@ namespace PersonalSite.Domain.IntegrationTests
             var techStack = new[] { ".Net", "MySQL" };
             
             Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
-            SaveChanges();
+            CloseContext();
 
             var jobExperience = Repository.GetAllJobExperiences().Single();
             AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);

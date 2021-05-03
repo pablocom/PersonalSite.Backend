@@ -6,5 +6,6 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
     {
         void Add(JobExperience entity);
         IQueryable<JobExperience> GetAllJobExperiences();
+        void SaveChanges();
     }
 }
