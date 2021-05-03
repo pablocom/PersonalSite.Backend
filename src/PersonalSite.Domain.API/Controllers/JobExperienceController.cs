@@ -34,11 +34,14 @@ namespace PersonalSite.Domain.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
         {
-            await mediator.Send(new CreateJobExperienceCommand(dto.Company,
-                dto.Description,
-                dto.JobPeriodStart,
-                dto.JobPeriodEnd,
-                dto.TechStack));
+            await mediator.Send(
+                new CreateJobExperienceCommand(
+                    dto.Company,
+                    dto.Description,
+                    dto.JobPeriodStart,
+                    dto.JobPeriodEnd,
+                    dto.TechStack)
+            );
 
             await unitOfWork.SaveChangesAsync();
             return Ok();

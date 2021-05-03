@@ -6,21 +6,21 @@ namespace PersonalSite.Persistence
 {
     public class JobExperienceRepository : IJobExperienceRepository
     {
-        private readonly PersonalSiteDbContext _context;
+        private readonly PersonalSiteDbContext context;
 
         public JobExperienceRepository(PersonalSiteDbContext context)
         {
-            this._context = context ?? throw new ArgumentNullException(nameof(context));
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public void Add(JobExperience entity)
         {
-            _context.Set<JobExperience>().Add(entity);
+            context.Set<JobExperience>().Add(entity);
         }
         
         public IQueryable<JobExperience> GetAllJobExperiences()
         {
-            return _context.Set<JobExperience>().AsQueryable();
+            return context.Set<JobExperience>().AsQueryable();
         }
     }
 }

@@ -25,7 +25,8 @@ namespace PersonalSite.Persistence
             await _context.Database.MigrateAsync(cancellationToken: cancellationToken);
         }
 
-        public string GenerateScript(string fromMigration = null, string toMigration = null, bool idempotent = false)
+        public string GenerateScript(string fromMigration = null, string toMigration = null,
+            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
         {
             return _context.Database.GenerateCreateScript();
         }
