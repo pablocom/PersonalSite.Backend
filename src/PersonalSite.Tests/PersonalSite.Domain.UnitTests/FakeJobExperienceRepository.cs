@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Domain.UnitTests
@@ -17,9 +19,9 @@ namespace PersonalSite.Domain.UnitTests
             dbContext.Add(entity);
         }
         
-        public IQueryable<JobExperience> GetAllJobExperiences()
+        public IEnumerable<JobExperience> GetAllJobExperiences()
         {
-            return dbContext.Set<JobExperience>().AsQueryable();
+            return dbContext.JobExperiences.ToArray();
         }
 
         public void SaveChanges()

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Persistence
@@ -18,9 +20,9 @@ namespace PersonalSite.Persistence
             context.Set<JobExperience>().Add(entity);
         }
         
-        public IQueryable<JobExperience> GetAllJobExperiences()
+        public IEnumerable<JobExperience> GetAllJobExperiences()
         {
-            return context.Set<JobExperience>().AsQueryable();
+            return context.JobExperiences.ToArray();
         }
 
         public void SaveChanges()
