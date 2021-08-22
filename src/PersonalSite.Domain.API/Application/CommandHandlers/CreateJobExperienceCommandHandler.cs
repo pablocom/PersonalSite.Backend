@@ -7,7 +7,7 @@ using PersonalSite.Domain.Services;
 
 namespace PersonalSite.Domain.API.Application.CommandHandlers
 {
-    public class CreateJobExperienceCommandHandler : IRequestHandler<CreateJobExperienceCommand, bool>
+    public class CreateJobExperienceCommandHandler : IRequestHandler<CreateJobExperienceCommand, Unit>
     {
         private readonly IJobExperienceService service;
 
@@ -16,7 +16,7 @@ namespace PersonalSite.Domain.API.Application.CommandHandlers
             this.service = service;
         }
         
-        public async Task<bool> Handle(CreateJobExperienceCommand command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateJobExperienceCommand command, CancellationToken cancellationToken)
         {
             service.CreateJobExperience(command.Company,
                 command.Description,
@@ -24,7 +24,7 @@ namespace PersonalSite.Domain.API.Application.CommandHandlers
                 command.JobPeriodEnd,
                 command.TechStack);
 
-            return await Task.FromResult(true);
+            return await Unit.Task;
         }
     }
 }

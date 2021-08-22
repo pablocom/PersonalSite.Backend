@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using MediatR;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.CommandHandlers;
@@ -10,7 +11,7 @@ using PersonalSite.Domain.Services;
 namespace PersonalSite.API.UnitTests.Handlers
 {
     [TestFixture]
-    public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBase<CreateJobExperienceCommandHandler, CreateJobExperienceCommand, bool>
+    public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBase<CreateJobExperienceCommandHandler, CreateJobExperienceCommand, Unit>
     {
         private IJobExperienceService service;
 

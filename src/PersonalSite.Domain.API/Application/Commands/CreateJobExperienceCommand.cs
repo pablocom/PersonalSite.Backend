@@ -3,7 +3,7 @@ using MediatR;
 
 namespace PersonalSite.Domain.API.Application.Commands
 {
-    public class CreateJobExperienceCommand : IRequest<bool>
+    public class CreateJobExperienceCommand : IRequest<Unit>
     {
         public string Company { get; }
         public string Description { get; }
