@@ -15,9 +15,9 @@ namespace PersonalSite.Persistence
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(JobExperience entity)
+        public void Add(JobExperience jobExperience)
         {
-            context.Set<JobExperience>().Add(entity);
+            context.Set<JobExperience>().Add(jobExperience);
         }
         
         public IEnumerable<JobExperience> GetAllJobExperiences()

@@ -14,9 +14,9 @@ namespace PersonalSite.Domain.UnitTests
             this.dbContext = dbContext;
         }
 
-        public void Add(JobExperience entity)
+        public void Add(JobExperience jobExperience)
         {
-            dbContext.Add(entity);
+            dbContext.Add(jobExperience);
         }
         
         public IEnumerable<JobExperience> GetAllJobExperiences()

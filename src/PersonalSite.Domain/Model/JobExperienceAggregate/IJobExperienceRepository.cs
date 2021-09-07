@@ -4,7 +4,7 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate
 {
     public interface IJobExperienceRepository : IDomainRepository<JobExperience>
     {
-        void Add(JobExperience entity);
+        void Add(JobExperience jobExperience);
         IEnumerable<JobExperience> GetAllJobExperiences();
         void SaveChanges();
     }
