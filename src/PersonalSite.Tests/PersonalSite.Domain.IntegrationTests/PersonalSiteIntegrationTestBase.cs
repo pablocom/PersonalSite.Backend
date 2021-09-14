@@ -29,11 +29,8 @@ namespace PersonalSite.Domain.IntegrationTests
             AdditionalSetup();
         }
 
-        protected void CloseContext()
-        {
-            Repository.SaveChanges();
-        }
-        
+        protected void CloseContext() => dbContext.SaveChanges();
+
         protected virtual void AdditionalSetup() { }
 
         [TearDown]

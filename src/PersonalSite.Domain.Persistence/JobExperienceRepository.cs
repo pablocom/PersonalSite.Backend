@@ -19,15 +19,10 @@ namespace PersonalSite.Persistence
         {
             context.Set<JobExperience>().Add(jobExperience);
         }
-        
+
         public IEnumerable<JobExperience> GetAllJobExperiences()
         {
             return context.JobExperiences.ToArray();
-        }
-
-        public void SaveChanges()
-        {
-            context.SaveChanges();
         }
     }
 }
