@@ -1,5 +1,5 @@
 # PersonalSite Backend
-### Microservice example for DDD architecture based project
+### Microservice example for Domain Model pattern practice
 
 ![YourActionName Actions Status](https://github.com/pablocom/PersonalSite.Backend/workflows/.NET%20Core/badge.svg?branch=master)
 
