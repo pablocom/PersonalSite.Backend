@@ -18,9 +18,10 @@ namespace PersonalSite.Domain.API.Application.QueryHandlers
             this.jobExperienceService = jobExperienceService;
         }
 
-        public async Task<IEnumerable<JobExperienceDto>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<JobExperienceDto>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
         {
-            return await Task.Run(() => jobExperienceService.GetJobExperiences(), cancellationToken);
+            var jobExperiences = jobExperienceService.GetJobExperiences();
+            return Task.FromResult(jobExperiences);
         }
     }
 }

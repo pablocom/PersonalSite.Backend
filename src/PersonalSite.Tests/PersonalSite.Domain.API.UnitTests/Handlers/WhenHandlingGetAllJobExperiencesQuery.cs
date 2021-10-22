@@ -15,23 +15,20 @@ namespace PersonalSite.API.UnitTests.Handlers
     {
         private IJobExperienceService service;
 
+        protected override GetJobExperiencesQueryHandler GetRequestHandler() => new(service);
+
         protected override void AdditionalSetup()
         {
             service = Substitute.For<IJobExperienceService>();
             base.AdditionalSetup();
-        } 
-        
+        }
+
         [Test]
         public void ServiceIsCalled()
         {
             Handler.Handle(new GetJobExperiencesQuery(), new CancellationToken());
 
             service.Received(1).GetJobExperiences();
-        }
-
-        protected override GetJobExperiencesQueryHandler GetRequestHandler()
-        {
-            return new GetJobExperiencesQueryHandler(service);
         }
     }
 }
