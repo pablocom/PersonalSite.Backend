@@ -5,6 +5,7 @@ using MediatR;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
+using PersonalSite.Domain.API.Application.CommandHandlers;
 using PersonalSite.Domain.API.Application.Commands;
 using PersonalSite.Persistence;
 
