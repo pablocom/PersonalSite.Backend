@@ -9,6 +9,8 @@ namespace PersonalSite.API.UnitTests.Controllers
     [TestFixture]
     public class WhenHandlingHealthCheckRequest : ControllerTestBase<HealthCheckController>
     {
+        protected override HealthCheckController GetController() => new(Substitute.For<ILogger<HealthCheckController>>());
+
         [Test]
         public void StatusShouldBeOk()
         {
@@ -20,8 +22,5 @@ namespace PersonalSite.API.UnitTests.Controllers
             Assert.That(result.StatusCode, Is.EqualTo(200));
             Assert.That(result.Value, Is.EqualTo(expectedMessage));
         }
-
-        protected override HealthCheckController GetController() =>
-            new HealthCheckController(Substitute.For<ILogger<HealthCheckController>>());
     }
 }
