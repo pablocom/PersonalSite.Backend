@@ -4,7 +4,6 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.API.Application.Queries;
 using PersonalSite.Domain.API.Controllers;
-using PersonalSite.Persistence;
 
 namespace PersonalSite.API.UnitTests.Controllers
 {
@@ -13,7 +12,7 @@ namespace PersonalSite.API.UnitTests.Controllers
     {
         private IMediator mediator;
 
-        protected override JobExperienceController GetController() => new(Substitute.For<IUnitOfWork>(), mediator);
+        protected override JobExperienceController GetController() => new(mediator);
 
         protected override void AdditionalSetup()
         {

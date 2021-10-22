@@ -19,7 +19,7 @@ namespace PersonalSite.API.UnitTests.Controllers
             mediator = Substitute.For<IMediator>();
         }
 
-        protected override JobExperienceController GetController() => new(UnitOfWork, mediator);
+        protected override JobExperienceController GetController() => new(mediator);
 
         [Test]
         public async Task CreateJobExperienceCommandIsSent()

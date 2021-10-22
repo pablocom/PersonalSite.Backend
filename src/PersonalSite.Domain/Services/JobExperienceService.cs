@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services.Dtos;
@@ -8,7 +9,7 @@ namespace PersonalSite.Domain.Services
     public interface IJobExperienceService
     {
         void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack);
-        JobExperienceDto[] GetJobExperiences();
+        IEnumerable<JobExperienceDto> GetJobExperiences();
     }
 
     public class JobExperienceService : IJobExperienceService
@@ -25,7 +26,7 @@ namespace PersonalSite.Domain.Services
             repository.Add(new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack));
         }
 
-        public JobExperienceDto[] GetJobExperiences()
+        public IEnumerable<JobExperienceDto> GetJobExperiences()
         {
             var jobExperiences = repository.GetAllJobExperiences().ToArray();
             return jobExperiences.Select(JobExperienceDto.From).ToArray();
