@@ -1,7 +1,7 @@
 # PersonalSite Backend
 ### Microservice example for Domain Model pattern practice
 
-![CI pipeline](https://github.com/pablocom/PersonalSite.Backend/workflows/.NET%20Core/badge.svg?branch=master)
+[![CI](https://github.com/pablocom/PersonalSite.Backend/actions/workflows/dotnet-core.yml/badge.svg)](https://github.com/pablocom/PersonalSite.Backend/actions/workflows/dotnet-core.yml)
 
 This project focuses on application of patterns, principles, and practices of Domain-Driven Design. More accurately on Domain-Model pattern. It stills evolution as I used it to get my hands dirty from what I read in the books.
 
