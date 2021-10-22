@@ -1,3 +1,4 @@
+using System;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Domain.Services;
 using PersonalSite.Persistence;
-using System;
+using Microsoft.Extensions.Logging;
+using PersonalSite.Domain.API.Errors;
 
 namespace PersonalSite.Domain.API
 {
@@ -40,15 +41,11 @@ namespace PersonalSite.Domain.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.ConfigureExceptionHandler(logger);
 
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -57,7 +54,7 @@ namespace PersonalSite.Domain.API
 
         private static void RunContextMigrations(IServiceCollection services)
         {
-            services.BuildServiceProvider().GetService<IMigrator>().Migrate();
+            services.BuildServiceProvider().GetService<IMigrator>()!.Migrate();
         }
     }
 }
