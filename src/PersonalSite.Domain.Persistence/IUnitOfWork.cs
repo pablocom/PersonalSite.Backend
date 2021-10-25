@@ -1,11 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PersonalSite.Persistence
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-        int SaveChanges();
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
+        void Rollback();
     }
 }

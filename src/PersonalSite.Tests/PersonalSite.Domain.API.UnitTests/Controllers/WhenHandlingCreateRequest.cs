@@ -12,15 +12,17 @@ namespace PersonalSite.API.UnitTests.Controllers
     [TestFixture]
     public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
     {
-        private IMediator _mediator;
+        private IMediator mediator;
 
         protected override void AdditionalSetup()
         {
-            _mediator = Substitute.For<IMediator>();
+            mediator = Substitute.For<IMediator>();
         }
 
+        protected override JobExperienceController GetController() => new(mediator);
+
         [Test]
-        public async Task ServiceIsCalled()
+        public async Task CreateJobExperienceCommandIsSent()
         {
             var company = "Ryanair";
             var description = "Software Developer";
@@ -38,7 +40,7 @@ namespace PersonalSite.API.UnitTests.Controllers
 
             await Controller.Create(createJobExperienceDto);
 
-            await _mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
+            await mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
                     AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
         }
 
@@ -51,11 +53,6 @@ namespace PersonalSite.API.UnitTests.Controllers
             Assert.That(createJobExperienceCommand.JobPeriodEnd, Is.EqualTo(end));
             CollectionAssert.AreEquivalent(teckStack, createJobExperienceCommand.TechStack);
             return true;
-        }
-
-        protected override JobExperienceController GetController()
-        {
-            return new JobExperienceController(Logger, UnitOfWork, _mediator);
         }
     }
 }

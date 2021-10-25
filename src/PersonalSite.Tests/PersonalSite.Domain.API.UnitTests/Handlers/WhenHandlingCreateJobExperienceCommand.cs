@@ -38,7 +38,7 @@ namespace PersonalSite.API.UnitTests.Handlers
 
         protected override CreateJobExperienceCommandHandler GetRequestHandler()
         {
-            return new CreateJobExperienceCommandHandler(service);
+            return new CreateJobExperienceCommandHandler(service, UnitOfWork);
         }
     }
 }

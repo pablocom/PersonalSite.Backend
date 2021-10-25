@@ -17,7 +17,7 @@ namespace PersonalSite.Persistence
 
         public void Add(JobExperience jobExperience)
         {
-            context.Set<JobExperience>().Add(jobExperience);
+            context.JobExperiences.Add(jobExperience);
         }
 
         public IEnumerable<JobExperience> GetAllJobExperiences()
