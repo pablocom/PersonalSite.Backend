@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Domain.Services;
-using PersonalSite.Domain.Services.Dtos;
+using PersonalSite.Domain.Application;
+using PersonalSite.Domain.Application.Dtos;
 using PersonalSite.Domain.UnitTests.Builders;
 
 namespace PersonalSite.Domain.UnitTests.Services

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Application.Commands;
-using PersonalSite.Domain.API.Application.Dtos;
+using PersonalSite.Domain.API.Commands;
 using PersonalSite.Domain.API.Controllers;
+using PersonalSite.Domain.API.Dtos;
 
 namespace PersonalSite.API.UnitTests.Controllers
 {

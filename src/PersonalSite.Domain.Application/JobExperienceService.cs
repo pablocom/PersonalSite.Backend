@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PersonalSite.Domain.Application.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Domain.Services.Dtos;
 
-namespace PersonalSite.Domain.Services
+namespace PersonalSite.Domain.Application
 {
+    /// <summary>
+    /// The application service layer represents the use cases and behavior of the application. Use cases are
+    /// implemented as application services that contain application logic to coordinate the fulfillment of
+    /// a use case by delegating to the domain and infrastructural layers.
+    /// </summary>
     public interface IJobExperienceService
     {
         void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack);

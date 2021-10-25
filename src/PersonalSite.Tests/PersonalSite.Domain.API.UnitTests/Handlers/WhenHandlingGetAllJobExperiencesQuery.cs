@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using System.Threading;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Application.Queries;
-using PersonalSite.Domain.API.Application.QueryHandlers;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Domain.Services;
-using PersonalSite.Domain.Services.Dtos;
+using PersonalSite.Domain.API.Queries;
+using PersonalSite.Domain.API.QueryHandlers;
+using PersonalSite.Domain.Application;
+using PersonalSite.Domain.Application.Dtos;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {

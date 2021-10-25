@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
+using PersonalSite.Domain.Application;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Persistence;
 
 namespace PersonalSite.Domain.UnitTests
 {

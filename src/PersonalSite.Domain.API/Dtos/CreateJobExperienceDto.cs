@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PersonalSite.Domain.API.Application.Dtos
+namespace PersonalSite.Domain.API.Dtos
 {
     public class CreateJobExperienceDto
     {

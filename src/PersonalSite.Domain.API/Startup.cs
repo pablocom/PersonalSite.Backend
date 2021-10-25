@@ -6,11 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Domain.Services;
 using PersonalSite.Persistence;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Errors;
+using PersonalSite.Domain.Application;
 
 namespace PersonalSite.Domain.API
 {

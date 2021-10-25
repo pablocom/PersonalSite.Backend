@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PersonalSite.Domain.API.Application.Commands;
-using PersonalSite.Domain.API.Application.Dtos;
 using PersonalSite.Persistence;
 using System.Threading.Tasks;
-using PersonalSite.Domain.API.Application.Queries;
+using PersonalSite.Domain.API.Commands;
+using PersonalSite.Domain.API.Dtos;
+using PersonalSite.Domain.API.Queries;
 
 namespace PersonalSite.Domain.API.Controllers
 {

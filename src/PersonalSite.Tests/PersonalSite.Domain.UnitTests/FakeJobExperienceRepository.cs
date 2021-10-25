@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PersonalSite.Domain.Application;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Domain.UnitTests

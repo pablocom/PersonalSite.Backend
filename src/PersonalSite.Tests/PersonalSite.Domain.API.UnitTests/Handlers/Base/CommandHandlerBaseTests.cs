@@ -5,8 +5,7 @@ using MediatR;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Application.CommandHandlers;
-using PersonalSite.Domain.API.Application.Commands;
+using PersonalSite.Domain.API.CommandHandlers;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.API.UnitTests.Handlers.Base
@@ -17,6 +16,8 @@ namespace PersonalSite.API.UnitTests.Handlers.Base
         private IUnitOfWork unitOfWork;
         private CommandHandler<FakeCommand> commandHandler;
         private FakeCommand command = new();
+        
+        // class intentionally public for mocking concerns
         public class FakeCommand : IRequest<Unit> { }
 
         [SetUp]

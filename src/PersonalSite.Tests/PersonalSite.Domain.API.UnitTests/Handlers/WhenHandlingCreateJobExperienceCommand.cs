@@ -1,12 +1,10 @@
 using System;
-using System.Threading;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Application.CommandHandlers;
-using PersonalSite.Domain.API.Application.Commands;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.Domain.Services;
+using PersonalSite.Domain.API.CommandHandlers;
+using PersonalSite.Domain.API.Commands;
+using PersonalSite.Domain.Application;
 
 namespace PersonalSite.API.UnitTests.Handlers
 {

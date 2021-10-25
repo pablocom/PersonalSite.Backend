@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalSite.Domain.Persistence\PersonalSite.Domain.Persistence.csproj" />
-    <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
+    <ProjectReference Include="..\PersonalSite.Domain.Application\PersonalSite.Domain.Application.csproj" />
   </ItemGroup>
 
 

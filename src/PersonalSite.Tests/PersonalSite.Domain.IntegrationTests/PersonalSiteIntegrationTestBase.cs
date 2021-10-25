@@ -2,6 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
+using PersonalSite.Domain.Application;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 
