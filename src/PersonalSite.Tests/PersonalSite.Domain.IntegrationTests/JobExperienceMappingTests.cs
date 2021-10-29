@@ -25,7 +25,7 @@ namespace PersonalSite.Domain.IntegrationTests
             AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
         }
         
-        private void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
+        private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
             DateTime endDate, IEnumerable<string> techStack)
         {
             Assert.That(jobExperience.Company, Is.EqualTo(company));

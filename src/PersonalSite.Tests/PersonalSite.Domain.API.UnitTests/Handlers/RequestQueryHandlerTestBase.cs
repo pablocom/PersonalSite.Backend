@@ -11,7 +11,7 @@ namespace PersonalSite.API.UnitTests.Handlers
         where TRequest : IRequest<TResponse>
         where TRequestHandler : IRequestHandler<TRequest, TResponse>
     {
-        protected IUnitOfWork UnitOfWork = Substitute.For<IUnitOfWork>();
+        protected readonly IUnitOfWork UnitOfWork = Substitute.For<IUnitOfWork>();
         protected TRequestHandler Handler { get; private set; }
         
         [SetUp]

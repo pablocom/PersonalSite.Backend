@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Application;
@@ -41,15 +42,15 @@ namespace PersonalSite.Domain.UnitTests.Services
         {
             TestDelegate action = () => 
             {
-                service.CreateJobExperience(company, description, new DateTime(), new DateTime(), new string[0]);
+                service.CreateJobExperience(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
             };
             
             var exception = Assert.Throws<DomainException>(action);
             Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
         }
 
-        private void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
-            DateTime endDate, string[] techStack)
+        private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
+            DateTime endDate, IEnumerable<string> techStack)
         {
             Assert.That(jobExperience.Company, Is.EqualTo(company));
             Assert.That(jobExperience.Description, Is.EqualTo(description));

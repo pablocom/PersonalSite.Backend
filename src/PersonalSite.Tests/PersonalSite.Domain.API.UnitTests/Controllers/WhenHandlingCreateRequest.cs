@@ -44,7 +44,7 @@ namespace PersonalSite.API.UnitTests.Controllers
                     AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
         }
 
-        private bool AssertCommand(CreateJobExperienceCommand createJobExperienceCommand, string company,
+        private static bool AssertCommand(CreateJobExperienceCommand createJobExperienceCommand, string company,
             string description, DateTime start, DateTime end, string[] teckStack)
         {
             Assert.That(createJobExperienceCommand.Company, Is.EqualTo(company));

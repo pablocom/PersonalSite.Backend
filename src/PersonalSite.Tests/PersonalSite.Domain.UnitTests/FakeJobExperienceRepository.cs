@@ -23,10 +23,5 @@ namespace PersonalSite.Domain.UnitTests
         {
             return dbContext.JobExperiences.ToArray();
         }
-
-        public void SaveChanges()
-        {
-            dbContext.SaveChanges();
-        }
     }
 }

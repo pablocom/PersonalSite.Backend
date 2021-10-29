@@ -19,7 +19,7 @@ namespace PersonalSite.Domain.UnitTests
             AddPersonalSiteMappings(modelBuilder);
         }
 
-        private void AddPersonalSiteMappings(ModelBuilder modelBuilder)
+        private static void AddPersonalSiteMappings(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new JobExperienceMappingOverride());
         }

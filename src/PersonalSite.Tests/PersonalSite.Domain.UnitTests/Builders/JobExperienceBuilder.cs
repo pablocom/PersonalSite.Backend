@@ -7,7 +7,7 @@ namespace PersonalSite.Domain.UnitTests.Builders
     {
         private string company;
         private string description;
-        private string[] techStack = new string[0];
+        private string[] techStack = Array.Empty<string>();
         private DateTime startDate;
         private DateTime endDate;
         
