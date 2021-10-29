@@ -17,9 +17,10 @@ namespace PersonalSite.Persistence
             dbTransaction = context.Database.BeginTransaction();
         }
 
-        public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
+        public void Commit()
         {
-            return await context.SaveChangesAsync(cancellationToken);
+            context.SaveChanges();
+            dbTransaction.Commit();
         }
 
         public void Rollback()

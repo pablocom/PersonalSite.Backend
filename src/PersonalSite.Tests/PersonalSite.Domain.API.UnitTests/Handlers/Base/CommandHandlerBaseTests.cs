@@ -48,11 +48,11 @@ namespace PersonalSite.API.UnitTests.Handlers.Base
         }
 
         [Test]
-        public async Task UnitOfWorkEndsAfterProcessing()
+        public void UnitOfWorkEndsAfterProcessing()
         {
             WhenRequestIsHandled();
             
-            await unitOfWork.Received(1).CommitAsync();
+            unitOfWork.Received(1).Commit();
         }
 
         private void WhenRequestIsHandled()

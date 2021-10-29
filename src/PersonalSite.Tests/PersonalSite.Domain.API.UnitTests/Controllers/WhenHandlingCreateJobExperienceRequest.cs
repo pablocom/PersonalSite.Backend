@@ -10,7 +10,7 @@ using PersonalSite.Domain.API.Dtos;
 namespace PersonalSite.API.UnitTests.Controllers
 {
     [TestFixture]
-    public class WhenHandlingCreateRequest : ControllerTestBase<JobExperienceController>
+    public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExperienceController>
     {
         private IMediator mediator;
 

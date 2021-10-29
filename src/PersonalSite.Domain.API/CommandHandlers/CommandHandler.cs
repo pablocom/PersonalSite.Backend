@@ -20,8 +20,8 @@ namespace PersonalSite.Domain.API.CommandHandlers
         {
             try
             {
-                await Process(command).ConfigureAwait(false);
-                await unitOfWork.CommitAsync(cancellationToken);
+                await Process(command);
+                unitOfWork.Commit();
             }
             catch (Exception)
             {

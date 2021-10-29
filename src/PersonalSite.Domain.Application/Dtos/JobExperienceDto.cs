@@ -4,6 +4,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Domain.Application.Dtos
 {
+    [Serializable]
     public class JobExperienceDto
     {
         public string Company { get; set; }
@@ -12,6 +13,8 @@ namespace PersonalSite.Domain.Application.Dtos
         public DateTime? JobPeriodEnd { get; set; }
         public IEnumerable<string> TechStack { get; set; }
 
+        public JobExperienceDto() { }
+        
         public JobExperienceDto(string company, string description, JobPeriod jobPeriod, IEnumerable<string> techStack)
         {
             Company = company;

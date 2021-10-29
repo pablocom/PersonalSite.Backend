@@ -29,10 +29,10 @@ namespace PersonalSite.Domain.API
             services.AddDbContext<PersonalSiteDbContext>(options =>
                 options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
-            services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
-            services.AddScoped<IJobExperienceService, JobExperienceService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IJobExperienceRepository, JobExperienceRepository>();
+            services.AddTransient<IMigrator, PersonalSiteDbContextMigrator>();
+            services.AddTransient<IJobExperienceService, JobExperienceService>();
 
             services.AddMediatR(typeof(Startup));
 
