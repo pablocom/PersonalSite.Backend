@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace PersonalSite.Persistence
 {
-    public class UnitOfWork : IUnitOfWork
+    public sealed class UnitOfWork : IUnitOfWork
     {
         private readonly PersonalSiteDbContext context;
-        private IDbContextTransaction dbTransaction;
+        private readonly IDbContextTransaction dbTransaction;
         
         public UnitOfWork(PersonalSiteDbContext context)
         {
