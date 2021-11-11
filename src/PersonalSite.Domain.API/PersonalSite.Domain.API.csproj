@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>PersonalSite.Domain.API</AssemblyName>
     <RootNamespace>PersonalSite.Domain.API</RootNamespace>
   </PropertyGroup>
@@ -24,6 +24,5 @@
     <ProjectReference Include="..\PersonalSite.Domain.Persistence\PersonalSite.Domain.Persistence.csproj" />
     <ProjectReference Include="..\PersonalSite.Domain.Application\PersonalSite.Domain.Application.csproj" />
   </ItemGroup>
-
 
 </Project>

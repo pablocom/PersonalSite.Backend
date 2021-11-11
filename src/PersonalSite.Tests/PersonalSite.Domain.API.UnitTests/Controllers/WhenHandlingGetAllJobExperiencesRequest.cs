@@ -5,26 +5,25 @@ using NUnit.Framework;
 using PersonalSite.Domain.API.Controllers;
 using PersonalSite.Domain.API.Queries;
 
-namespace PersonalSite.API.UnitTests.Controllers
+namespace PersonalSite.API.UnitTests.Controllers;
+
+[TestFixture]
+public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>
 {
-    [TestFixture]
-    public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>
+    private IMediator mediator;
+
+    protected override JobExperienceController GetController() => new(mediator);
+
+    protected override void AdditionalSetup()
     {
-        private IMediator mediator;
+        mediator = Substitute.For<IMediator>();
+    }
 
-        protected override JobExperienceController GetController() => new(mediator);
+    [Test]
+    public async Task GetJobExperiencesQueryIsSent()
+    {
+        await Controller.GetAll();
 
-        protected override void AdditionalSetup()
-        {
-            mediator = Substitute.For<IMediator>();
-        }
-
-        [Test]
-        public async Task GetJobExperiencesQueryIsSent()
-        {
-            await Controller.GetAll();
-
-            await mediator.Received(1).Send(Arg.Is<GetJobExperiencesQuery>(x => true));
-        }
+        await mediator.Received(1).Send(Arg.Is<GetJobExperiencesQuery>(x => true));
     }
 }

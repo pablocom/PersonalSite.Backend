@@ -5,34 +5,34 @@ using PersonalSite.Domain.Application;
 using PersonalSite.Domain.Application.Dtos;
 using PersonalSite.Domain.UnitTests.Builders;
 
-namespace PersonalSite.Domain.UnitTests.Services
+namespace PersonalSite.Domain.UnitTests.Services;
+
+public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 {
-    public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
+    private IJobExperienceService service;
+
+    protected override void AdditionalSetup()
     {
-        private IJobExperienceService service;
+        service = new JobExperienceService(Repository);
+    }
 
-        protected override void AdditionalSetup()
+    [Test]
+    public void MultipleJobExperiencesAreReturned()
+    {
+        var company = "Ryanair";
+        var description = "Software Engineer";
+        var startDate = new DateTime(2019, 09, 09);
+        var endDate = new DateTime(2021, 07, 01);
+        var techStack = new[] { ".Net", "MySQL" };
+
+        var otherCompany = "1millionBot";
+        var otherDescription = "Web Developer";
+        var otherStartDate = new DateTime(2018, 02, 09);
+        var otherEndDate = new DateTime(2018, 09, 01);
+        var otherTechStack = new[] { "Node.js", "MongoDB" };
+
+        AssumeDataInRepository(new[]
         {
-            service = new JobExperienceService(Repository);
-        }
-
-        [Test]
-        public void MultipleJobExperiencesAreReturned()
-        {
-            var company = "Ryanair";
-            var description = "Software Engineer";
-            var startDate = new DateTime(2019, 09, 09);
-            var endDate = new DateTime(2021, 07, 01);
-            var techStack = new[] { ".Net", "MySQL" };
-
-            var otherCompany = "1millionBot";
-            var otherDescription = "Web Developer";
-            var otherStartDate = new DateTime(2018, 02, 09);
-            var otherEndDate = new DateTime(2018, 09, 01);
-            var otherTechStack = new[] { "Node.js", "MongoDB" };
-
-            AssumeDataInRepository(new[]
-            {
                 new JobExperienceBuilder()
                     .WithCompany(company)
                     .WithDescription(description)
@@ -49,21 +49,20 @@ namespace PersonalSite.Domain.UnitTests.Services
                     .Build()
             });
 
-            var jobExperiences = service.GetJobExperiences().ToArray();
+        var jobExperiences = service.GetJobExperiences().ToArray();
 
-            Assert.That(jobExperiences.Length, Is.EqualTo(2));
-            AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
-            AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
-        }
+        Assert.That(jobExperiences.Length, Is.EqualTo(2));
+        AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
+        AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
+    }
 
-        private static void AssertJobExperience(JobExperienceDto jobExperience, string company, string description,
-            DateTime startDate, DateTime endDate, string[] techStack)
-        {
-            Assert.That(jobExperience.Company, Is.EqualTo(company));
-            Assert.That(jobExperience.Description, Is.EqualTo(description));
-            Assert.That(jobExperience.JobPeriodStart, Is.EqualTo(startDate));
-            Assert.That(jobExperience.JobPeriodEnd, Is.EqualTo(endDate));
-            CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
-        }
+    private static void AssertJobExperience(JobExperienceDto jobExperience, string company, string description,
+        DateTime startDate, DateTime endDate, string[] techStack)
+    {
+        Assert.That(jobExperience.Company, Is.EqualTo(company));
+        Assert.That(jobExperience.Description, Is.EqualTo(description));
+        Assert.That(jobExperience.JobPeriodStart, Is.EqualTo(startDate));
+        Assert.That(jobExperience.JobPeriodEnd, Is.EqualTo(endDate));
+        CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "PersonalSite.Domain\PersonalSite.Domain.csproj", "{13178447-06FA-4652-8735-CD79E255C6F9}"
 EndProject
@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.API.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.IntegrationTests\PersonalSite.Domain.IntegrationTests.csproj", "{09BB995A-9C5F-4FA9-893B-C91B567E0BE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.Application", "PersonalSite.Domain.Application\PersonalSite.Domain.Application.csproj", "{B87A9835-AC50-4CD2-A8B9-D2DC0B3AD2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.Application", "PersonalSite.Domain.Application\PersonalSite.Domain.Application.csproj", "{B87A9835-AC50-4CD2-A8B9-D2DC0B3AD2A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.API.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.Domain.API.IntegrationTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.API.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.Domain.API.IntegrationTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
