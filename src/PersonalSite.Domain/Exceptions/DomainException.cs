@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace PersonalSite.Domain.Exceptions
+namespace PersonalSite.Domain.Exceptions;
+
+public class DomainException : Exception
 {
-    public class DomainException : Exception
-    {
-        public DomainException(string message) : base(message)
-        {
-        }
-    }
+    public DomainException(string message) : base(message)
+    { }
 }

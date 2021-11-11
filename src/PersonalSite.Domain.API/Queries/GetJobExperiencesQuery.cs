@@ -2,10 +2,7 @@
 using MediatR;
 using PersonalSite.Domain.Application.Dtos;
 
-namespace PersonalSite.Domain.API.Queries
-{
-    public class GetJobExperiencesQuery : IRequest<IEnumerable<JobExperienceDto>>
-    {
+namespace PersonalSite.Domain.API.Queries;
 
-    }
-}
+public class GetJobExperiencesQuery : IRequest<IEnumerable<JobExperienceDto>>
+{ }

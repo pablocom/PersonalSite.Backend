@@ -11,49 +11,48 @@ using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Errors;
 using PersonalSite.Domain.Application;
 
-namespace PersonalSite.Domain.API
+namespace PersonalSite.Domain.API;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddDbContext<PersonalSiteDbContext>(options =>
+            options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
+
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
+        services.AddTransient<IJobExperienceRepository, JobExperienceRepository>();
+        services.AddTransient<IMigrator, PersonalSiteDbContextMigrator>();
+        services.AddTransient<IJobExperienceService, JobExperienceService>();
+
+        services.AddMediatR(typeof(Startup));
+
+        RunContextMigrations(services);
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+    {
+        app.ConfigureExceptionHandler(logger);
+
+        app.UseRouting();
+        app.UseEndpoints(endpoints =>
         {
-            Configuration = configuration;
-        }
+            endpoints.MapControllers();
+        });
+    }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-            services.AddDbContext<PersonalSiteDbContext>(options =>
-                options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
-
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IJobExperienceRepository, JobExperienceRepository>();
-            services.AddTransient<IMigrator, PersonalSiteDbContextMigrator>();
-            services.AddTransient<IJobExperienceService, JobExperienceService>();
-
-            services.AddMediatR(typeof(Startup));
-
-            RunContextMigrations(services);
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
-        {
-            app.ConfigureExceptionHandler(logger);
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
-
-        private static void RunContextMigrations(IServiceCollection services)
-        {
-            services.BuildServiceProvider().GetService<IMigrator>()!.Migrate();
-        }
+    private static void RunContextMigrations(IServiceCollection services)
+    {
+        services.BuildServiceProvider().GetService<IMigrator>()!.Migrate();
     }
 }

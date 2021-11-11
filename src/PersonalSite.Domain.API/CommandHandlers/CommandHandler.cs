@@ -4,34 +4,33 @@ using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.Domain.API.CommandHandlers
+namespace PersonalSite.Domain.API.CommandHandlers;
+
+public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
+    where TCommand : IRequest<Unit>
 {
-    public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit> 
-        where TCommand : IRequest<Unit>
+    private readonly IUnitOfWork unitOfWork;
+
+    protected CommandHandler(IUnitOfWork unitOfWork)
     {
-        private readonly IUnitOfWork unitOfWork;
-
-        protected CommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
-
-        public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                await Process(command);
-                unitOfWork.Commit();
-            }
-            catch (Exception)
-            {
-                unitOfWork.Rollback();
-                throw;
-            }
-
-            return Unit.Value;
-        }
-
-        public abstract Task Process(TCommand command);
+        this.unitOfWork = unitOfWork;
     }
+
+    public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await Process(command);
+            unitOfWork.Commit();
+        }
+        catch (Exception)
+        {
+            unitOfWork.Rollback();
+            throw;
+        }
+
+        return Unit.Value;
+    }
+
+    public abstract Task Process(TCommand command);
 }

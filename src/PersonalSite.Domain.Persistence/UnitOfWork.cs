@@ -1,37 +1,33 @@
-﻿using System.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace PersonalSite.Persistence
+namespace PersonalSite.Persistence;
+
+public sealed class UnitOfWork : IUnitOfWork
 {
-    public sealed class UnitOfWork : IUnitOfWork
+    private readonly PersonalSiteDbContext context;
+    private readonly IDbContextTransaction dbTransaction;
+
+    public UnitOfWork(PersonalSiteDbContext context)
     {
-        private readonly PersonalSiteDbContext context;
-        private readonly IDbContextTransaction dbTransaction;
-        
-        public UnitOfWork(PersonalSiteDbContext context)
-        {
-            this.context = context;
+        this.context = context;
 
-            dbTransaction = context.Database.BeginTransaction();
-        }
+        dbTransaction = context.Database.BeginTransaction();
+    }
 
-        public void Commit()
-        {
-            context.SaveChanges();
-            dbTransaction.Commit();
-        }
+    public void Commit()
+    {
+        context.SaveChanges();
+        dbTransaction.Commit();
+    }
 
-        public void Rollback()
-        {
-            dbTransaction.Rollback();
-        }
+    public void Rollback()
+    {
+        dbTransaction.Rollback();
+    }
 
-        public void Dispose()
-        {
-            dbTransaction.Dispose();
-            context.Dispose();
-        }
+    public void Dispose()
+    {
+        dbTransaction.Dispose();
+        context.Dispose();
     }
 }
