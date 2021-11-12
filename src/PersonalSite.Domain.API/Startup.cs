@@ -10,6 +10,7 @@ using PersonalSite.Persistence;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Domain.API.Errors;
 using PersonalSite.Domain.Application;
+using PersonalSite.Domain.WebApi.Installers;
 
 namespace PersonalSite.Domain.API;
 
@@ -37,6 +38,7 @@ public class Startup
         services.AddMediatR(typeof(Startup));
 
         RunContextMigrations(services);
+        DomainEventsInstaller.Init();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
