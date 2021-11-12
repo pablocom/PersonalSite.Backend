@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\PersonalSite.Domain.API\PersonalSite.Domain.API.csproj" />
+      <ProjectReference Include="..\..\PersonalSite.Domain.API\PersonalSite.Domain.WebApi.csproj" />
     </ItemGroup>
 
 </Project>

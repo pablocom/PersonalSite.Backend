@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "Pers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.Persistence", "PersonalSite.Domain.Persistence\PersonalSite.Domain.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.API", "PersonalSite.Domain.API\PersonalSite.Domain.API.csproj", "{D852893F-25B6-467E-B3B6-BC4E997A2AF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.WebApi", "PersonalSite.Domain.API\PersonalSite.Domain.WebApi.csproj", "{D852893F-25B6-467E-B3B6-BC4E997A2AF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalSite.Tests", "PersonalSite.Tests", "{5F9EA4EB-E65A-4C58-979A-3A38FE6778CA}"
 EndProject

@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>PersonalSite.Domain.API</AssemblyName>
-    <RootNamespace>PersonalSite.Domain.API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +11,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="PersonalSite.Persistence.csproj.EntityFrameworkCore.targets" />
-    <None Remove="PersonalSite.Domain.API.EntityFrameworkCore.targets" />
   </ItemGroup>
 
   <ItemGroup>
