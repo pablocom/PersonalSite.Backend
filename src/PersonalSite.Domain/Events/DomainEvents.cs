@@ -38,12 +38,12 @@ public static class DomainEvents
             action(domainEvent);
         }
 
-        foreach (var handler in _staticHandlers)
+        foreach (var handlerType in _staticHandlers)
         {
-            if (typeof(IDomainEventHandler<T>).IsAssignableFrom(handler))
+            if (typeof(IDomainEventHandler<T>).IsAssignableFrom(handlerType))
             {
-                var instance = (IDomainEventHandler<T>)Activator.CreateInstance(handler);
-                instance.Handle(domainEvent);
+                var handler = (IDomainEventHandler<T>)Activator.CreateInstance(handlerType);
+                handler.Handle(domainEvent);
             }
         }
     }
