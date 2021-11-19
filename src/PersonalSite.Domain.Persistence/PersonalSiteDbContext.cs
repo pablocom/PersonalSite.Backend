@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.Persistence;

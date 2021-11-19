@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PersonalSite.Domain.Events;
-using PersonalSite.Domain.Exceptions;
-using PersonalSite.Domain.Extensions;
+using PersonalSite.WebApi.Events;
+using PersonalSite.WebApi.Exceptions;
+using PersonalSite.WebApi.Extensions;
 
-namespace PersonalSite.Domain.Model.JobExperienceAggregate;
+namespace PersonalSite.WebApi.Model.JobExperienceAggregate;
 
 public class JobExperience : Entity, IAggregateRoot
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PersonalSite.Domain.Model.JobExperienceAggregate;
+namespace PersonalSite.WebApi.Model.JobExperienceAggregate;
 
 public class JobPeriod : ValueObject
 {

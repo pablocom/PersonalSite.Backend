@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Commands;
-using PersonalSite.Domain.API.Controllers;
-using PersonalSite.Domain.API.Dtos;
+using PersonalSite.WebApi.Commands;
+using PersonalSite.WebApi.Controllers;
+using PersonalSite.WebApi.Dtos;
 
-namespace PersonalSite.API.UnitTests.Controllers;
+namespace PersonalSite.WebApi.UnitTests.Controllers;
 
 [TestFixture]
 public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExperienceController>

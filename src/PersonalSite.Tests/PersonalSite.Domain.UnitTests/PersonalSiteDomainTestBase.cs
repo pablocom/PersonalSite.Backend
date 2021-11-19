@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using PersonalSite.Domain.Application;
-using PersonalSite.Domain.Events;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Application;
+using PersonalSite.WebApi.Events;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.UnitTests;
+namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {

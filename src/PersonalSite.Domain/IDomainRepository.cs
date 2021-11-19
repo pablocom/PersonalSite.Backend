@@ -1,8 +1,8 @@
-﻿namespace PersonalSite.Domain;
+﻿namespace PersonalSite.WebApi;
 
 /// <summary>
 /// Marks domain repository of an aggregate root
 /// </summary>
 /// <typeparam name="TAggregateRoot">Type of aggregate root of repository</typeparam>
-public interface IDomainRepository<TAggregateRoot> where TAggregateRoot : IAggregateRoot
+public interface IDomainRepository<IAggregateRoot>
 { }

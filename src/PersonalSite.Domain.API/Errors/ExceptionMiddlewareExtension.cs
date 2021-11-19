@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace PersonalSite.Domain.API.Errors;
+namespace PersonalSite.WebApi.Errors;
 
 public static class ExceptionMiddlewareExtension
 {
@@ -33,5 +33,5 @@ public static class ExceptionMiddlewareExtension
     }
 }
 
-    
+
 

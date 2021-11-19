@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Persistence.Mappings;
 

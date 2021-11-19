@@ -1,7 +1,7 @@
 ﻿using System;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.UnitTests.Builders;
+namespace PersonalSite.UnitTests.Builders;
 
 public class JobExperienceBuilder
 {

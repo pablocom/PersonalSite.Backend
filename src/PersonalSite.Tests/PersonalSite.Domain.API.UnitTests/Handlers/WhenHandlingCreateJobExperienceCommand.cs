@@ -2,11 +2,11 @@ using System;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.CommandHandlers;
-using PersonalSite.Domain.API.Commands;
-using PersonalSite.Domain.Application;
+using PersonalSite.Application;
+using PersonalSite.WebApi.CommandHandlers;
+using PersonalSite.WebApi.Commands;
 
-namespace PersonalSite.API.UnitTests.Handlers;
+namespace PersonalSite.WebApi.UnitTests.Handlers;
 
 [TestFixture]
 public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBase<CreateJobExperienceCommandHandler, CreateJobExperienceCommand, Unit>

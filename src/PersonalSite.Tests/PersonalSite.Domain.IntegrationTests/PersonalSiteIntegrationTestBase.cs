@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
-using PersonalSite.Domain.Application;
+using PersonalSite.Application;
+using PersonalSite.WebApi.Events;
 using PersonalSite.Persistence;
 using System;
 
-namespace PersonalSite.Domain.IntegrationTests;
+namespace PersonalSite.IntegrationTests;
 
 public class PersonalSiteIntegrationTestBase
 {
@@ -24,7 +25,9 @@ public class PersonalSiteIntegrationTestBase
 
         dbContext = new PersonalSiteDbContext(options);
         Repository = new JobExperienceRepository(dbContext);
-        this.transaction = dbContext.Database.BeginTransaction();
+        transaction = dbContext.Database.BeginTransaction();
+
+        DomainEvents.Init();
 
         AdditionalSetup();
     }

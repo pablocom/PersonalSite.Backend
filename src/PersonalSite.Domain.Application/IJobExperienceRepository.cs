@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.WebApi;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.Application;
+namespace PersonalSite.Application;
 
 public interface IJobExperienceRepository : IDomainRepository<JobExperience>
 {

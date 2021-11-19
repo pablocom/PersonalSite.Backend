@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PersonalSite.Domain.Events;
+namespace PersonalSite.WebApi.Events;
 
 public static class DomainEvents
 {
-    private static IDictionary<Type, List<Delegate>> _dynamicHandlers;
+    private static Dictionary<Type, List<Delegate>> _dynamicHandlers;
     private static List<Type> _staticHandlers;
 
     public static void Init()

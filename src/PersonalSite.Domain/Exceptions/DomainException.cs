@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalSite.Domain.Exceptions;
+namespace PersonalSite.WebApi.Exceptions;
 
 public class DomainException : Exception
 {

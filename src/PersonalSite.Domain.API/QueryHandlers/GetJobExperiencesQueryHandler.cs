@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using PersonalSite.Domain.API.Queries;
-using PersonalSite.Domain.Application;
-using PersonalSite.Domain.Application.Dtos;
+using PersonalSite.Application;
+using PersonalSite.Application.Dtos;
+using PersonalSite.WebApi.Queries;
 
-namespace PersonalSite.Domain.API.QueryHandlers;
+namespace PersonalSite.WebApi.QueryHandlers;
 
 public class GetJobExperiencesQueryHandler : IRequestHandler<GetJobExperiencesQuery, IEnumerable<JobExperienceDto>>
 {

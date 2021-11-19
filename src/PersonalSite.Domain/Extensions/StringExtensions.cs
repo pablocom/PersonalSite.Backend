@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.Domain.Extensions;
+﻿namespace PersonalSite.WebApi.Extensions;
 
 public static class StringExtensions
 {

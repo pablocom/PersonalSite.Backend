@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.Application.Dtos;
+namespace PersonalSite.Application.Dtos;
 
 [Serializable]
 public class JobExperienceDto

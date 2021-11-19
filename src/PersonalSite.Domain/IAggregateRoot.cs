@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.Domain;
+﻿namespace PersonalSite.WebApi;
 
 /// <summary>
 /// Marker for AggregateRoot entities of the bounded context

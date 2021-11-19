@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.Domain.Events;
+using PersonalSite.WebApi.Events;
 
-namespace PersonalSite.Domain.WebApi.Installers;
+namespace PersonalSite.WebApi.Installers;
 
 public static class DomainEventsInstallerExtensions
 {

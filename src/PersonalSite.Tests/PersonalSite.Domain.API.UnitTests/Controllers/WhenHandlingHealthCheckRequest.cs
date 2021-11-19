@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Controllers;
+using PersonalSite.WebApi.Controllers;
 
-namespace PersonalSite.API.UnitTests.Controllers;
+namespace PersonalSite.WebApi.UnitTests.Controllers;
 
 [TestFixture]
 public class WhenHandlingHealthCheckRequest : ControllerTestBase<HealthCheckController>

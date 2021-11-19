@@ -1,5 +1,5 @@
-﻿using PersonalSite.Domain.Application;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
+﻿using PersonalSite.Application;
+using PersonalSite.WebApi.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
-using PersonalSite.Domain.API.CommandHandlers;
 using PersonalSite.Persistence;
+using PersonalSite.WebApi.CommandHandlers;
 
-namespace PersonalSite.API.UnitTests.Handlers.Base;
+namespace PersonalSite.WebApi.UnitTests.Handlers.Base;
 
 [TestFixture]
 public class CommandHandlerBaseTests

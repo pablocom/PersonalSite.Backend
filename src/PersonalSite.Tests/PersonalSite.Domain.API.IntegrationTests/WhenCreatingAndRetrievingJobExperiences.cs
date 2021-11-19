@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using PersonalSite.Domain.API.Dtos;
-using PersonalSite.Domain.Application.Dtos;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
+using PersonalSite.WebApi.Dtos;
 
-namespace PersonalSite.Domain.API.FunctionalTests;
+namespace PersonalSite.WebApi.FunctionalTests;
 
 public class WhenCreatingAndRetrievingJobExperiences
 {
