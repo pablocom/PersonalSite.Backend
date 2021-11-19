@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PersonalSite.Domain.Application.Dtos;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.Application;
+namespace PersonalSite.Application;
 
 /// <summary>
 /// The application service layer represents the use cases and behavior of the application. Use cases are

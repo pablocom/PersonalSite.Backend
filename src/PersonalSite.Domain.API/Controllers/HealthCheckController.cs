@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace PersonalSite.Domain.API.Controllers;
+namespace PersonalSite.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

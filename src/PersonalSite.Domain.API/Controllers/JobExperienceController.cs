@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using PersonalSite.Domain.API.Commands;
-using PersonalSite.Domain.API.Dtos;
-using PersonalSite.Domain.API.Queries;
+using PersonalSite.WebApi.Dtos;
+using PersonalSite.WebApi.Queries;
+using PersonalSite.WebApi.Commands;
 
-namespace PersonalSite.Domain.API.Controllers;
+namespace PersonalSite.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

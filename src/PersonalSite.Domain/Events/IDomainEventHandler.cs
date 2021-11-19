@@ -1,6 +1,4 @@
-﻿using PersonalSite.Domain.Events;
-
-namespace PersonalSite.Domain;
+﻿namespace PersonalSite.Domain.Events;
 
 public interface IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent

@@ -1,6 +1,6 @@
 ﻿using PersonalSite.Domain.Events;
 
-namespace PersonalSite.Domain.Application.DomainEventHandlers;
+namespace PersonalSite.Application.DomainEventHandlers;
 
 public class JobExperienceAddedHandler : IDomainEventHandler<JobExperienceAdded>
 {

@@ -2,7 +2,7 @@
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence.Mappings;
 
-namespace PersonalSite.Domain.UnitTests;
+namespace PersonalSite.UnitTests;
 
 public class FakePersonalSiteDbContext : DbContext
 {

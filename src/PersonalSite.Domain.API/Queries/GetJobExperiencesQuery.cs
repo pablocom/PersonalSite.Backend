@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using PersonalSite.Domain.Application.Dtos;
+using PersonalSite.Application.Dtos;
 
-namespace PersonalSite.Domain.API.Queries;
+namespace PersonalSite.WebApi.Queries;
 
 public class GetJobExperiencesQuery : IRequest<IEnumerable<JobExperienceDto>>
 { }

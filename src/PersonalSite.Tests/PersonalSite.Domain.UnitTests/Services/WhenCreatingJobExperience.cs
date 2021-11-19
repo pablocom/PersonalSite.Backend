@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using PersonalSite.Domain.Application;
+using PersonalSite.Application;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.UnitTests.Services;
+namespace PersonalSite.UnitTests.Services;
 
 [TestFixture]
 public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
