@@ -1,4 +1,4 @@
-﻿using PersonalSite.WebApi.Events;
+﻿using PersonalSite.Domain.Events;
 
 namespace PersonalSite.Application.DomainEventHandlers;
 

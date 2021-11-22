@@ -4,7 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.WebApi.UnitTests.Handlers;
+namespace PersonalSite.API.UnitTests.Handlers;
 
 [TestFixture]
 public abstract class RequestQueryHandlerTestBase<TRequestHandler, TRequest, TResponse>
@@ -17,9 +17,9 @@ public abstract class RequestQueryHandlerTestBase<TRequestHandler, TRequest, TRe
     [SetUp]
     protected void SetUp()
     {
-        this.AdditionalSetup();
+        AdditionalSetup();
 
-        Handler = this.GetRequestHandler();
+        Handler = GetRequestHandler();
     }
 
     protected TResponse WhenHandingRequest(TRequest request)

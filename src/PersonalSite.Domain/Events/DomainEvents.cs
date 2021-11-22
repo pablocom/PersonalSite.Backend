@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PersonalSite.WebApi.Events;
+namespace PersonalSite.Domain.Events;
 
 public static class DomainEvents
 {

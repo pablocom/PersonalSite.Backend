@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using PersonalSite.Application;
-using PersonalSite.WebApi.Events;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Events;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests;
 

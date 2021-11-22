@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Application;
-using PersonalSite.WebApi.Events;
-using PersonalSite.WebApi.Exceptions;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Events;
+using PersonalSite.Domain.Exceptions;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests.Services;
 

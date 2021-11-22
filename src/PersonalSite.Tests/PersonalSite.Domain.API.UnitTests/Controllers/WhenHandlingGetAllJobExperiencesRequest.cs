@@ -5,7 +5,7 @@ using NUnit.Framework;
 using PersonalSite.WebApi.Controllers;
 using PersonalSite.WebApi.Queries;
 
-namespace PersonalSite.WebApi.UnitTests.Controllers;
+namespace PersonalSite.API.UnitTests.Controllers;
 
 [TestFixture]
 public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PersonalSite.Application.Dtos;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PersonalSite.Application.Dtos;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Application;
 

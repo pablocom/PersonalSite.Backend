@@ -7,7 +7,7 @@ using PersonalSite.Application.Dtos;
 using PersonalSite.WebApi.Queries;
 using PersonalSite.WebApi.QueryHandlers;
 
-namespace PersonalSite.WebApi.UnitTests.Handlers;
+namespace PersonalSite.API.UnitTests.Handlers;
 
 public class WhenHandlingGetAllJobExperiencesQuery : RequestQueryHandlerTestBase<GetJobExperiencesQueryHandler,
     GetJobExperiencesQuery, IEnumerable<JobExperienceDto>>
