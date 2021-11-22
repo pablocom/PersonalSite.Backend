@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.WebApi.Events;
+﻿namespace PersonalSite.Domain.Events;
 
 public interface IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent

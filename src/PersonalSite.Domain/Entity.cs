@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalSite.WebApi;
+namespace PersonalSite.Domain;
 
 public abstract class Entity : IEquatable<Entity>
 {
@@ -17,7 +17,7 @@ public abstract class Entity : IEquatable<Entity>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
+        if (obj.GetType() != GetType()) return false;
         return Equals((Entity)obj);
     }
 

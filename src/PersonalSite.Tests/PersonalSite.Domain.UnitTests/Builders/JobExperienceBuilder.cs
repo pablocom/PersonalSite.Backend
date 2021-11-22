@@ -1,5 +1,5 @@
 ﻿using System;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests.Builders;
 

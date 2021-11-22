@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.WebApi.Events;
+using PersonalSite.Domain.Events;
 
 namespace PersonalSite.WebApi.Installers;
 

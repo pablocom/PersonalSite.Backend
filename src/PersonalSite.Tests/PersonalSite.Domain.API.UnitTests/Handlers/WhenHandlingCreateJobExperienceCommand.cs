@@ -6,7 +6,7 @@ using PersonalSite.Application;
 using PersonalSite.WebApi.CommandHandlers;
 using PersonalSite.WebApi.Commands;
 
-namespace PersonalSite.WebApi.UnitTests.Handlers;
+namespace PersonalSite.API.UnitTests.Handlers;
 
 [TestFixture]
 public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBase<CreateJobExperienceCommandHandler, CreateJobExperienceCommand, Unit>

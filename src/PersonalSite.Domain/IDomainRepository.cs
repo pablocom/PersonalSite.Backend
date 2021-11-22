@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.WebApi;
+﻿namespace PersonalSite.Domain;
 
 /// <summary>
 /// Marks domain repository of an aggregate root

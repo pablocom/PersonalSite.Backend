@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.IntegrationTests;
 

@@ -7,7 +7,7 @@ using PersonalSite.WebApi.Commands;
 using PersonalSite.WebApi.Controllers;
 using PersonalSite.WebApi.Dtos;
 
-namespace PersonalSite.WebApi.UnitTests.Controllers;
+namespace PersonalSite.API.UnitTests.Controllers;
 
 [TestFixture]
 public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExperienceController>

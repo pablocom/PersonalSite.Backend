@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using PersonalSite.Application;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests;
 

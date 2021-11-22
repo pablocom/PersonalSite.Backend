@@ -6,7 +6,7 @@ using NUnit.Framework;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.CommandHandlers;
 
-namespace PersonalSite.WebApi.UnitTests.Handlers.Base;
+namespace PersonalSite.API.UnitTests.Handlers.Base;
 
 [TestFixture]
 public class CommandHandlerBaseTests

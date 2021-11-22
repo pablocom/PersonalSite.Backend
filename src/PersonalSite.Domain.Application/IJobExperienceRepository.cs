@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using PersonalSite.WebApi;
-using PersonalSite.WebApi.Model.JobExperienceAggregate;
+using PersonalSite.Domain;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.Application;
 

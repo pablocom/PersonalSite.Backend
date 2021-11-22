@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.WebApi.Events;
+﻿namespace PersonalSite.Domain.Events;
 
 /// <summary>
 /// Marker for domain events

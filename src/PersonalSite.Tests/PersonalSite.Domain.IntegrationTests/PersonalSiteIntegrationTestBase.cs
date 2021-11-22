@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
 using PersonalSite.Application;
-using PersonalSite.WebApi.Events;
 using PersonalSite.Persistence;
 using System;
+using PersonalSite.Domain.Events;
 
 namespace PersonalSite.IntegrationTests;
 

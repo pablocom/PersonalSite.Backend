@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PersonalSite.WebApi.Events;
+namespace PersonalSite.Domain.Events;
 
 public class JobExperienceAdded : IDomainEvent
 {
