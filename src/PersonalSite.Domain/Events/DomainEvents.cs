@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace PersonalSite.Domain.Events;
 
@@ -12,14 +11,15 @@ public static class DomainEvents
 
     public static void Init()
     {
-        _dynamicHandlers = Assembly.GetExecutingAssembly()
-            .GetTypes()
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(a => a.GetTypes());
+
+        _dynamicHandlers = assemblies
             .Where(x => typeof(IDomainEvent).IsAssignableFrom(x) && !x.IsInterface)
             .ToArray()
             .ToDictionary(x => x, x => new List<Delegate>());
 
-        _staticHandlers = Assembly.GetExecutingAssembly()
-            .GetTypes()
+        _staticHandlers = assemblies
             .Where(x => x.GetInterfaces().Any(y => y.IsGenericType && y.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>)))
             .ToList();
     }
