@@ -1,4 +1,4 @@
-﻿using PersonalSite.Domain.Application;
+﻿using PersonalSite.Application;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;

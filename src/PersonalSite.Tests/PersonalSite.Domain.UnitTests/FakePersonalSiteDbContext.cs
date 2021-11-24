@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence.Mappings;
+using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.UnitTests;
+namespace PersonalSite.UnitTests;
 
 public class FakePersonalSiteDbContext : DbContext
 {

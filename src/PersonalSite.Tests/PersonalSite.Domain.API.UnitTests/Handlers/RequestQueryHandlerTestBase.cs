@@ -17,9 +17,9 @@ public abstract class RequestQueryHandlerTestBase<TRequestHandler, TRequest, TRe
     [SetUp]
     protected void SetUp()
     {
-        this.AdditionalSetup();
+        AdditionalSetup();
 
-        Handler = this.GetRequestHandler();
+        Handler = GetRequestHandler();
     }
 
     protected TResponse WhenHandingRequest(TRequest request)

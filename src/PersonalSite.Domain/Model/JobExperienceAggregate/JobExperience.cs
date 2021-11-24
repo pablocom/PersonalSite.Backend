@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
@@ -24,5 +25,7 @@ public class JobExperience : Entity, IAggregateRoot
         Description = description;
         JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
         TechStack = techStack;
+
+        DomainEvents.Raise(new JobExperienceAdded(Company, Description, JobPeriod.Start, JobPeriod.End, TechStack));
     }
 }

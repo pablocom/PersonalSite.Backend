@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Controllers;
+using PersonalSite.WebApi.Controllers;
 
 namespace PersonalSite.API.UnitTests.Controllers;
 

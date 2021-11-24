@@ -8,10 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalSite.Persistence;
 using Microsoft.Extensions.Logging;
-using PersonalSite.Domain.API.Errors;
-using PersonalSite.Domain.Application;
+using PersonalSite.Application;
+using PersonalSite.WebApi.Installers;
+using PersonalSite.WebApi.Errors;
 
-namespace PersonalSite.Domain.API;
+namespace PersonalSite.WebApi;
 
 public class Startup
 {
@@ -35,6 +36,7 @@ public class Startup
         services.AddTransient<IJobExperienceService, JobExperienceService>();
 
         services.AddMediatR(typeof(Startup));
+        services.AddDomainEventHandlers();
 
         RunContextMigrations(services);
     }

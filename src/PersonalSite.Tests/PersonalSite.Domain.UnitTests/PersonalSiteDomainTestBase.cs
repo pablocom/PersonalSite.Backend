@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
-using PersonalSite.Domain.Application;
+using PersonalSite.Application;
+using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.UnitTests;
+namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {
@@ -12,6 +13,8 @@ public class PersonalSiteDomainTestBase
     [SetUp]
     public void SetUp()
     {
+        DomainEvents.Init();
+
         DbContext = new FakePersonalSiteDbContext();
         DbContext.Database.EnsureDeleted();
         Repository = new FakeJobExperienceRepository(DbContext);

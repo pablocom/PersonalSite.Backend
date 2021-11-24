@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Threading;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Queries;
-using PersonalSite.Domain.API.QueryHandlers;
-using PersonalSite.Domain.Application;
-using PersonalSite.Domain.Application.Dtos;
+using PersonalSite.Application;
+using PersonalSite.Application.Dtos;
+using PersonalSite.WebApi.Queries;
+using PersonalSite.WebApi.QueryHandlers;
 
 namespace PersonalSite.API.UnitTests.Handlers;
 

@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.API.Controllers;
-using PersonalSite.Domain.API.Queries;
+using PersonalSite.WebApi.Controllers;
+using PersonalSite.WebApi.Queries;
 
 namespace PersonalSite.API.UnitTests.Controllers;
 

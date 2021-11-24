@@ -4,7 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.IntegrationTests;
+namespace PersonalSite.IntegrationTests;
 
 [TestFixture]
 public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase

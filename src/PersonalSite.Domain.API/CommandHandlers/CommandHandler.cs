@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.Domain.API.CommandHandlers;
+namespace PersonalSite.WebApi.CommandHandlers;
 
 public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
     where TCommand : IRequest<Unit>
