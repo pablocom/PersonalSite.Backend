@@ -20,7 +20,7 @@ public class JobExperienceRepository : IJobExperienceRepository
         context.JobExperiences.Add(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAll()
+    public IEnumerable<JobExperience> Find()
     {
         return context.JobExperiences.ToArray();
     }

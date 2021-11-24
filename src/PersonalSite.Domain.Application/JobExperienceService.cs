@@ -33,7 +33,7 @@ public class JobExperienceService : IJobExperienceService
 
     public IEnumerable<JobExperienceDto> GetJobExperiences()
     {
-        var jobExperiences = repository.GetAll().ToArray();
+        var jobExperiences = repository.Find().ToArray();
         return jobExperiences.Select(JobExperienceDto.From).ToArray();
     }
 }

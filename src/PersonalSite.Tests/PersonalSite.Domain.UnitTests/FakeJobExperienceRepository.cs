@@ -19,7 +19,7 @@ public class FakeJobExperienceRepository : IJobExperienceRepository
         dbContext.Add(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAll()
+    public IEnumerable<JobExperience> Find()
     {
         return dbContext.JobExperiences.ToArray();
     }

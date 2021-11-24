@@ -31,7 +31,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
-        var jobExperience = Repository.GetAll().Single();
+        var jobExperience = Repository.Find().Single();
         AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
     }
 

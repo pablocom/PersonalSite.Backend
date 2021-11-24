@@ -7,5 +7,5 @@ namespace PersonalSite.Application;
 public interface IJobExperienceRepository : IDomainRepository<JobExperience>
 {
     void Save(JobExperience jobExperience);
-    IEnumerable<JobExperience> GetAll();
+    IEnumerable<JobExperience> Find();
 }
