@@ -18,10 +18,10 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
         var endDate = new DateTime(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
-        Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
+        Repository.Save(new JobExperience(company, description, startDate, endDate, techStack));
         CloseContext();
 
-        var jobExperience = Repository.GetAllJobExperiences().Single();
+        var jobExperience = Repository.Find().Single();
         AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
     }
 

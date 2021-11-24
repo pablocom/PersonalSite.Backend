@@ -28,12 +28,12 @@ public class JobExperienceService : IJobExperienceService
 
     public void CreateJobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
     {
-        repository.Add(new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack));
+        repository.Save(new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack));
     }
 
     public IEnumerable<JobExperienceDto> GetJobExperiences()
     {
-        var jobExperiences = repository.GetAllJobExperiences().ToArray();
+        var jobExperiences = repository.Find().ToArray();
         return jobExperiences.Select(JobExperienceDto.From).ToArray();
     }
 }
