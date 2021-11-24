@@ -15,12 +15,12 @@ public class JobExperienceRepository : IJobExperienceRepository
         this.context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public void Add(JobExperience jobExperience)
+    public void Save(JobExperience jobExperience)
     {
         context.JobExperiences.Add(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAllJobExperiences()
+    public IEnumerable<JobExperience> GetAll()
     {
         return context.JobExperiences.ToArray();
     }

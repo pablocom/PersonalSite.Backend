@@ -14,12 +14,12 @@ public class FakeJobExperienceRepository : IJobExperienceRepository
         this.dbContext = dbContext;
     }
 
-    public void Add(JobExperience jobExperience)
+    public void Save(JobExperience jobExperience)
     {
         dbContext.Add(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAllJobExperiences()
+    public IEnumerable<JobExperience> GetAll()
     {
         return dbContext.JobExperiences.ToArray();
     }

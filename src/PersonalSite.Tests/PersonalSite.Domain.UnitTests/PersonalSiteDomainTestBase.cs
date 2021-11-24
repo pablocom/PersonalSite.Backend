@@ -30,7 +30,7 @@ public class PersonalSiteDomainTestBase
     protected void AssumeDataInRepository(params JobExperience[] entities)
     {
         foreach (var entity in entities)
-            Repository.Add(entity);
+            Repository.Save(entity);
 
         CloseContext();
     }
