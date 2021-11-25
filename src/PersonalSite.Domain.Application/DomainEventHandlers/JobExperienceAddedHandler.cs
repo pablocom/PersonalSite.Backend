@@ -2,9 +2,9 @@
 
 namespace PersonalSite.Application.DomainEventHandlers;
 
-public class JobExperienceAddedHandler : IDomainEventHandler<JobExperienceAdded>
+public class JobExperienceAddedHandler : IDomainEventHandler<JobExperienceCreated>
 {
-    public void Handle(JobExperienceAdded domainEvent)
+    public void Handle(JobExperienceCreated domainEvent)
     {
     }
 }

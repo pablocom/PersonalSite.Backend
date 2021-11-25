@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PersonalSite.Domain.Events;
 
-public class JobExperienceAdded : IDomainEvent
+public class JobExperienceCreated : IDomainEvent
 {
     public string Company { get; set; }
     public string Description { get; set; }
@@ -11,7 +11,7 @@ public class JobExperienceAdded : IDomainEvent
     public DateTime? JobPeriodEnd { get; set; }
     public IEnumerable<string> TechStack { get; set; }
 
-    public JobExperienceAdded(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, IEnumerable<string> techStack)
+    public JobExperienceCreated(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, IEnumerable<string> techStack)
     {
         Company = company;
         Description = description;

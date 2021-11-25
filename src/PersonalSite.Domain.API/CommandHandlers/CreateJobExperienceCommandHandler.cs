@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using PersonalSite.Application;
+﻿using PersonalSite.Application;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.Commands;
+using System.Threading.Tasks;
 
 namespace PersonalSite.WebApi.CommandHandlers;
 
@@ -16,11 +17,8 @@ public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperie
 
     public override Task Process(CreateJobExperienceCommand command)
     {
-        service.CreateJobExperience(command.Company,
-            command.Description,
-            command.JobPeriodStart,
-            command.JobPeriodEnd,
-            command.TechStack);
+        var args = new JobExperienceCreationArgs(command.Company, command.Description, command.JobPeriodStart, command.JobPeriodEnd, command.TechStack);
+        service.CreateJobExperience(args);
 
         return Task.CompletedTask;
     }
