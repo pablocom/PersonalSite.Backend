@@ -44,8 +44,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var endDate = new DateTime(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
-        var jobExperienceAdded = default(JobExperienceAdded);
-        DomainEvents.Register<JobExperienceAdded>(ev => jobExperienceAdded = ev);
+        var jobExperienceAdded = default(JobExperienceCreated);
+        DomainEvents.Register<JobExperienceCreated>(ev => jobExperienceAdded = ev);
 
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();

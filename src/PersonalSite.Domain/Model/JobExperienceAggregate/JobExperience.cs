@@ -26,6 +26,6 @@ public class JobExperience : Entity, IAggregateRoot
         JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
         TechStack = techStack;
 
-        DomainEvents.Raise(new JobExperienceAdded(Company, Description, JobPeriod.Start, JobPeriod.End, TechStack));
+        DomainEvents.Raise(new JobExperienceCreated(Company, Description, JobPeriod.Start, JobPeriod.End, TechStack));
     }
 }
