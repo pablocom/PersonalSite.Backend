@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PersonalSite.Application;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonalSite.UnitTests.Services;
 
@@ -27,8 +28,9 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var startDate = new DateTime(2019, 09, 09);
         var endDate = new DateTime(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
+        var args = new JobExperienceCreationArgs(company, description, startDate, endDate, techStack);
 
-        service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        service.CreateJobExperience(args);
         CloseContext();
 
         var jobExperience = Repository.GetAllJobExperiences().Single();
@@ -43,11 +45,11 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var startDate = new DateTime(2019, 09, 09);
         var endDate = new DateTime(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
-
         var jobExperienceAdded = default(JobExperienceCreated);
         DomainEvents.Register<JobExperienceCreated>(ev => jobExperienceAdded = ev);
+        var args = new JobExperienceCreationArgs(company, description, startDate, endDate, techStack);
 
-        service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        service.CreateJobExperience(args);
         CloseContext();
 
         Assert.That(jobExperienceAdded.Company, Is.EqualTo(company));
@@ -65,7 +67,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         TestDelegate action = () =>
         {
-            service.CreateJobExperience(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
+            var args = new JobExperienceCreationArgs(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
+            service.CreateJobExperience(args);
         };
 
         var exception = Assert.Throws<DomainException>(action);

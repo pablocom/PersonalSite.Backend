@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.WebApi.Commands;
 using PersonalSite.WebApi.Controllers;
 using PersonalSite.WebApi.Dtos;
+using System;
+using System.Threading.Tasks;
 
 namespace PersonalSite.API.UnitTests.Controllers;
 
