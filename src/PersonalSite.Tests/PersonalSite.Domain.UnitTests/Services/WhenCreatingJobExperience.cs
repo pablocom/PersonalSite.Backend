@@ -24,8 +24,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         var company = "Ryanair";
         var description = "Software Engineer";
-        var startDate = new DateTime(2019, 09, 09);
-        var endDate = new DateTime(2021, 07, 01);
+        var startDate = DateTime.SpecifyKind(new DateTime(2019, 09, 09), DateTimeKind.Utc);
+        var endDate = DateTime.SpecifyKind(new DateTime(2021, 09, 30), DateTimeKind.Utc);
         var techStack = new[] { ".Net", "MySQL" };
 
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
@@ -40,8 +40,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         var company = "Ryanair";
         var description = "Software Engineer";
-        var startDate = new DateTime(2019, 09, 09);
-        var endDate = new DateTime(2021, 07, 01);
+        var startDate = DateTime.SpecifyKind(new DateTime(2019, 09, 09), DateTimeKind.Utc);
+        var endDate = DateTime.SpecifyKind(new DateTime(2021, 09, 30), DateTimeKind.Utc);
         var techStack = new[] { ".Net", "MySQL" };
 
         var jobExperienceAdded = default(JobExperienceAdded);
@@ -63,10 +63,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     [TestCase("", "")]
     public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
     {
-        TestDelegate action = () =>
-        {
-            service.CreateJobExperience(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
-        };
+        void action() 
+            => service.CreateJobExperience(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
 
         var exception = Assert.Throws<DomainException>(action);
         Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));

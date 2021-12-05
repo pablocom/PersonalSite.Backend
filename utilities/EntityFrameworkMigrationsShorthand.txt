@@ -1,1 +1,1 @@
-Add-Migration NameOfMigration -Project PersonalSite.Persistence -StartUpProject PersonalSite.API
+dotnet ef migrations add InitialMigration -p PersonalSite.Domain.Persistence -s PersonalSite.Domain.API --verbose

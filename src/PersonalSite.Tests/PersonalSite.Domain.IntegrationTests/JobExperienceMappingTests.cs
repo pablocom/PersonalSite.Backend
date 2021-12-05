@@ -14,8 +14,8 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
     {
         var company = "Ryanair";
         var description = "Software Engineer";
-        var startDate = new DateTime(2019, 09, 09);
-        var endDate = new DateTime(2021, 07, 01);
+        var startDate = new DateTime(2019, 09, 09).ToUniversalTime();
+        var endDate = new DateTime(2021, 07, 01).ToUniversalTime();
         var techStack = new[] { ".Net", "MySQL" };
 
         Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));

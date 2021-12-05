@@ -40,11 +40,10 @@ public static class DomainEvents
 
         foreach (var handlerType in _staticHandlers)
         {
-            if (typeof(IDomainEventHandler<T>).IsAssignableFrom(handlerType))
-            {
-                var handler = (IDomainEventHandler<T>)Activator.CreateInstance(handlerType);
-                handler.Handle(domainEvent);
-            }
+            if (!typeof(IDomainEventHandler<T>).IsAssignableFrom(handlerType)) continue;
+            
+            var handler = (IDomainEventHandler<T>)Activator.CreateInstance(handlerType);
+            handler.Handle(domainEvent);
         }
     }
 }

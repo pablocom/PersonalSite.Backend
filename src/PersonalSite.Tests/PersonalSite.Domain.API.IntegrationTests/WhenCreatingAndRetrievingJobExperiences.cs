@@ -39,11 +39,12 @@ public class WhenCreatingAndRetrievingJobExperiences
         Assert.IsEmpty(jobExperiences!);
 
         var createJobExperienceDto = new CreateJobExperienceDto(
-            "Ryanair",
-            "Software Developer",
-            new DateTime(2020, 1, 1),
-            new DateTime(2020, 5, 1),
-            new[] { ".Net Core", "NSubstitute" });
+            "Acme",
+            "Software Engineer",
+            DateTime.SpecifyKind(new DateTime(2020, 1, 1), DateTimeKind.Utc),
+            DateTime.SpecifyKind(new DateTime(2020, 5, 1), DateTimeKind.Utc),
+            new[] { ".Net Core", "NSubstitute" }
+        );
         var createResponse = await client.PostAsJsonAsync("JobExperience", createJobExperienceDto);
         Assert.That(createResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
