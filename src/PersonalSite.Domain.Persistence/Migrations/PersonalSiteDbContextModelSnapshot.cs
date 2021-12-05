@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalSite.Persistence;
 
+#nullable disable
+
 namespace PersonalSite.Persistence.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
@@ -15,16 +17,18 @@ namespace PersonalSite.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("PersonalSite.Domain.Model.JobExperienceAggregate.JobExperience", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Company")
                         .HasColumnType("text");
@@ -45,15 +49,13 @@ namespace PersonalSite.Persistence.Migrations
                     b.OwnsOne("PersonalSite.Domain.Model.JobExperienceAggregate.JobPeriod", "JobPeriod", b1 =>
                         {
                             b1.Property<int>("JobExperienceId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                                .HasColumnType("integer");
 
                             b1.Property<DateTime?>("End")
-                                .HasColumnType("timestamp without time zone");
+                                .HasColumnType("timestamp with time zone");
 
                             b1.Property<DateTime>("Start")
-                                .HasColumnType("timestamp without time zone");
+                                .HasColumnType("timestamp with time zone");
 
                             b1.HasKey("JobExperienceId");
 
@@ -62,6 +64,8 @@ namespace PersonalSite.Persistence.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("JobExperienceId");
                         });
+
+                    b.Navigation("JobPeriod");
                 });
 #pragma warning restore 612, 618
         }

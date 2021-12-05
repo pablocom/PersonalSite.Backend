@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Queries;
 using PersonalSite.WebApi.Commands;
+using System;
 
 namespace PersonalSite.WebApi.Controllers;
 
@@ -32,7 +33,7 @@ public class JobExperienceController : ControllerBase
             new CreateJobExperienceCommand(
                 dto.Company,
                 dto.Description,
-                dto.JobPeriodStart,
+                DateTime.SpecifyKind(dto.JobPeriodStart, DateTimeKind.Local),
                 dto.JobPeriodEnd,
                 dto.TechStack)
         );
