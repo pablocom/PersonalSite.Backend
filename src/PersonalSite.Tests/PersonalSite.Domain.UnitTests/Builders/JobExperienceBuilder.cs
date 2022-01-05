@@ -8,8 +8,8 @@ public class JobExperienceBuilder
     private string company;
     private string description;
     private string[] techStack = Array.Empty<string>();
-    private DateTime startDate;
-    private DateTime endDate;
+    private DateOnly startDate;
+    private DateOnly endDate;
 
     public JobExperience Build()
     {
@@ -34,13 +34,13 @@ public class JobExperienceBuilder
         return this;
     }
 
-    public JobExperienceBuilder WithStartDate(DateTime startDate)
+    public JobExperienceBuilder WithStartDate(DateOnly startDate)
     {
         this.startDate = startDate;
         return this;
     }
 
-    public JobExperienceBuilder WithEndDate(DateTime endDate)
+    public JobExperienceBuilder WithEndDate(DateOnly endDate)
     {
         this.endDate = endDate;
         return this;

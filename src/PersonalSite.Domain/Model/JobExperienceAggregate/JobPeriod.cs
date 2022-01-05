@@ -5,12 +5,12 @@ namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
 public class JobPeriod : ValueObject
 {
-    public DateTime Start { get; }
-    public DateTime? End { get; }
+    public DateOnly Start { get; }
+    public DateOnly? End { get; }
 
     protected JobPeriod() { }
 
-    public JobPeriod(DateTime start, DateTime? end)
+    public JobPeriod(DateOnly start, DateOnly? end)
     {
         Start = start;
         End = end;

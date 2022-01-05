@@ -24,8 +24,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         var company = "Ryanair";
         var description = "Software Engineer";
-        var startDate = DateTime.SpecifyKind(new DateTime(2019, 09, 09), DateTimeKind.Utc);
-        var endDate = DateTime.SpecifyKind(new DateTime(2021, 09, 30), DateTimeKind.Utc);
+        var startDate = new DateOnly(2019, 09, 09);
+        var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
@@ -40,8 +40,8 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         var company = "Ryanair";
         var description = "Software Engineer";
-        var startDate = DateTime.SpecifyKind(new DateTime(2019, 09, 09), DateTimeKind.Utc);
-        var endDate = DateTime.SpecifyKind(new DateTime(2021, 09, 30), DateTimeKind.Utc);
+        var startDate = new DateOnly(2019, 09, 09);
+        var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
         var jobExperienceAdded = default(JobExperienceAdded);
@@ -63,15 +63,16 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     [TestCase("", "")]
     public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
     {
-        void action() 
-            => service.CreateJobExperience(company, description, new DateTime(), new DateTime(), Array.Empty<string>());
+        TestDelegate action = () =>
+        {
+            service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
+        };
 
         var exception = Assert.Throws<DomainException>(action);
         Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
     }
 
-    private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateTime startDate,
-        DateTime endDate, IEnumerable<string> techStack)
+    private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateOnly startDate, DateOnly endDate, IEnumerable<string> techStack)
     {
         Assert.That(jobExperience.Company, Is.EqualTo(company));
         Assert.That(jobExperience.Description, Is.EqualTo(description));

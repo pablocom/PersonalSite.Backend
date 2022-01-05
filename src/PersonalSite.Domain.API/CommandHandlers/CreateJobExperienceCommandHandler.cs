@@ -16,7 +16,8 @@ public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperie
 
     public override Task Process(CreateJobExperienceCommand command)
     {
-        service.CreateJobExperience(command.Company,
+        service.CreateJobExperience(
+            command.Company,
             command.Description,
             command.JobPeriodStart,
             command.JobPeriodEnd,
