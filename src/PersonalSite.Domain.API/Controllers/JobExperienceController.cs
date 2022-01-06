@@ -34,7 +34,7 @@ public class JobExperienceController : ControllerBase
                 dto.Company,
                 dto.Description,
                 dto.JobPeriodStart,
-                dto.JobPeriodEnd.HasValue ? dto.JobPeriodEnd.Value : null,
+                dto.JobPeriodEnd,
                 dto.TechStack));
         return Ok();
     }

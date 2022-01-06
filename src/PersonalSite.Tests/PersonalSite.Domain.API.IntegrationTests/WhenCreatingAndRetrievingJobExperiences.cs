@@ -18,9 +18,10 @@ namespace PersonalSite.Domain.API.FunctionalTests;
 
 public class WhenCreatingAndRetrievingJobExperiences
 {
-    private static readonly JsonSerializerOptions jsonSerializerOptions = new()
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
-        Converters = { new DateOnlyJsonConverter() }
+        Converters = { new DateOnlyJsonConverter() },
+        PropertyNameCaseInsensitive = true
     };
 
     private HttpClient client;
@@ -40,7 +41,7 @@ public class WhenCreatingAndRetrievingJobExperiences
         var response = await client.GetAsync("JobExperience");
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        var jobExperiences = await response.Content.ReadFromJsonAsync<JobExperienceDto[]>(jsonSerializerOptions);
+        var jobExperiences = await response.Content.ReadFromJsonAsync<JobExperienceDto[]>(JsonSerializerOptions);
         Assert.IsNotNull(jobExperiences);
         Assert.IsEmpty(jobExperiences!);
 
@@ -50,13 +51,13 @@ public class WhenCreatingAndRetrievingJobExperiences
             new DateOnly(2020, 1, 1),
             new DateOnly(2020, 5, 1),
             new[] { ".Net Core", "NSubstitute" });
-        var createResponse = await client.PostAsJsonAsync("JobExperience", createJobExperienceDto, jsonSerializerOptions);
+        var createResponse = await client.PostAsJsonAsync("JobExperience", createJobExperienceDto, JsonSerializerOptions);
         Assert.That(createResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
         var secondResponse = await client.GetAsync("JobExperience");
         Assert.That(secondResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         var json = await secondResponse.Content.ReadAsStringAsync();
-        var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, jsonSerializerOptions);
+        var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, JsonSerializerOptions);
         Assert.That(secondJobExperiences, Has.Length.EqualTo(1));
         Assert.That(secondJobExperiences![0].Company, Is.EqualTo(createJobExperienceDto.Company));
         Assert.That(secondJobExperiences[0].Description, Is.EqualTo(createJobExperienceDto.Description));

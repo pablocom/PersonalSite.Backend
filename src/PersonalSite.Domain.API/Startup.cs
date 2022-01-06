@@ -31,7 +31,9 @@ public class Startup
             .AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
+        
         services.AddDbContext<PersonalSiteDbContext>(options =>
             options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
 
