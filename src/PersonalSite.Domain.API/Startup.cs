@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using PersonalSite.Application;
 using PersonalSite.WebApi.Installers;
 using PersonalSite.WebApi.Errors;
+using PersonalSite.WebApi.Infrastructure;
 
 namespace PersonalSite.WebApi;
 
@@ -26,7 +27,13 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            });
+        
         services.AddDbContext<PersonalSiteDbContext>(options =>
             options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
 

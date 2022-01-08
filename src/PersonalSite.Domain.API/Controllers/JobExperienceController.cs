@@ -33,10 +33,9 @@ public class JobExperienceController : ControllerBase
             new CreateJobExperienceCommand(
                 dto.Company,
                 dto.Description,
-                DateTime.SpecifyKind(dto.JobPeriodStart, DateTimeKind.Utc),
-                dto.JobPeriodEnd.HasValue ? DateTime.SpecifyKind(dto.JobPeriodEnd.Value, DateTimeKind.Utc) : null,
-                dto.TechStack)
-        );
+                dto.JobPeriodStart,
+                dto.JobPeriodEnd,
+                dto.TechStack));
         return Ok();
     }
 }

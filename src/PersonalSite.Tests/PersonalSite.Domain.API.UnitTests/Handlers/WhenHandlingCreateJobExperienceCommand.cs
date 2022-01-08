@@ -24,8 +24,8 @@ public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBas
     {
         var company = "Ryanair";
         var description = "Software Developer";
-        var jobPeriodStart = new DateTime(2020, 1, 1);
-        var jobPeriodEnd = new DateTime(2020, 5, 1);
+        var jobPeriodStart = new DateOnly(2020, 1, 1);
+        var jobPeriodEnd = new DateOnly(2020, 5, 1);
         var techStack = new[] { ".Net Core", "NSubstitute" };
 
         var createJobExperienceCommand = new CreateJobExperienceCommand(company, description, jobPeriodStart, jobPeriodEnd, techStack);

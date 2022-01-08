@@ -16,7 +16,7 @@ public class JobExperience : Entity, IAggregateRoot
     protected JobExperience()
     { }
 
-    public JobExperience(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, ICollection<string> techStack)
+    public JobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, ICollection<string> techStack)
     {
         if (company.IsNullOrEmpty() || description.IsNullOrEmpty())
             throw new DomainException("Job experience company and description must have value");

@@ -9,8 +9,8 @@ public class JobExperienceDto
 {
     public string Company { get; set; }
     public string Description { get; set; }
-    public DateTime JobPeriodStart { get; set; }
-    public DateTime? JobPeriodEnd { get; set; }
+    public DateOnly JobPeriodStart { get; set; }
+    public DateOnly? JobPeriodEnd { get; set; }
     public IEnumerable<string> TechStack { get; set; }
 
     public JobExperienceDto() { }

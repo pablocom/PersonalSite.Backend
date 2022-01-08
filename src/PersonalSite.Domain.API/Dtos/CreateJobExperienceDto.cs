@@ -9,7 +9,7 @@ public class CreateJobExperienceDto
     {
     }
 
-    public CreateJobExperienceDto(string company, string description, DateTime jobPeriodStart, DateTime? jobPeriodEnd, string[] techStack)
+    public CreateJobExperienceDto(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
         Company = company;
         Description = description;
@@ -22,7 +22,7 @@ public class CreateJobExperienceDto
     public string Company { get; set; }
     [Required]
     public string Description { get; set; }
-    public DateTime JobPeriodStart { get; set; }
-    public DateTime? JobPeriodEnd { get; set; }
+    public DateOnly JobPeriodStart { get; set; }
+    public DateOnly? JobPeriodEnd { get; set; }
     public string[] TechStack { get; set; }
 }

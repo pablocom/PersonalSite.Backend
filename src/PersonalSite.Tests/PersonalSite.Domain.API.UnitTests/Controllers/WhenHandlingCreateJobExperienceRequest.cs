@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.WebApi.Commands;
 using PersonalSite.WebApi.Controllers;
 using PersonalSite.WebApi.Dtos;
+using System;
+using System.Threading.Tasks;
 
 namespace PersonalSite.API.UnitTests.Controllers;
 
@@ -26,8 +26,8 @@ public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExpe
     {
         var company = "Ryanair";
         var description = "Software Developer";
-        var jobPeriodStart = new DateTime(2020, 1, 1);
-        var jobPeriodEnd = new DateTime(2020, 5, 1);
+        var jobPeriodStart = new DateOnly(2020, 1, 1);
+        var jobPeriodEnd = new DateOnly(2020, 5, 1);
         var techStack = new[] { ".Net Core", "NSubstitute" };
         var createJobExperienceDto = new CreateJobExperienceDto
         {
@@ -44,8 +44,7 @@ public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExpe
                 AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
     }
 
-    private static bool AssertCommand(CreateJobExperienceCommand createJobExperienceCommand, string company,
-        string description, DateTime start, DateTime end, string[] teckStack)
+    private static bool AssertCommand(CreateJobExperienceCommand createJobExperienceCommand, string company, string description, DateOnly start, DateOnly end, string[] teckStack)
     {
         Assert.That(createJobExperienceCommand.Company, Is.EqualTo(company));
         Assert.That(createJobExperienceCommand.Description, Is.EqualTo(description));
