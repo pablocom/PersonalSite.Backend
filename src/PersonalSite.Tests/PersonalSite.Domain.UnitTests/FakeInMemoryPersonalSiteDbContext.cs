@@ -4,7 +4,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests;
 
-public class FakePersonalSiteDbContext : DbContext
+public class FakeInMemoryPersonalSiteDbContext : DbContext
 {
     public DbSet<JobExperience> JobExperiences { get; set; }
 
