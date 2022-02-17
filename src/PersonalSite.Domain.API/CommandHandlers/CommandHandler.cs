@@ -22,6 +22,7 @@ public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
         {
             await Process(command);
             unitOfWork.Commit();
+            // TODO: Dispatch domain events to queue
         }
         catch (Exception)
         {

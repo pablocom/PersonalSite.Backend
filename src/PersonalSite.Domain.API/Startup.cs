@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PersonalSite.Persistence;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Application;
+using PersonalSite.IoC;
 using PersonalSite.WebApi.Installers;
 using PersonalSite.WebApi.Errors;
 using PersonalSite.WebApi.Infrastructure;
@@ -21,7 +22,6 @@ public class Startup
     {
         Configuration = configuration;
     }
-
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,17 +35,16 @@ public class Startup
             });
         
         services.AddDbContext<PersonalSiteDbContext>(options =>
-            options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")));
-
-        services.AddTransient<IUnitOfWork, UnitOfWork>();
-        services.AddTransient<IJobExperienceRepository, JobExperienceRepository>();
-        services.AddTransient<IMigrator, PersonalSiteDbContextMigrator>();
-        services.AddTransient<IJobExperienceService, JobExperienceService>();
-
-        services.AddMediatR(typeof(Startup));
-        services.AddDomainEventHandlers();
+            options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")))
+            .AddScoped<IUnitOfWork, UnitOfWork>()
+            .AddScoped<IJobExperienceRepository, JobExperienceRepository>()
+            .AddTransient<IMigrator, PersonalSiteDbContextMigrator>()
+            .AddScoped<IJobExperienceService, JobExperienceService>()
+            .AddMediatR(typeof(Startup))
+            .AddDomainEventHandlers();
 
         RunContextMigrations(services);
+        DependencyInjectionContainer.Init(services.BuildServiceProvider());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

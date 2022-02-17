@@ -7,6 +7,7 @@ public static class DomainEventsInstallerExtensions
 {
     public static IServiceCollection AddDomainEventHandlers(this IServiceCollection services)
     {
+        // TODO add domain events to services using reflection
         DomainEvents.Init();
         return services;
     }

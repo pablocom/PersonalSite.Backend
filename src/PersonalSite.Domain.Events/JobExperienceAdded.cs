@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PersonalSite.Domain.Events;
+﻿namespace PersonalSite.Domain.Events;
 
 public class JobExperienceAdded : IDomainEvent
 {
