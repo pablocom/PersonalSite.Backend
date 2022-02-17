@@ -7,9 +7,9 @@ namespace PersonalSite.UnitTests;
 
 public class FakeJobExperienceRepository : IJobExperienceRepository
 {
-    private readonly FakePersonalSiteDbContext dbContext;
+    private readonly FakeInMemoryPersonalSiteDbContext dbContext;
 
-    public FakeJobExperienceRepository(FakePersonalSiteDbContext dbContext)
+    public FakeJobExperienceRepository(FakeInMemoryPersonalSiteDbContext dbContext)
     {
         this.dbContext = dbContext;
     }

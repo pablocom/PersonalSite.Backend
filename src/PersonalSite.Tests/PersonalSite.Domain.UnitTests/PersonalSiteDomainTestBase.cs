@@ -8,14 +8,14 @@ namespace PersonalSite.UnitTests;
 public class PersonalSiteDomainTestBase
 {
     protected IJobExperienceRepository Repository { get; set; }
-    private FakePersonalSiteDbContext DbContext { get; set; }
+    private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
     [SetUp]
     public void SetUp()
     {
         DomainEvents.Init();
 
-        DbContext = new FakePersonalSiteDbContext();
+        DbContext = new FakeInMemoryPersonalSiteDbContext();
         DbContext.Database.EnsureDeleted();
         Repository = new FakeJobExperienceRepository(DbContext);
 
