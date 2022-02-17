@@ -61,6 +61,6 @@ public class Startup
 
     private static void RunContextMigrations(IServiceCollection services)
     {
-        services.BuildServiceProvider().GetService<IMigrator>()!.Migrate();
+        services.BuildServiceProvider().GetRequiredService<IMigrator>().Migrate();
     }
 }
