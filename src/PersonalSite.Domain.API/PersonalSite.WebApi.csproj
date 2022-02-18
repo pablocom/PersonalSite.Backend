@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj" />
     <ProjectReference Include="..\PersonalSite.Domain.Persistence\PersonalSite.Persistence.csproj" />
     <ProjectReference Include="..\PersonalSite.Domain.Application\PersonalSite.Application.csproj" />
+    <ProjectReference Include="..\PersonalSite.IoC\PersonalSite.IoC.csproj" />
   </ItemGroup>
 
 </Project>

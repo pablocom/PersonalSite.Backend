@@ -6,6 +6,7 @@ using PersonalSite.Application;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.UnitTests.Extensions;
 
 namespace PersonalSite.UnitTests.Services;
 
@@ -43,18 +44,20 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var startDate = new DateOnly(2019, 09, 09);
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
-
-        var jobExperienceAdded = default(JobExperienceAdded);
-        DomainEvents.Register<JobExperienceAdded>(ev => jobExperienceAdded = ev);
+        var handler = AssumeDomainEventHandlerWasRegistered<JobExperienceAdded>();
 
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
-        Assert.That(jobExperienceAdded.Company, Is.EqualTo(company));
-        Assert.That(jobExperienceAdded.Description, Is.EqualTo(description));
-        Assert.That(jobExperienceAdded.JobPeriodStart, Is.EqualTo(startDate));
-        Assert.That(jobExperienceAdded.JobPeriodEnd, Is.EqualTo(endDate));
-        CollectionAssert.AreEquivalent(techStack, jobExperienceAdded.TechStack);
+        handler.AssertEventWasRaised(@event =>
+        {
+            Assert.That(@event, Is.Not.Null);
+            Assert.That(@event.Company, Is.EqualTo(company));
+            Assert.That(@event.Description, Is.EqualTo(description));
+            Assert.That(@event.JobPeriodStart, Is.EqualTo(startDate));
+            Assert.That(@event.JobPeriodEnd, Is.EqualTo(endDate));
+            CollectionAssert.AreEquivalent(@event.TechStack, techStack);
+        });
     }
 
     [TestCase(null, null)]

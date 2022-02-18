@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.WebApi.IntegrationTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.IoC", "PersonalSite.IoC\PersonalSite.IoC.csproj", "{91496E08-9375-433E-B72D-867ADDD82BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.Events", "PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj", "{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91496E08-9375-433E-B72D-867ADDD82BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91496E08-9375-433E-B72D-867ADDD82BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91496E08-9375-433E-B72D-867ADDD82BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91496E08-9375-433E-B72D-867ADDD82BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

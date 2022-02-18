@@ -1,19 +1,23 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.IoC;
+using System;
 
 namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {
+    private static readonly IServiceProvider _serviceProvider = Substitute.For<IServiceProvider>();
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
     [SetUp]
     public void SetUp()
     {
-        DomainEvents.Init();
+        DependencyInjectionContainer.Init(_serviceProvider);
 
         DbContext = new FakeInMemoryPersonalSiteDbContext();
         DbContext.Database.EnsureDeleted();
@@ -33,6 +37,17 @@ public class PersonalSiteDomainTestBase
             Repository.Add(entity);
 
         CloseContext();
+    }
+
+    protected IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent> AssumeDomainEventHandlerWasRegistered<TDomainEvent>() 
+        where TDomainEvent : IDomainEvent
+    {
+        var domainEventHandler = Substitute.For<IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>>(Array.Empty<object>());
+        
+        DomainEvents.RegisterSyncHandler(domainEventHandler.GetType());
+        DependencyInjectionContainer.Current.GetService(domainEventHandler.GetType()).Returns(domainEventHandler);
+
+        return domainEventHandler;
     }
 
     protected virtual void AdditionalSetup() { }
