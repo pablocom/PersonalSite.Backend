@@ -10,13 +10,14 @@ namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {
+    private static readonly IServiceProvider _serviceProvider = Substitute.For<IServiceProvider>();
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
     [SetUp]
     public void SetUp()
     {
-        DependencyInjectionContainer.Init(Substitute.For<IServiceProvider>());
+        DependencyInjectionContainer.Init(_serviceProvider);
 
         DbContext = new FakeInMemoryPersonalSiteDbContext();
         DbContext.Database.EnsureDeleted();

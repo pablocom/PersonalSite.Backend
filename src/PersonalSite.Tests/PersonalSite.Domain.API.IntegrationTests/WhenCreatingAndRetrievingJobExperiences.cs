@@ -9,12 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using PersonalSite.Application.Dtos;
+using PersonalSite.IoC;
 using PersonalSite.Persistence;
-using PersonalSite.WebApi;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Infrastructure;
 
-namespace PersonalSite.Domain.API.FunctionalTests;
+namespace PersonalSite.WebApi.IntegrationTests;
 
 public class WhenCreatingAndRetrievingJobExperiences
 {
@@ -24,15 +24,13 @@ public class WhenCreatingAndRetrievingJobExperiences
         PropertyNameCaseInsensitive = true
     };
 
-    private HttpClient client;
+    private HttpClient client = default!;
     private readonly WebApplicationFactory<Startup> applicationFactory = new();
-    private IServiceScope serviceScope;
 
     [SetUp]
     public void Setup()
     {
         client = applicationFactory.CreateClient();
-        serviceScope = applicationFactory.Services.CreateScope();
     }
 
     [Test]
@@ -71,12 +69,11 @@ public class WhenCreatingAndRetrievingJobExperiences
     {
         if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
         {
-            var dbContext = serviceScope.ServiceProvider.GetRequiredService<PersonalSiteDbContext>();
+            var dbContext = DependencyInjectionContainer.Current.GetRequiredService<PersonalSiteDbContext>();
             dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
             dbContext.SaveChanges();
         }
 
-        serviceScope.Dispose();
         applicationFactory.Dispose();
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.UnitTests.Extensions;
 
 namespace PersonalSite.UnitTests.Services;
 
@@ -49,7 +49,15 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
-        handler.Received(1).Handle(Arg.Is<JobExperienceAdded>(received => AssertEvent(received, company, description, startDate, endDate, techStack)));
+        handler.AssertEventWasRaised(@event =>
+        {
+            Assert.That(@event, Is.Not.Null);
+            Assert.That(@event.Company, Is.EqualTo(company));
+            Assert.That(@event.Description, Is.EqualTo(description));
+            Assert.That(@event.JobPeriodStart, Is.EqualTo(startDate));
+            Assert.That(@event.JobPeriodEnd, Is.EqualTo(endDate));
+            CollectionAssert.AreEquivalent(@event.TechStack, techStack);
+        });
     }
 
     [TestCase(null, null)]
@@ -74,16 +82,5 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         Assert.That(jobExperience.JobPeriod.Start, Is.EqualTo(startDate));
         Assert.That(jobExperience.JobPeriod.End, Is.EqualTo(endDate));
         CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
-    }
-
-    private bool AssertEvent(JobExperienceAdded received, string company, string description, DateOnly startDate, DateOnly endDate, string[] techStack)
-    {
-        Assert.That(received, Is.Not.Null);
-        Assert.That(received.Company, Is.EqualTo(company));
-        Assert.That(received.Description, Is.EqualTo(description));
-        Assert.That(received.JobPeriodStart, Is.EqualTo(startDate));
-        Assert.That(received.JobPeriodEnd, Is.EqualTo(endDate));
-        CollectionAssert.AreEquivalent(received.TechStack, techStack);
-        return true;
     }
 }
