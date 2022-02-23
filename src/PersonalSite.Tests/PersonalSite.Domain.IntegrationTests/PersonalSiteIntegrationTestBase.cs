@@ -4,7 +4,8 @@ using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Persistence;
 using System;
-using PersonalSite.Domain.Events;
+using PersonalSite.IoC;
+using NSubstitute;
 
 namespace PersonalSite.IntegrationTests;
 
@@ -17,6 +18,8 @@ public class PersonalSiteIntegrationTestBase
     [SetUp]
     protected void Setup()
     {
+        DependencyInjectionContainer.Init(Substitute.For<IServiceProviderProxy>());
+
         var connectionString = Environment.GetEnvironmentVariable("PersonalSiteConnectionString");
         var options = new DbContextOptionsBuilder<PersonalSiteDbContext>()
             .UseNpgsql(connectionString)

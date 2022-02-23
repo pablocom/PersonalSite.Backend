@@ -67,12 +67,13 @@ public class WhenCreatingAndRetrievingJobExperiences
     [TearDown]
     public void Teardown()
     {
-        if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
-        {
-            var dbContext = DependencyInjectionContainer.Current.GetService<PersonalSiteDbContext>();
-            dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
-            dbContext.SaveChanges();
-        }
+        // TODO: clean up database on successfully finishing
+        //if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
+        //{
+        //    var dbContext = DependencyInjectionContainer.Current.GetService<PersonalSiteDbContext>();
+        //    dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
+        //    dbContext.SaveChanges();
+        //}
 
         applicationFactory.Dispose();
     }

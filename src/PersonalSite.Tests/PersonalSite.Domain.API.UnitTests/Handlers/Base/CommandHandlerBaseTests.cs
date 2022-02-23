@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NSubstitute;
 using NUnit.Framework;
+using PersonalSite.Domain.Events;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.CommandHandlers;
 
@@ -12,6 +13,7 @@ namespace PersonalSite.API.UnitTests.Handlers.Base;
 public class CommandHandlerBaseTests
 {
     private IUnitOfWork unitOfWork;
+    private IDomainEventDispatcherStore domainEventDispatcherStore;
     private CommandHandler<FakeCommand> commandHandler;
     private FakeCommand command = new();
 
@@ -22,7 +24,8 @@ public class CommandHandlerBaseTests
     public void SetUp()
     {
         unitOfWork = Substitute.For<IUnitOfWork>();
-        commandHandler = Substitute.For<CommandHandler<FakeCommand>>(unitOfWork);
+        domainEventDispatcherStore = Substitute.For<IDomainEventDispatcherStore>();
+        commandHandler = Substitute.For<CommandHandler<FakeCommand>>(unitOfWork, domainEventDispatcherStore);
     }
 
     [Test]
@@ -51,6 +54,24 @@ public class CommandHandlerBaseTests
         WhenRequestIsHandled();
 
         unitOfWork.Received(1).Commit();
+    }
+
+    [Test]
+    public void RunDomainEventHandlerDispatchersInStore()
+    {
+        WhenRequestIsHandled();
+
+        domainEventDispatcherStore.Received(1).RunDomainEventHandlerDispatchers();
+    }
+
+    [Test]
+    public void DoesNotRunAggregateDispatchersIfUnitOfWorkFailsToCommit()
+    {
+        unitOfWork.When(x => x.Commit()).Throw<Exception>();
+
+        WhenRequestIsHandled();
+
+        domainEventDispatcherStore.DidNotReceive().RunDomainEventHandlerDispatchers();
     }
 
     private void WhenRequestIsHandled()

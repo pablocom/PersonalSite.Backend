@@ -3,6 +3,7 @@ using MediatR;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Application;
+using PersonalSite.Domain.Events;
 using PersonalSite.WebApi.CommandHandlers;
 using PersonalSite.WebApi.Commands;
 
@@ -36,6 +37,6 @@ public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBas
 
     protected override CreateJobExperienceCommandHandler GetRequestHandler()
     {
-        return new CreateJobExperienceCommandHandler(service, UnitOfWork);
+        return new CreateJobExperienceCommandHandler(service, UnitOfWork, Substitute.For<IDomainEventDispatcherStore>());
     }
 }

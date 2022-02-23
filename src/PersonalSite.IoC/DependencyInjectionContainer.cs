@@ -14,4 +14,5 @@ public static class DependencyInjectionContainer
 public interface IServiceProviderProxy
 {
     object GetService(Type type);
+    TService GetService<TService>();
 }
