@@ -16,6 +16,6 @@ public class JobExperienceAddedHandlerAtTheEndOfCurrentScope : IHandleDomainEven
     {
         var jobExperiences = jobExperienceRepository.GetAllJobExperiences();
 
-        Console.WriteLine($"{DateTime.UtcNow:s} - Handling {nameof(JobExperienceAdded)}...");
+        Console.WriteLine($"{DateTime.UtcNow:s} - Publishing {nameof(JobExperienceAdded)} to message bus...");
     }
 }
