@@ -6,18 +6,28 @@ public static class DomainEvents
 {
     private static readonly IList<Type> SyncDomainEventHandlerTypes = new List<Type>();
     private static readonly IList<Type> AsyncDomainEventHandlerTypes = new List<Type>();
-    private static readonly SemaphoreSlim SemaphoreSlim = new(1, 1);
-    
-    [Obsolete]
-    public static void Init()
-    {
-        
-    }
 
     public static void Raise<TDomainEvent>(TDomainEvent domainEvent)
         where TDomainEvent : IDomainEvent
     {   
         RaiseSyncDomainEventHandlers(domainEvent);
+        SaveAggregateDomainEventHandlerDispatchers(domainEvent);
+    }
+
+    public static void RegisterSyncHandler(Type domainEventHandlerType)
+    {
+        if (domainEventHandlerType is null)
+            throw new ArgumentNullException(nameof(domainEventHandlerType));
+
+        SyncDomainEventHandlerTypes.Add(domainEventHandlerType);
+    }
+
+    public static void RegisterAsyncHandler(Type domainEventHandlerType)
+    {
+        if (domainEventHandlerType is null)
+            throw new ArgumentNullException(nameof(domainEventHandlerType));
+
+        AsyncDomainEventHandlerTypes.Add(domainEventHandlerType);
     }
 
     private static void RaiseSyncDomainEventHandlers<TDomainEvent>(TDomainEvent domainEvent) where TDomainEvent : IDomainEvent
@@ -52,12 +62,20 @@ public static class DomainEvents
         }
     }
 
-    public static void RegisterSyncHandler(Type domainEventHandlerType)
+    private static void SaveAggregateDomainEventHandlerDispatchers<TDomainEvent>(TDomainEvent domainEvent)
+        where TDomainEvent : IDomainEvent
     {
-        if (domainEventHandlerType is null)
-            throw new ArgumentNullException(nameof(domainEventHandlerType));
+        var domainEventDispatcherStore = (IDomainEventDispatcherStore) DependencyInjectionContainer.Current.GetService(typeof(IDomainEventDispatcherStore))!;
+        foreach (var handlerType in TakeHandlersOfType<IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<TDomainEvent>>(AsyncDomainEventHandlerTypes))
+        {
+            var domainEventHandlerDispatcher = new DomainEventHandlerDispatcher(() =>
+            {
+                var handler = (IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<TDomainEvent>)DependencyInjectionContainer.Current.GetService(handlerType)!;
+                handler.Handle(domainEvent);
+            });
 
-        SyncDomainEventHandlerTypes.Add(domainEventHandlerType);
+            domainEventDispatcherStore.Push(domainEventHandlerDispatcher);
+        }
     }
 
     private static IEnumerable<Type> TakeHandlersOfType<TDomainEventHandler>(IEnumerable<Type> allHandlerTypes)

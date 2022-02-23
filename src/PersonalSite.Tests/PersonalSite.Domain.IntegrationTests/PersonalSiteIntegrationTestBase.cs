@@ -27,8 +27,6 @@ public class PersonalSiteIntegrationTestBase
         Repository = new JobExperienceRepository(dbContext);
         transaction = dbContext.Database.BeginTransaction();
 
-        DomainEvents.Init();
-
         AdditionalSetup();
     }
 

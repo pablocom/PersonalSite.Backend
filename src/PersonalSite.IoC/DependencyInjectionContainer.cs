@@ -2,11 +2,16 @@
 
 public static class DependencyInjectionContainer
 {
-    public static IServiceProvider Current => _instance;
-    private static IServiceProvider _instance = null!;
-    
-    public static void Init(IServiceProvider serviceProvider)
+    private static IServiceProviderProxy? serviceProviderProxy;
+    public static IServiceProviderProxy Current => serviceProviderProxy ?? throw new Exception("You should Initialize the ServiceProvider before using it.");
+
+    public static void Init(IServiceProviderProxy proxy)
     {
-        _instance = serviceProvider;
+        serviceProviderProxy = proxy;
     }
+}
+
+public interface IServiceProviderProxy
+{
+    object GetService(Type type);
 }

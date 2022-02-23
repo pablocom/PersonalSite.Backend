@@ -10,7 +10,7 @@ namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {
-    private static readonly IServiceProvider _serviceProvider = Substitute.For<IServiceProvider>();
+    private static readonly IServiceProviderProxy _serviceProvider = Substitute.For<IServiceProviderProxy>();
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 

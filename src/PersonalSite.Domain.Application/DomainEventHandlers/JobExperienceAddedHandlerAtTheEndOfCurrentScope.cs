@@ -3,11 +3,11 @@ using System;
 
 namespace PersonalSite.Application.DomainEventHandlers;
 
-public class JobExperienceAddedHandler : IHandleDomainEventsSynchronouslyInCurrentScope<JobExperienceAdded>
+public class JobExperienceAddedHandlerAtTheEndOfCurrentScope : IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<JobExperienceAdded>
 {
     private readonly IJobExperienceRepository jobExperienceRepository;
 
-    public JobExperienceAddedHandler(IJobExperienceRepository jobExperienceRepository)
+    public JobExperienceAddedHandlerAtTheEndOfCurrentScope(IJobExperienceRepository jobExperienceRepository)
     {
         this.jobExperienceRepository = jobExperienceRepository;
     }

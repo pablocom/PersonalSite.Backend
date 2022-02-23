@@ -13,6 +13,7 @@ using PersonalSite.IoC;
 using PersonalSite.WebApi.Installers;
 using PersonalSite.WebApi.Errors;
 using PersonalSite.WebApi.Infrastructure;
+using PersonalSite.Domain.Events;
 
 namespace PersonalSite.WebApi;
 
@@ -41,15 +42,18 @@ public class Startup
             .AddTransient<IMigrator, PersonalSiteDbContextMigrator>()
             .AddScoped<IJobExperienceService, JobExperienceService>()
             .AddMediatR(typeof(Startup))
+            .AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>()
+            .AddHttpContextAccessor().AddSingleton<IServiceProviderProxy, HttpContextServiceProviderProxy>()
             .AddDomainEventHandlers();
 
         RunContextMigrations(services);
-        DependencyInjectionContainer.Init(services.BuildServiceProvider());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger, IServiceProvider serviceProvider)
     {
+        DependencyInjectionContainer.Init(serviceProvider.GetRequiredService<IServiceProviderProxy>());
+
         app.ConfigureExceptionHandler(logger);
 
         app.UseRouting();

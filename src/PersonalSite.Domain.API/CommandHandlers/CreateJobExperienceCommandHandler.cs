@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using PersonalSite.Application;
+using PersonalSite.Domain.Events;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.Commands;
 
@@ -9,7 +10,8 @@ public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperie
 {
     private readonly IJobExperienceService service;
 
-    public CreateJobExperienceCommandHandler(IJobExperienceService service, IUnitOfWork unitOfWork) : base(unitOfWork)
+    public CreateJobExperienceCommandHandler(IJobExperienceService service, IUnitOfWork unitOfWork, IDomainEventDispatcherStore dispatcherStore) 
+        : base(unitOfWork, dispatcherStore)
     {
         this.service = service;
     }

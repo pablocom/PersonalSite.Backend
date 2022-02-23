@@ -69,7 +69,7 @@ public class WhenCreatingAndRetrievingJobExperiences
     {
         if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
         {
-            var dbContext = DependencyInjectionContainer.Current.GetRequiredService<PersonalSiteDbContext>();
+            var dbContext = DependencyInjectionContainer.Current.GetService<PersonalSiteDbContext>();
             dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
             dbContext.SaveChanges();
         }
