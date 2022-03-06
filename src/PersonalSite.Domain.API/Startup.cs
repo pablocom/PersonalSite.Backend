@@ -14,6 +14,7 @@ using PersonalSite.WebApi.Installers;
 using PersonalSite.WebApi.Errors;
 using PersonalSite.WebApi.Infrastructure;
 using PersonalSite.Domain.Events;
+using MassTransit;
 
 namespace PersonalSite.WebApi;
 
@@ -34,7 +35,7 @@ public class Startup
                 options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
-        
+
         services.AddDbContext<PersonalSiteDbContext>(options =>
             options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")))
             .AddScoped<IUnitOfWork, UnitOfWork>()
@@ -42,15 +43,37 @@ public class Startup
             .AddTransient<IMigrator, PersonalSiteDbContextMigrator>()
             .AddScoped<IJobExperienceService, JobExperienceService>()
             .AddMediatR(typeof(Startup))
-            .AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>()
             .AddHttpContextAccessor().AddSingleton<IServiceProviderProxy, ServiceProviderProxy>()
             .AddDomainEventHandlers();
+
+        AddMassTransit(services);
 
         RunContextMigrations(services);
     }
 
+    private static void AddMassTransit(IServiceCollection services)
+    {
+        services.AddMassTransit(x =>
+        {
+            x.AddConsumer<MessageConsumer>();
+
+            x.UsingInMemory((context, cfg) =>
+            {
+                cfg.ConfigureEndpoints(context);
+            });
+        });
+
+        services.AddMediator(cfg =>
+        {
+
+        });
+        services.AddMassTransitHostedService(true);
+
+        services.AddHostedService<Worker>();
+    }
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger, IServiceProvider serviceProvider)
+    public void Configure(IApplicationBuilder app, ILogger<Startup> logger, IServiceProvider serviceProvider)
     {
         DependencyInjectionContainer.Init(serviceProvider.GetRequiredService<IServiceProviderProxy>());
 

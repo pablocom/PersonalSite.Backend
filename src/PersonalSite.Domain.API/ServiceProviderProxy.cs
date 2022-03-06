@@ -8,19 +8,27 @@ namespace PersonalSite.WebApi;
 public class ServiceProviderProxy : IServiceProviderProxy
 {
     private readonly IHttpContextAccessor contextAccessor;
+    private readonly IServiceProvider serviceProvider; // TODO: this should be the masstransit consumer context accessor
 
-    public ServiceProviderProxy(IHttpContextAccessor contextAccessor)
+    public ServiceProviderProxy(IHttpContextAccessor contextAccessor, IServiceProvider serviceProvider)
     {
         this.contextAccessor = contextAccessor;
+        this.serviceProvider = serviceProvider;
     }
 
     public object GetService(Type type)
     {
-        return contextAccessor.HttpContext.RequestServices.GetService(type);
+        if (contextAccessor.HttpContext is not null)
+            return contextAccessor.HttpContext.RequestServices.GetService(type);
+
+        return serviceProvider.GetService(type);
     }
 
     public TService GetService<TService>()
     {
-        return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
+        if (contextAccessor.HttpContext is not null)
+            return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
+
+        return serviceProvider.GetRequiredService<TService>();
     }
 }
