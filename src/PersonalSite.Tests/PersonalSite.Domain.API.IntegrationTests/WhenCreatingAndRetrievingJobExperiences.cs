@@ -65,16 +65,15 @@ public class WhenCreatingAndRetrievingJobExperiences
     }
 
     [TearDown]
-    public void Teardown()
+    public async Task Teardown()
     {
-        // TODO: clean up database on successfully finishing
-        //if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
-        //{
-        //    var dbContext = DependencyInjectionContainer.Current.GetService<PersonalSiteDbContext>();
-        //    dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
-        //    dbContext.SaveChanges();
-        //}
-
+        if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
+        {
+            await using var scope = applicationFactory.Services.CreateAsyncScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<PersonalSiteDbContext>();
+            dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
+            dbContext.SaveChanges();
+        }
         applicationFactory.Dispose();
     }
 }
