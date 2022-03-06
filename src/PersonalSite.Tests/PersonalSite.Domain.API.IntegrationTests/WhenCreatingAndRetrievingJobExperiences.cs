@@ -10,10 +10,11 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
+using PersonalSite.WebApi;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Infrastructure;
 
-namespace PersonalSite.WebApi.IntegrationTests;
+namespace PersonalSite.FunctionalTests;
 
 public class WhenCreatingAndRetrievingJobExperiences
 {

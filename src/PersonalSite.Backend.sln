@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi", "Pers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalSite.Tests", "PersonalSite.Tests", "{5F9EA4EB-E65A-4C58-979A-3A38FE6778CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.UnitTests", "PersonalSite.Tests\PersonalSite.Domain.UnitTests\PersonalSite.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.UnitTests", "PersonalSite.Tests\PersonalSite.Domain.UnitTests\PersonalSite.Domain.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi.UnitTests", "PersonalSite.Tests\PersonalSite.Domain.API.UnitTests\PersonalSite.WebApi.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
 EndProject
@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Application", "PersonalSite.Domain.Application\PersonalSite.Application.csproj", "{B87A9835-AC50-4CD2-A8B9-D2DC0B3AD2A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.WebApi.IntegrationTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.FunctionalTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.FunctionalTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.IoC", "PersonalSite.IoC\PersonalSite.IoC.csproj", "{91496E08-9375-433E-B72D-867ADDD82BBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IoC", "PersonalSite.IoC\PersonalSite.IoC.csproj", "{91496E08-9375-433E-B72D-867ADDD82BBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Domain.Events", "PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj", "{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.Events", "PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj", "{D5D40687-75F1-46D8-AD5B-946F23BD1EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

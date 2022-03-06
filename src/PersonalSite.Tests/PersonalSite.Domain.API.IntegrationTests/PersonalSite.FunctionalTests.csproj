@@ -6,7 +6,7 @@
 
         <IsPackable>false</IsPackable>
 
-        <RootNamespace>PersonalSite.Domain.API.FunctionalTests</RootNamespace>
+        <RootNamespace>PersonalSite.FunctionalTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
