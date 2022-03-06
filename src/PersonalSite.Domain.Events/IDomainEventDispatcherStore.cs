@@ -1,4 +1,6 @@
-﻿namespace PersonalSite.Domain.Events;
+﻿using System.Collections.Concurrent;
+
+namespace PersonalSite.Domain.Events;
 
 public interface IDomainEventDispatcherStore
 {
@@ -8,7 +10,7 @@ public interface IDomainEventDispatcherStore
 
 public class DomainEventDispatcherStore : IDomainEventDispatcherStore
 {
-    private readonly List<DomainEventHandlerDispatcher> _domainEventHandlerDispatcher = new();
+    private readonly ConcurrentBag<DomainEventHandlerDispatcher> _domainEventHandlerDispatcher = new();
 
     public void Push(DomainEventHandlerDispatcher domainEventHandlerDispatcher)
     {

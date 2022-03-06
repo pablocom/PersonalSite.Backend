@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using PersonalSite.Application.Dtos;
-using PersonalSite.IoC;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Infrastructure;

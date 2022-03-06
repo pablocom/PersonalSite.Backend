@@ -14,8 +14,9 @@ public class JobExperienceAddedHandler : IHandleDomainEventsSynchronouslyInCurre
 
     public void Handle(JobExperienceAdded domainEvent)
     {
+        Console.WriteLine($"{DateTime.UtcNow:s} - Handling synchronously {nameof(JobExperienceAdded)}...");
+
         var jobExperiences = jobExperienceRepository.GetAllJobExperiences();
 
-        Console.WriteLine($"{DateTime.UtcNow:s} - Handling synchronously {nameof(JobExperienceAdded)}...");
     }
 }
