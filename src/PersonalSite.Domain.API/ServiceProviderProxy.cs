@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace PersonalSite.WebApi;
 
-public class HttpContextServiceProviderProxy : IServiceProviderProxy
+public class ServiceProviderProxy : IServiceProviderProxy
 {
     private readonly IHttpContextAccessor contextAccessor;
 
-    public HttpContextServiceProviderProxy(IHttpContextAccessor contextAccessor)
+    public ServiceProviderProxy(IHttpContextAccessor contextAccessor)
     {
         this.contextAccessor = contextAccessor;
     }

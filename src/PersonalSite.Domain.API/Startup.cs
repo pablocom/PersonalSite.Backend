@@ -43,7 +43,7 @@ public class Startup
             .AddScoped<IJobExperienceService, JobExperienceService>()
             .AddMediatR(typeof(Startup))
             .AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>()
-            .AddHttpContextAccessor().AddSingleton<IServiceProviderProxy, HttpContextServiceProviderProxy>()
+            .AddHttpContextAccessor().AddSingleton<IServiceProviderProxy, ServiceProviderProxy>()
             .AddDomainEventHandlers();
 
         RunContextMigrations(services);
