@@ -1,24 +1,24 @@
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PersonalSite.WebApi.MessageBus
+namespace PersonalSite.WebApi.Infrastructure
 {
     public interface IBusEventHandlerScopeAccessor
     {
-        IServiceScope? CurrentScope { get; set; }
+        IServiceScope CurrentScope { get; set; }
     }
 
     // Implementation copied from https://github.com/dotnet/aspnetcore/blob/main/src%2FHttp%2FHttp%2Fsrc%2FHttpContextAccessor.cs
     public class BusEventHandlerScopeAccessor : IBusEventHandlerScopeAccessor
     {
-        private static readonly AsyncLocal<MessageBusScopeHolder> _httpContextCurrent = new();
+        private static readonly AsyncLocal<MessageBusScopeHolder> _messageBusContextCurrent = new();
 
-        public IServiceScope? CurrentScope
+        public IServiceScope CurrentScope
         {
-            get { return _httpContextCurrent.Value?.Context; }
+            get { return _messageBusContextCurrent.Value?.Context; }
             set
             {
-                var holder = _httpContextCurrent.Value;
+                var holder = _messageBusContextCurrent.Value;
                 if (holder != null)
                 {
                     // Clear current IServiceScope trapped in the AsyncLocals, as its done.
@@ -29,14 +29,14 @@ namespace PersonalSite.WebApi.MessageBus
                 {
                     // Use an object indirection to hold the IServiceScope in the AsyncLocal,
                     // so it can be cleared in all ExecutionContexts when its cleared.
-                    _httpContextCurrent.Value = new MessageBusScopeHolder {Context = value};
+                    _messageBusContextCurrent.Value = new MessageBusScopeHolder { Context = value };
                 }
             }
         }
 
         private class MessageBusScopeHolder
         {
-            public IServiceScope? Context;
+            public IServiceScope Context;
         }
     }
 

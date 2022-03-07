@@ -2,7 +2,6 @@
 using PersonalSite.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.WebApi.MessageBus;
 
 namespace PersonalSite.WebApi.Infrastructure;
 
@@ -30,8 +29,8 @@ public class ServiceProviderProxy : IServiceProviderProxy
     public TService GetService<TService>()
     {
         if (contextAccessor.HttpContext is not null)
-            return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
+            return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
 
-        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
+        return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
     }
 }

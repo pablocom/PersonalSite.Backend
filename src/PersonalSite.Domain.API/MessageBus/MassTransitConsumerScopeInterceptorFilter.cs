@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using GreenPipes;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalSite.WebApi.Infrastructure;
 
 namespace PersonalSite.WebApi.MessageBus;
 
