@@ -2,17 +2,23 @@
 using PersonalSite.IoC;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalSite.WebApi.MessageBus;
 
 namespace PersonalSite.WebApi;
 
 public class ServiceProviderProxy : IServiceProviderProxy
 {
     private readonly IHttpContextAccessor contextAccessor;
-    private readonly IServiceProvider serviceProvider; // TODO: this should be the masstransit consumer context accessor
-
-    public ServiceProviderProxy(IHttpContextAccessor contextAccessor, IServiceProvider serviceProvider)
+    private readonly IMessageBusConsumerScopeAccessor messageBusConsumerScopeAccessor;
+    private readonly IServiceProvider serviceProvider;
+    
+    public ServiceProviderProxy(
+        IHttpContextAccessor contextAccessor,
+        IMessageBusConsumerScopeAccessor messageBusConsumerScopeAccessor,
+        IServiceProvider serviceProvider)
     {
         this.contextAccessor = contextAccessor;
+        this.messageBusConsumerScopeAccessor = messageBusConsumerScopeAccessor;
         this.serviceProvider = serviceProvider;
     }
 
@@ -21,7 +27,7 @@ public class ServiceProviderProxy : IServiceProviderProxy
         if (contextAccessor.HttpContext is not null)
             return contextAccessor.HttpContext.RequestServices.GetService(type);
 
-        return serviceProvider.GetService(type);
+        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetService(type);
     }
 
     public TService GetService<TService>()
@@ -29,6 +35,11 @@ public class ServiceProviderProxy : IServiceProviderProxy
         if (contextAccessor.HttpContext is not null)
             return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
 
-        return serviceProvider.GetRequiredService<TService>();
+        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
+    }
+
+    public IServiceScope BeginScope()
+    {
+        return serviceProvider.CreateScope();
     }
 }

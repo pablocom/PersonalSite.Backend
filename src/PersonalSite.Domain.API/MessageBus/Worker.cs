@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using MassTransit;
+﻿using System;
 using System.Threading;
-using System;
+using System.Threading.Tasks;
+using MassTransit;
+using Microsoft.Extensions.Hosting;
 
-
-namespace PersonalSite.WebApi
+namespace PersonalSite.WebApi.MessageBus
 {
     public class Worker : BackgroundService
     {

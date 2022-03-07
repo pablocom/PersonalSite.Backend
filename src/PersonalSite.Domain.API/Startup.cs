@@ -15,6 +15,8 @@ using PersonalSite.WebApi.Errors;
 using PersonalSite.WebApi.Infrastructure;
 using PersonalSite.Domain.Events;
 using MassTransit;
+using MassTransit.Context;
+using PersonalSite.WebApi.MessageBus;
 
 namespace PersonalSite.WebApi;
 
@@ -43,7 +45,9 @@ public class Startup
             .AddTransient<IMigrator, PersonalSiteDbContextMigrator>()
             .AddScoped<IJobExperienceService, JobExperienceService>()
             .AddMediatR(typeof(Startup))
-            .AddHttpContextAccessor().AddSingleton<IServiceProviderProxy, ServiceProviderProxy>()
+            .AddHttpContextAccessor()
+            .AddSingleton<IMessageBusConsumerScopeAccessor, MessageBusConsumerScopeAccessor>()
+            .AddSingleton<IServiceProviderProxy, ServiceProviderProxy>()
             .AddDomainEventHandlers();
 
         AddMassTransit(services);
@@ -59,6 +63,7 @@ public class Startup
 
             x.UsingInMemory((context, cfg) =>
             {
+                cfg.UseConsumeFilter(typeof(ConsumerScopeAccessorMiddleware<>), context);
                 cfg.ConfigureEndpoints(context);
             });
         });

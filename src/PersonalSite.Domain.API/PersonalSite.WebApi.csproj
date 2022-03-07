@@ -21,4 +21,10 @@
     <ProjectReference Include="..\PersonalSite.IoC\PersonalSite.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Message.cs" />
+    <Compile Remove="MessageConsumer.cs" />
+    <Compile Remove="Worker.cs" />
+  </ItemGroup>
+
 </Project>

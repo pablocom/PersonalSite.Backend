@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using PersonalSite.WebApi.Commands;
 
-namespace PersonalSite.WebApi
+namespace PersonalSite.WebApi.MessageBus
 {
     public class MessageConsumer : IConsumer<Message>
     {
@@ -27,7 +27,8 @@ namespace PersonalSite.WebApi
             var jobPeriodStart = new DateOnly(2020, 1, 1);
             var jobPeriodEnd = new DateOnly(2020, 5, 1);
             var techStack = new[] { ".Net Core", "NSubstitute" };
-            var createJobExperienceCommand = new CreateJobExperienceCommand(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+            var createJobExperienceCommand =
+                new CreateJobExperienceCommand(company, description, jobPeriodStart, jobPeriodEnd, techStack);
 
             mediator.Send(createJobExperienceCommand);
 

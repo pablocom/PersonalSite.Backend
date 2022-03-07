@@ -1,4 +1,4 @@
-﻿namespace PersonalSite.WebApi
+﻿namespace PersonalSite.WebApi.MessageBus
 {
     public class Message
     {
