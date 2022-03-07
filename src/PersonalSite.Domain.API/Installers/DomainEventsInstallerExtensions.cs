@@ -9,6 +9,7 @@ public static class DomainEventsInstallerExtensions
 {
     public static IServiceCollection AddDomainEventHandlers(this IServiceCollection services)
     {
+        services.AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>();
         RegisterSyncDomainEventHandlers(services);
         RegisterAsyncDomainEventHandlers(services);
         return services;

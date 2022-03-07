@@ -63,10 +63,6 @@ public class Startup
             });
         });
 
-        services.AddMediator(cfg =>
-        {
-
-        });
         services.AddMassTransitHostedService(true);
 
         services.AddHostedService<Worker>();
