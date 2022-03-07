@@ -21,7 +21,7 @@ namespace PersonalSite.WebApi.MessageBus
             {
                 await _bus.Publish(new Message { Text = $"The time is {DateTimeOffset.Now}" });
 
-                await Task.Delay(1000, cancellationToken);
+                await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
             }
         }
     }

@@ -11,16 +11,10 @@ public static class DependencyInjectionContainer
     {
         serviceProviderProxy = proxy;
     }
-
-    public static IServiceScope BeginScope()
-    {
-        return Current.BeginScope();
-    }
 }
 
 public interface IServiceProviderProxy
 {
     object GetService(Type type);
     TService GetService<TService>();
-    IServiceScope BeginScope();
 }

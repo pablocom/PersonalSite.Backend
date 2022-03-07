@@ -46,11 +46,11 @@ public class Startup
             .AddScoped<IJobExperienceService, JobExperienceService>()
             .AddMediatR(typeof(Startup))
             .AddHttpContextAccessor()
-            .AddSingleton<IMessageBusConsumerScopeAccessor, MessageBusConsumerScopeAccessor>()
+            .AddSingleton<IBusEventHandlerScopeAccessor, BusEventHandlerScopeAccessor>()
             .AddSingleton<IServiceProviderProxy, ServiceProviderProxy>()
             .AddDomainEventHandlers();
 
-        AddMassTransit(services);
+        //AddMassTransit(services);
 
         RunContextMigrations(services);
     }
@@ -63,7 +63,7 @@ public class Startup
 
             x.UsingInMemory((context, cfg) =>
             {
-                cfg.UseConsumeFilter(typeof(ConsumerScopeAccessorMiddleware<>), context);
+                cfg.UseConsumeFilter(typeof(MassTransitConsumerScopeInterceptorFilter<>), context);
                 cfg.ConfigureEndpoints(context);
             });
         });

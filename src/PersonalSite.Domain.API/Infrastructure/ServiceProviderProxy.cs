@@ -4,22 +4,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalSite.WebApi.MessageBus;
 
-namespace PersonalSite.WebApi;
+namespace PersonalSite.WebApi.Infrastructure;
 
 public class ServiceProviderProxy : IServiceProviderProxy
 {
     private readonly IHttpContextAccessor contextAccessor;
-    private readonly IMessageBusConsumerScopeAccessor messageBusConsumerScopeAccessor;
-    private readonly IServiceProvider serviceProvider;
-    
+    private readonly IBusEventHandlerScopeAccessor messageBusConsumerScopeAccessor;
+
     public ServiceProviderProxy(
         IHttpContextAccessor contextAccessor,
-        IMessageBusConsumerScopeAccessor messageBusConsumerScopeAccessor,
-        IServiceProvider serviceProvider)
+        IBusEventHandlerScopeAccessor messageBusConsumerScopeAccessor)
     {
         this.contextAccessor = contextAccessor;
         this.messageBusConsumerScopeAccessor = messageBusConsumerScopeAccessor;
-        this.serviceProvider = serviceProvider;
     }
 
     public object GetService(Type type)
@@ -36,10 +33,5 @@ public class ServiceProviderProxy : IServiceProviderProxy
             return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
 
         return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
-    }
-
-    public IServiceScope BeginScope()
-    {
-        return serviceProvider.CreateScope();
     }
 }
