@@ -19,7 +19,10 @@ namespace PersonalSite.WebApi.MessageBus
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await _bus.Publish(new Message { Text = $"The time is {DateTimeOffset.Now}" });
+                await Task.WhenAll(
+                    _bus.Publish(new Message { Text = $"1 - The time is {DateTimeOffset.Now}" }), 
+                    _bus.Publish(new Message { Text = $"2 - The time is {DateTimeOffset.Now}" })
+                );
 
                 await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
             }

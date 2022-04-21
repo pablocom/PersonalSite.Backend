@@ -26,11 +26,11 @@ public class ServiceProviderProxy : IServiceProviderProxy
         return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetService(type);
     }
 
-    public TService GetService<TService>()
+    public TService GetRequiredService<TService>()
     {
         if (contextAccessor.HttpContext is not null)
-            return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
+            return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
 
-        return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
+        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
     }
 }

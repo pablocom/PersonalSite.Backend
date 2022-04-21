@@ -3,12 +3,15 @@
 public class DomainEventHandlerDispatcher
  
 {
-    private readonly Action dispatchAction;
+    private readonly Func<Task> dispatchAction;
 
-    public DomainEventHandlerDispatcher(Action dispatchAction)
+    public DomainEventHandlerDispatcher(Func<Task> dispatchAction)
     {
         this.dispatchAction = dispatchAction;
     }
 
-    public void Run() => dispatchAction();
+    public async Task Run()
+    {
+        await dispatchAction().ConfigureAwait(false);
+    }
 }

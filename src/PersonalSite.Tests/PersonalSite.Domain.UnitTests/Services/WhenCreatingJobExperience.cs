@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Domain.Events;
@@ -37,27 +38,25 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     }
 
     [Test]
-    public void RaisesDomainEvent()
+    public async Task RaisesDomainEvent()
     {
         var company = "Ryanair";
         var description = "Software Engineer";
         var startDate = new DateOnly(2019, 09, 09);
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
-        var handler = AssumeDomainEventHandlerWasRegistered<JobExperienceAdded>();
-
-        service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        JobExperienceAdded @event = null;
+        using var disposable = DomainEvents.Register<JobExperienceAdded>(ev => @event = ev);
+        
+        await service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
-        handler.AssertEventWasRaised(@event =>
-        {
-            Assert.That(@event, Is.Not.Null);
-            Assert.That(@event.Company, Is.EqualTo(company));
-            Assert.That(@event.Description, Is.EqualTo(description));
-            Assert.That(@event.JobPeriodStart, Is.EqualTo(startDate));
-            Assert.That(@event.JobPeriodEnd, Is.EqualTo(endDate));
-            CollectionAssert.AreEquivalent(@event.TechStack, techStack);
-        });
+        Assert.That(@event, Is.Not.Null);
+        Assert.That(@event.Company, Is.EqualTo(company));
+        Assert.That(@event.Description, Is.EqualTo(description));
+        Assert.That(@event.JobPeriodStart, Is.EqualTo(startDate));
+        Assert.That(@event.JobPeriodEnd, Is.EqualTo(endDate));
+        CollectionAssert.AreEquivalent(@event.TechStack, techStack);
     }
 
     [TestCase(null, null)]
@@ -66,12 +65,12 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     [TestCase("", "")]
     public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
     {
-        TestDelegate action = () =>
+        AsyncTestDelegate action = async () =>
         {
-            service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
+            await service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
         };
-
-        var exception = Assert.Throws<DomainException>(action);
+        
+        var exception = Assert.ThrowsAsync<DomainException>(action);
         Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
     }
 

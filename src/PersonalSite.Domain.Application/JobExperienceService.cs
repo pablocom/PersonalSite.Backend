@@ -3,6 +3,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Application;
 
@@ -13,7 +14,7 @@ namespace PersonalSite.Application;
 /// </summary>
 public interface IJobExperienceService
 {
-    void CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack);
+    Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack);
     IEnumerable<JobExperienceDto> GetJobExperiences();
 }
 
@@ -26,9 +27,10 @@ public class JobExperienceService : IJobExperienceService
         this.repository = repository;
     }
 
-    public void CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
+    public async Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
-        repository.Add(new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack));
+        var jobExperience = await JobExperience.Create(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+        repository.Add(jobExperience);
     }
 
     public IEnumerable<JobExperienceDto> GetJobExperiences()

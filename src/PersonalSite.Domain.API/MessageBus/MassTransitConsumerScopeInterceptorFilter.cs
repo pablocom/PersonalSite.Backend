@@ -6,7 +6,8 @@ using PersonalSite.WebApi.Infrastructure;
 
 namespace PersonalSite.WebApi.MessageBus;
 
-public class MassTransitConsumerScopeInterceptorFilter<TMessage> : IFilter<ConsumeContext<TMessage>> where TMessage : class
+public class MassTransitConsumerScopeInterceptorFilter<TMessage> 
+    : IFilter<ConsumeContext<TMessage>> where TMessage : class
 {
     private readonly IBusEventHandlerScopeAccessor consumerScopeAccessor;
 

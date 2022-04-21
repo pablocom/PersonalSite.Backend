@@ -15,7 +15,7 @@ public class JobExperienceDto
 
     public JobExperienceDto() { }
 
-    public JobExperienceDto(string company, string description, JobPeriod jobPeriod, IEnumerable<string> techStack)
+    private JobExperienceDto(string company, string description, JobPeriod jobPeriod, IEnumerable<string> techStack)
     {
         Company = company;
         Description = description;

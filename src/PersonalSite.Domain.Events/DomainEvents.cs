@@ -4,14 +4,47 @@ namespace PersonalSite.Domain.Events;
 
 public static class DomainEvents
 {
+    private static readonly object HandlerActionLock = new();
+    private static readonly AsyncLocal<IList<Delegate>?> t_currentHandlerActions = new();
+    private static IList<Delegate> HandlerActions
+    {
+        get
+        {
+            if (t_currentHandlerActions.Value is null)
+                t_currentHandlerActions.Value = new List<Delegate>();
+
+            return t_currentHandlerActions.Value;
+        }
+    }
     private static readonly IList<Type> SyncDomainEventHandlerTypes = new List<Type>();
     private static readonly IList<Type> AsyncDomainEventHandlerTypes = new List<Type>();
 
-    public static void Raise<TDomainEvent>(TDomainEvent domainEvent)
+    public static async Task Raise<TDomainEvent>(TDomainEvent domainEvent)
         where TDomainEvent : IDomainEvent
-    {   
-        RaiseSyncDomainEventHandlers(domainEvent);
+    {
+        InvokeRegisteredEventHandlerActions(domainEvent);
+        await RaiseSyncDomainEventHandlers(domainEvent);
         SaveAggregateDomainEventHandlerDispatchers(domainEvent);
+    }
+
+    public static IDisposable Register<TDomainEvent>(Action<TDomainEvent> eventHandlerAction)
+        where TDomainEvent : IDomainEvent
+    {
+        if (eventHandlerAction is null)
+            throw new ArgumentNullException(nameof(eventHandlerAction));
+
+        lock (HandlerActionLock)
+        {
+            HandlerActions.Add(eventHandlerAction);
+        }
+
+        return new DomainEventRegistrationRemover(() =>
+        {
+            lock (HandlerActionLock)
+            {
+                HandlerActions.Remove(eventHandlerAction);
+            }
+        });
     }
 
     public static void RegisterSyncHandler(Type domainEventHandlerType)
@@ -30,9 +63,23 @@ public static class DomainEvents
         AsyncDomainEventHandlerTypes.Add(domainEventHandlerType);
     }
 
-    private static void RaiseSyncDomainEventHandlers<TDomainEvent>(TDomainEvent domainEvent) where TDomainEvent : IDomainEvent
+    private static void InvokeRegisteredEventHandlerActions<TDomainEvent>(TDomainEvent domainEvent)
+        where TDomainEvent : IDomainEvent
     {
-        var syncDomainEventHandlers = new Queue<Type>(
+        if (t_currentHandlerActions.Value is null)
+            return;
+
+        foreach (var action in HandlerActions)
+        {
+            var typedAction = action as Action<TDomainEvent>;
+            typedAction?.Invoke(domainEvent);
+        }
+    }
+
+    private static async Task RaiseSyncDomainEventHandlers<TDomainEvent>(TDomainEvent domainEvent)
+        where TDomainEvent : IDomainEvent
+    {
+        Queue<Type> syncDomainEventHandlers = new(
             TakeHandlersOfType<IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>>(SyncDomainEventHandlerTypes)
         );
 
@@ -40,41 +87,33 @@ public static class DomainEvents
         {
             var domainEventHandlerType = syncDomainEventHandlers.Dequeue();
 
-            try
-            {
-                var handler = DependencyInjectionContainer.Current.GetService(domainEventHandlerType) as IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>;
-                if (handler is null)
-                {
-                    throw new InvalidOperationException($"Cannot resolve domain event handler for {domainEventHandlerType.Name}");
-                }
+            var handler =
+                DependencyInjectionContainer.Current.GetService(domainEventHandlerType) as IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>;
+            if (handler is null)
+                throw new InvalidOperationException($"Cannot resolve domain event handler for {domainEventHandlerType.Name}");
 
-                handler.Handle(domainEvent);
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"Exception: {ex} while executing synchronous handler {domainEventHandlerType.Name}");
-                foreach(var handlerType in syncDomainEventHandlers)
-                {
-                    Console.Error.WriteLine($"Skipping execution of a handler " + handlerType.Name);
-                }
-                throw;
-            }
+            await handler.Handle(domainEvent);
         }
     }
 
     private static void SaveAggregateDomainEventHandlerDispatchers<TDomainEvent>(TDomainEvent domainEvent)
         where TDomainEvent : IDomainEvent
     {
-        var domainEventDispatcherStore = (IDomainEventDispatcherStore) DependencyInjectionContainer.Current.GetService(typeof(IDomainEventDispatcherStore))!;
-        foreach (var handlerType in TakeHandlersOfType<IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<TDomainEvent>>(AsyncDomainEventHandlerTypes))
+        var domainEventHandlers = TakeHandlersOfType<IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<TDomainEvent>>(AsyncDomainEventHandlerTypes);
+        if (!domainEventHandlers.Any())
+            return;
+
+        var domainEventDispatcherStore = (IDomainEventDispatcherStore) DependencyInjectionContainer.Current
+            .GetService(typeof(IDomainEventDispatcherStore))!;
+        foreach (var handlerType in domainEventHandlers)
         {
-            var domainEventHandlerDispatcher = new DomainEventHandlerDispatcher(() =>
+            var domainEventHandlerDispatcher = new DomainEventHandlerDispatcher(async () =>
             {
                 var handler = (IHandleDomainEventsAsynchronouslyAtTheEndOfTheCurrentScope<TDomainEvent>)DependencyInjectionContainer.Current.GetService(handlerType)!;
-                handler.Handle(domainEvent);
+                await handler.Handle(domainEvent);
             });
 
-            domainEventDispatcherStore.Push(domainEventHandlerDispatcher);
+            domainEventDispatcherStore.Add(domainEventHandlerDispatcher);
         }
     }
 
@@ -82,5 +121,17 @@ public static class DomainEvents
     {
         return allHandlerTypes.Where(type => type.GetInterfaces().Where(i => i.IsGenericType).Contains(typeof(TDomainEventHandler)))
             .ToArray();
+    }
+
+    private sealed class DomainEventRegistrationRemover : IDisposable
+    {
+        private readonly Action removalAction;
+
+        public DomainEventRegistrationRemover(Action removalAction)
+        {
+            this.removalAction = removalAction;
+        }
+
+        public void Dispose() => this.removalAction();
     }
 }

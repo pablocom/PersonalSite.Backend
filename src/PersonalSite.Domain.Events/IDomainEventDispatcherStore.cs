@@ -4,22 +4,22 @@ namespace PersonalSite.Domain.Events;
 
 public interface IDomainEventDispatcherStore
 {
-    void Push(DomainEventHandlerDispatcher domainEventHandlerDispatcher);
-    void RunDomainEventHandlerDispatchers();
+    void Add(DomainEventHandlerDispatcher domainEventHandlerDispatcher);
+    Task RunDomainEventHandlerDispatchers();
 }
 
 public class DomainEventDispatcherStore : IDomainEventDispatcherStore
 {
     private readonly ConcurrentBag<DomainEventHandlerDispatcher> _domainEventHandlerDispatcher = new();
 
-    public void Push(DomainEventHandlerDispatcher domainEventHandlerDispatcher)
+    public void Add(DomainEventHandlerDispatcher domainEventHandlerDispatcher)
     {
         _domainEventHandlerDispatcher.Add(domainEventHandlerDispatcher);
     }
 
-    public void RunDomainEventHandlerDispatchers()
+    public async Task RunDomainEventHandlerDispatchers()
     {
         foreach (var dispatcher in _domainEventHandlerDispatcher)
-            dispatcher.Run();
+            await dispatcher.Run();
     }
 }

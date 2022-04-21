@@ -42,7 +42,7 @@ public class PersonalSiteDomainTestBase
     protected IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent> AssumeDomainEventHandlerWasRegistered<TDomainEvent>() 
         where TDomainEvent : IDomainEvent
     {
-        var domainEventHandler = Substitute.For<IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>>(Array.Empty<object>());
+        var domainEventHandler = Substitute.For<IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>>();
         
         DomainEvents.RegisterSyncHandler(domainEventHandler.GetType());
         DependencyInjectionContainer.Current.GetService(domainEventHandler.GetType()).Returns(domainEventHandler);
