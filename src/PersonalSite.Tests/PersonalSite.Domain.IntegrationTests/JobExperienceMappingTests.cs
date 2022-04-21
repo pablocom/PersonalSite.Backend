@@ -21,8 +21,9 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
         Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
         CloseContext();
 
-        var jobExperience = Repository.GetAllJobExperiences().Single();
-        AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
+        var jobExperiences = Repository.GetAllJobExperiences().ToArray();
+        Assert.That(jobExperiences, Has.Length.EqualTo(1));
+        AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
     }
 
     private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateOnly startDate, DateOnly endDate, IEnumerable<string> techStack)

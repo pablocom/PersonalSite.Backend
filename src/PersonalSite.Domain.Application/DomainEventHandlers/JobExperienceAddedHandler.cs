@@ -1,5 +1,6 @@
 ﻿using PersonalSite.Domain.Events;
 using System;
+using System.Threading.Tasks;
 
 namespace PersonalSite.Application.DomainEventHandlers;
 
@@ -12,11 +13,11 @@ public class JobExperienceAddedHandler : IHandleDomainEventsSynchronouslyInCurre
         this.jobExperienceRepository = jobExperienceRepository;
     }
 
-    public void Handle(JobExperienceAdded domainEvent)
+    public Task Handle(JobExperienceAdded domainEvent)
     {
         Console.WriteLine($"{DateTime.UtcNow:s} - Handling synchronously {nameof(JobExperienceAdded)}...");
 
         var jobExperiences = jobExperienceRepository.GetAllJobExperiences();
-
+        return Task.CompletedTask;
     }
 }
