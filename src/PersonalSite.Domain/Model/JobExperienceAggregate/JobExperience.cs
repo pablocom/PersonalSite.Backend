@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
-public class JobExperience : Entity, IAggregateRoot
+public class JobExperience : Entity<int>, IAggregateRoot
 {
     public string Company { get; protected set; }
     public string Description { get; protected set; }
@@ -26,7 +26,6 @@ public class JobExperience : Entity, IAggregateRoot
         Description = description;
         JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
         TechStack = techStack;
-
     }
 
     public static async Task<JobExperience> Create(string company, string description, DateOnly jobPeriodStart,

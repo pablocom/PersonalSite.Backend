@@ -2,23 +2,30 @@
 
 namespace PersonalSite.Domain;
 
-public abstract class Entity : IEquatable<Entity>
+public abstract class Entity<TId> : IEquatable<Entity<TId>>
 {
-    public int Id { get; private set; }
+    public TId Id { get; protected set; }
 
-    public bool Equals(Entity other)
+    public bool Equals(Entity<TId> other)
     {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id;
+        if (ReferenceEquals(null, other)) 
+            return false;
+        if (ReferenceEquals(this, other)) 
+            return true;
+        
+        return Id.Equals(other.Id);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object other)
     {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
-        return Equals((Entity)obj);
+        if (ReferenceEquals(null, other)) 
+            return false;
+        if (ReferenceEquals(this, other)) 
+            return true;
+        if (other.GetType() != GetType()) 
+            return false;
+        
+        return Equals((Entity<TId>) other);
     }
 
     public override int GetHashCode()
