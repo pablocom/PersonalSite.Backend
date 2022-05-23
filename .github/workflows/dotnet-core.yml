@@ -38,7 +38,7 @@ jobs:
         dotnet tool install --global dotnet-ef
         dotnet tool restore
         cd /home/runner/work/PersonalSite.Backend/PersonalSite.Backend/src/
-        dotnet ef database update --project PersonalSite.Domain.Persistence --startup-project PersonalSite.Domain.API 
+        dotnet ef database update --project PersonalSite.Persistence --startup-project PersonalSite.WebApi 
     - name: Build
       run: dotnet build src --configuration Release --no-restore
     - name: Test
