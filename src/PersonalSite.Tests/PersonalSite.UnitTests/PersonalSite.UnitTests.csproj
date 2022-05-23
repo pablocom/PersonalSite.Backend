@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PersonalSite.Domain.Persistence\PersonalSite.Persistence.csproj" />
+    <ProjectReference Include="..\..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

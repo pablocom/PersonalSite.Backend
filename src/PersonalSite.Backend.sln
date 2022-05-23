@@ -5,21 +5,21 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain", "PersonalSite.Domain\PersonalSite.Domain.csproj", "{13178447-06FA-4652-8735-CD79E255C6F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Persistence", "PersonalSite.Domain.Persistence\PersonalSite.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Persistence", "PersonalSite.Persistence\PersonalSite.Persistence.csproj", "{F46F8149-C045-4880-B207-2C7D4A71132E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi", "PersonalSite.Domain.API\PersonalSite.WebApi.csproj", "{D852893F-25B6-467E-B3B6-BC4E997A2AF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi", "PersonalSite.WebApi\PersonalSite.WebApi.csproj", "{D852893F-25B6-467E-B3B6-BC4E997A2AF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalSite.Tests", "PersonalSite.Tests", "{5F9EA4EB-E65A-4C58-979A-3A38FE6778CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Domain.UnitTests", "PersonalSite.Tests\PersonalSite.Domain.UnitTests\PersonalSite.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.UnitTests", "PersonalSite.Tests\PersonalSite.UnitTests\PersonalSite.UnitTests.csproj", "{AFEDB244-A56C-4815-9388-837B972DDDC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi.UnitTests", "PersonalSite.Tests\PersonalSite.Domain.API.UnitTests\PersonalSite.WebApi.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi.UnitTests", "PersonalSite.Tests\PersonalSite.WebApi.UnitTests\PersonalSite.WebApi.UnitTests.csproj", "{D29517F6-FB8D-42CC-9520-0ADD528CA662}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationTests", "PersonalSite.Tests\PersonalSite.Domain.IntegrationTests\PersonalSite.IntegrationTests.csproj", "{09BB995A-9C5F-4FA9-893B-C91B567E0BE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationTests", "PersonalSite.Tests\PersonalSite.IntegrationTests\PersonalSite.IntegrationTests.csproj", "{09BB995A-9C5F-4FA9-893B-C91B567E0BE6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Application", "PersonalSite.Domain.Application\PersonalSite.Application.csproj", "{B87A9835-AC50-4CD2-A8B9-D2DC0B3AD2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Application", "PersonalSite.Application\PersonalSite.Application.csproj", "{B87A9835-AC50-4CD2-A8B9-D2DC0B3AD2A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.FunctionalTests", "PersonalSite.Tests\PersonalSite.Domain.API.IntegrationTests\PersonalSite.FunctionalTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.FunctionalTests", "PersonalSite.Tests\PersonalSite.FunctionalTests\PersonalSite.FunctionalTests.csproj", "{7AE3C3CA-28B6-4C74-9C66-D1703F0C3BE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IoC", "PersonalSite.IoC\PersonalSite.IoC.csproj", "{91496E08-9375-433E-B72D-867ADDD82BBB}"
 EndProject
