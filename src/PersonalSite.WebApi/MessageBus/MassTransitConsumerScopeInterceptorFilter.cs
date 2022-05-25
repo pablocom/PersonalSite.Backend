@@ -9,16 +9,16 @@ namespace PersonalSite.WebApi.MessageBus;
 public class MassTransitConsumerScopeInterceptorFilter<TMessage> 
     : IFilter<ConsumeContext<TMessage>> where TMessage : class
 {
-    private readonly IBusEventHandlerScopeAccessor consumerScopeAccessor;
+    private readonly IBusEventHandlerScopeAccessor _consumerScopeAccessor;
 
     public MassTransitConsumerScopeInterceptorFilter(IBusEventHandlerScopeAccessor consumerScopeAccessor)
     {
-        this.consumerScopeAccessor = consumerScopeAccessor;
+        _consumerScopeAccessor = consumerScopeAccessor;
     }
     
     public async Task Send(ConsumeContext<TMessage> context, IPipe<ConsumeContext<TMessage>> next)
     {
-        consumerScopeAccessor.CurrentScope = context.GetPayload<IServiceScope>();
+        _consumerScopeAccessor.CurrentScope = context.GetPayload<IServiceScope>();
         await next.Send(context);
     }
 

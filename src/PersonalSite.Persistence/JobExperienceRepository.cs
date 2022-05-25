@@ -8,20 +8,20 @@ namespace PersonalSite.Persistence;
 
 public class JobExperienceRepository : IJobExperienceRepository
 {
-    private readonly PersonalSiteDbContext context;
+    private readonly PersonalSiteDbContext _context;
 
     public JobExperienceRepository(PersonalSiteDbContext context)
     {
-        this.context = context ?? throw new ArgumentNullException(nameof(context));
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
     public void Add(JobExperience jobExperience)
     {
-        context.JobExperiences.Add(jobExperience);
+        _context.JobExperiences.Add(jobExperience);
     }
 
     public IEnumerable<JobExperience> GetAllJobExperiences()
     {
-        return context.JobExperiences.ToArray();
+        return _context.JobExperiences.ToArray();
     }
 }

@@ -4,30 +4,30 @@ namespace PersonalSite.Persistence;
 
 public sealed class UnitOfWork : IUnitOfWork
 {
-    private readonly PersonalSiteDbContext context;
-    private readonly IDbContextTransaction dbTransaction;
+    private readonly PersonalSiteDbContext _context;
+    private readonly IDbContextTransaction _dbTransaction;
 
     public UnitOfWork(PersonalSiteDbContext context)
     {
-        this.context = context;
+        _context = context;
 
-        dbTransaction = context.Database.BeginTransaction();
+        _dbTransaction = context.Database.BeginTransaction();
     }
 
     public void Commit()
     {
-        context.SaveChanges();
-        dbTransaction.Commit();
+        _context.SaveChanges();
+        _dbTransaction.Commit();
     }
 
     public void Rollback()
     {
-        dbTransaction.Rollback();
+        _dbTransaction.Rollback();
     }
 
     public void Dispose()
     {
-        dbTransaction.Dispose();
-        context.Dispose();
+        _dbTransaction.Dispose();
+        _context.Dispose();
     }
 }

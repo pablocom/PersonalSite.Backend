@@ -12,13 +12,13 @@ namespace PersonalSite.API.UnitTests.Handlers;
 public class WhenHandlingGetAllJobExperiencesQuery : RequestQueryHandlerTestBase<GetJobExperiencesQueryHandler,
     GetJobExperiencesQuery, IEnumerable<JobExperienceDto>>
 {
-    private IJobExperienceService service;
+    private IJobExperienceService _service;
 
-    protected override GetJobExperiencesQueryHandler GetRequestHandler() => new(service);
+    protected override GetJobExperiencesQueryHandler GetRequestHandler() => new(_service);
 
     protected override void AdditionalSetup()
     {
-        service = Substitute.For<IJobExperienceService>();
+        _service = Substitute.For<IJobExperienceService>();
         base.AdditionalSetup();
     }
 
@@ -27,6 +27,6 @@ public class WhenHandlingGetAllJobExperiencesQuery : RequestQueryHandlerTestBase
     {
         Handler.Handle(new GetJobExperiencesQuery(), new CancellationToken());
 
-        service.Received(1).GetJobExperiences();
+        _service.Received(1).GetJobExperiences();
     }
 }

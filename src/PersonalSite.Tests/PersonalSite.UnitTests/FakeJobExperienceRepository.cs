@@ -7,20 +7,20 @@ namespace PersonalSite.UnitTests;
 
 public class FakeJobExperienceRepository : IJobExperienceRepository
 {
-    private readonly FakeInMemoryPersonalSiteDbContext dbContext;
+    private readonly FakeInMemoryPersonalSiteDbContext _dbContext;
 
     public FakeJobExperienceRepository(FakeInMemoryPersonalSiteDbContext dbContext)
     {
-        this.dbContext = dbContext;
+        _dbContext = dbContext;
     }
 
     public void Add(JobExperience jobExperience)
     {
-        dbContext.Add(jobExperience);
+        _dbContext.Add(jobExperience);
     }
 
     public IEnumerable<JobExperience> GetAllJobExperiences()
     {
-        return dbContext.JobExperiences.ToArray();
+        return _dbContext.JobExperiences.ToArray();
     }
 }

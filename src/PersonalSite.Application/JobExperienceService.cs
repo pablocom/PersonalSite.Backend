@@ -20,22 +20,22 @@ public interface IJobExperienceService
 
 public class JobExperienceService : IJobExperienceService
 {
-    private readonly IJobExperienceRepository repository;
+    private readonly IJobExperienceRepository _repository;
 
     public JobExperienceService(IJobExperienceRepository repository)
     {
-        this.repository = repository;
+        _repository = repository;
     }
 
     public async Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
         var jobExperience = await JobExperience.Create(company, description, jobPeriodStart, jobPeriodEnd, techStack);
-        repository.Add(jobExperience);
+        _repository.Add(jobExperience);
     }
 
     public IEnumerable<JobExperienceDto> GetJobExperiences()
     {
-        var jobExperiences = repository.GetAllJobExperiences().ToArray();
+        var jobExperiences = _repository.GetAllJobExperiences().ToArray();
         return jobExperiences.Select(JobExperienceDto.From).ToArray();
     }
 }

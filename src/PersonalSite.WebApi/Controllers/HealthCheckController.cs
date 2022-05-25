@@ -7,17 +7,17 @@ namespace PersonalSite.WebApi.Controllers;
 [Route("[controller]")]
 public class HealthCheckController : ControllerBase
 {
-    private readonly ILogger<HealthCheckController> logger;
+    private readonly ILogger<HealthCheckController> _logger;
 
     public HealthCheckController(ILogger<HealthCheckController> logger)
     {
-        this.logger = logger;
+        _logger = logger;
     }
 
     [HttpGet]
     public IActionResult GetHealthStatus()
     {
-        logger.LogInformation("Status OK...");
+        _logger.LogInformation("Status OK...");
         return Ok("Pablo Company PersonalSite's API Rest");
     }
 }

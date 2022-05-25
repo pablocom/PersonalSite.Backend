@@ -8,17 +8,17 @@ namespace PersonalSite.WebApi.CommandHandlers;
 
 public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperienceCommand>
 {
-    private readonly IJobExperienceService service;
+    private readonly IJobExperienceService _service;
 
     public CreateJobExperienceCommandHandler(IJobExperienceService service, IUnitOfWork unitOfWork, IDomainEventDispatcherStore dispatcherStore) 
         : base(unitOfWork, dispatcherStore)
     {
-        this.service = service;
+        _service = service;
     }
 
     public override Task Process(CreateJobExperienceCommand command)
     {
-        service.CreateJobExperience(
+        _service.CreateJobExperience(
             command.Company,
             command.Description,
             command.JobPeriodStart,

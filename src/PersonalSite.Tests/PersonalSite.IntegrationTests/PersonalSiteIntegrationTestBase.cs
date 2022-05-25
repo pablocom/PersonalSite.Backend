@@ -11,9 +11,9 @@ namespace PersonalSite.IntegrationTests;
 
 public class PersonalSiteIntegrationTestBase
 {
-    private IDbContextTransaction transaction;
+    private IDbContextTransaction _transaction;
     protected IJobExperienceRepository Repository;
-    private PersonalSiteDbContext dbContext;
+    private PersonalSiteDbContext _dbContext;
 
     [SetUp]
     protected void Setup()
@@ -26,20 +26,20 @@ public class PersonalSiteIntegrationTestBase
             .EnableSensitiveDataLogging()
             .Options;
 
-        dbContext = new PersonalSiteDbContext(options);
-        Repository = new JobExperienceRepository(dbContext);
-        transaction = dbContext.Database.BeginTransaction();
+        _dbContext = new PersonalSiteDbContext(options);
+        Repository = new JobExperienceRepository(_dbContext);
+        _transaction = _dbContext.Database.BeginTransaction();
 
         AdditionalSetup();
     }
 
-    protected void CloseContext() => dbContext.SaveChanges();
+    protected void CloseContext() => _dbContext.SaveChanges();
 
     protected virtual void AdditionalSetup() { }
 
     [TearDown]
     protected void Teardown()
     {
-        transaction.Rollback();
+        _transaction.Rollback();
     }
 }

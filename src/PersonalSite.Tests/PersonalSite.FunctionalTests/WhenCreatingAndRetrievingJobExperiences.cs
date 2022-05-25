@@ -24,19 +24,19 @@ public class WhenCreatingAndRetrievingJobExperiences
         PropertyNameCaseInsensitive = true
     };
 
-    private HttpClient client = default!;
-    private readonly WebApplicationFactory<Startup> applicationFactory = new();
+    private HttpClient _client = default!;
+    private readonly WebApplicationFactory<Startup> _applicationFactory = new();
 
     [SetUp]
     public void Setup()
     {
-        client = applicationFactory.CreateClient();
+        _client = _applicationFactory.CreateClient();
     }
 
     [Test]
     public async Task SingleJobExperienceIsCreatedAndRetrieved()
     {
-        var response = await client.GetAsync("JobExperience");
+        var response = await _client.GetAsync("JobExperience");
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         var jobExperiences = await response.Content.ReadFromJsonAsync<JobExperienceDto[]>(JsonSerializerOptions);
@@ -49,10 +49,10 @@ public class WhenCreatingAndRetrievingJobExperiences
             new DateOnly(2020, 1, 1),
             new DateOnly(2020, 5, 1),
             new[] { ".Net Core", "NSubstitute" });
-        var createResponse = await client.PostAsJsonAsync("JobExperience", createJobExperienceDto, JsonSerializerOptions);
+        var createResponse = await _client.PostAsJsonAsync("JobExperience", createJobExperienceDto, JsonSerializerOptions);
         Assert.That(createResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
-        var secondResponse = await client.GetAsync("JobExperience");
+        var secondResponse = await _client.GetAsync("JobExperience");
         Assert.That(secondResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         var json = await secondResponse.Content.ReadAsStringAsync();
         var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, JsonSerializerOptions);
@@ -69,11 +69,11 @@ public class WhenCreatingAndRetrievingJobExperiences
     {
         if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed)
         {
-            await using var scope = applicationFactory.Services.CreateAsyncScope();
+            await using var scope = _applicationFactory.Services.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<PersonalSiteDbContext>();
             dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
             dbContext.SaveChanges();
         }
-        applicationFactory.Dispose();
+        _applicationFactory.Dispose();
     }
 }

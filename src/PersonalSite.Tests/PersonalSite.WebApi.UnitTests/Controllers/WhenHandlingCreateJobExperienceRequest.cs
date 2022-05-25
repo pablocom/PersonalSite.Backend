@@ -12,14 +12,14 @@ namespace PersonalSite.API.UnitTests.Controllers;
 [TestFixture]
 public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExperienceController>
 {
-    private IMediator mediator;
+    private IMediator _mediator;
 
     protected override void AdditionalSetup()
     {
-        mediator = Substitute.For<IMediator>();
+        _mediator = Substitute.For<IMediator>();
     }
 
-    protected override JobExperienceController GetController() => new(mediator);
+    protected override JobExperienceController GetController() => new(_mediator);
 
     [Test]
     public async Task CreateJobExperienceCommandIsSent()
@@ -40,7 +40,7 @@ public class WhenHandlingCreateJobExperienceRequest : ControllerTestBase<JobExpe
 
         await Controller.Create(createJobExperienceDto);
 
-        await mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
+        await _mediator.Received(1).Send(Arg.Is<CreateJobExperienceCommand>(x =>
                 AssertCommand(x, company, description, jobPeriodStart, jobPeriodEnd, techStack)));
     }
 

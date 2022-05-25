@@ -10,12 +10,12 @@ namespace PersonalSite.WebApi.MessageBus
     public class MessageConsumer : IConsumer<Message>
     {
         private readonly ILogger<MessageConsumer> _logger;
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public MessageConsumer(ILogger<MessageConsumer> logger, IMediator mediator)
         {
             _logger = logger;
-            this.mediator = mediator;
+            _mediator = mediator;
         }
 
         public Task Consume(ConsumeContext<Message> context)
@@ -30,7 +30,7 @@ namespace PersonalSite.WebApi.MessageBus
             var createJobExperienceCommand =
                 new CreateJobExperienceCommand(company, description, jobPeriodStart, jobPeriodEnd, techStack);
 
-            mediator.Send(createJobExperienceCommand);
+            _mediator.Send(createJobExperienceCommand);
 
             return Task.CompletedTask;
         }

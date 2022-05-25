@@ -10,16 +10,16 @@ namespace PersonalSite.WebApi.QueryHandlers;
 
 public class GetJobExperiencesQueryHandler : IRequestHandler<GetJobExperiencesQuery, IEnumerable<JobExperienceDto>>
 {
-    private readonly IJobExperienceService jobExperienceService;
+    private readonly IJobExperienceService _jobExperienceService;
 
     public GetJobExperiencesQueryHandler(IJobExperienceService jobExperienceService)
     {
-        this.jobExperienceService = jobExperienceService;
+        _jobExperienceService = jobExperienceService;
     }
 
     public Task<IEnumerable<JobExperienceDto>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
     {
-        var jobExperiences = jobExperienceService.GetJobExperiences();
+        var jobExperiences = _jobExperienceService.GetJobExperiences();
         return Task.FromResult(jobExperiences);
     }
 }

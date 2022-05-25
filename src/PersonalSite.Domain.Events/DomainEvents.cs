@@ -5,15 +5,15 @@ namespace PersonalSite.Domain.Events;
 public static class DomainEvents
 {
     private static readonly object HandlerActionLock = new();
-    private static readonly AsyncLocal<IList<Delegate>?> t_currentHandlerActions = new();
+    private static readonly AsyncLocal<IList<Delegate>?> TCurrentHandlerActions = new();
     private static IList<Delegate> HandlerActions
     {
         get
         {
-            if (t_currentHandlerActions.Value is null)
-                t_currentHandlerActions.Value = new List<Delegate>();
+            if (TCurrentHandlerActions.Value is null)
+                TCurrentHandlerActions.Value = new List<Delegate>();
 
-            return t_currentHandlerActions.Value;
+            return TCurrentHandlerActions.Value;
         }
     }
     private static readonly IList<Type> SyncDomainEventHandlerTypes = new List<Type>();
@@ -66,7 +66,7 @@ public static class DomainEvents
     private static void InvokeRegisteredEventHandlerActions<TDomainEvent>(TDomainEvent domainEvent)
         where TDomainEvent : IDomainEvent
     {
-        if (t_currentHandlerActions.Value is null)
+        if (TCurrentHandlerActions.Value is null)
             return;
 
         foreach (var action in HandlerActions)
@@ -125,13 +125,13 @@ public static class DomainEvents
 
     private sealed class DomainEventRegistrationRemover : IDisposable
     {
-        private readonly Action removalAction;
+        private readonly Action _removalAction;
 
         public DomainEventRegistrationRemover(Action removalAction)
         {
-            this.removalAction = removalAction;
+            _removalAction = removalAction;
         }
 
-        public void Dispose() => this.removalAction();
+        public void Dispose() => _removalAction();
     }
 }

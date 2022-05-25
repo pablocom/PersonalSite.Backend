@@ -6,18 +6,18 @@ namespace PersonalSite.Application.DomainEventHandlers;
 
 public class JobExperienceAddedHandler : IHandleDomainEventsSynchronouslyInCurrentScope<JobExperienceAdded>
 {
-    private readonly IJobExperienceRepository jobExperienceRepository;
+    private readonly IJobExperienceRepository _jobExperienceRepository;
 
     public JobExperienceAddedHandler(IJobExperienceRepository jobExperienceRepository)
     {
-        this.jobExperienceRepository = jobExperienceRepository;
+        _jobExperienceRepository = jobExperienceRepository;
     }
 
     public Task Handle(JobExperienceAdded domainEvent)
     {
         Console.WriteLine($"{DateTime.UtcNow:s} - Handling synchronously {nameof(JobExperienceAdded)}...");
 
-        var jobExperiences = jobExperienceRepository.GetAllJobExperiences();
+        var jobExperiences = _jobExperienceRepository.GetAllJobExperiences();
         return Task.CompletedTask;
     }
 }

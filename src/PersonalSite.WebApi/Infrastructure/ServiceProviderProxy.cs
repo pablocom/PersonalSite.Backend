@@ -7,30 +7,30 @@ namespace PersonalSite.WebApi.Infrastructure;
 
 public class ServiceProviderProxy : IServiceProviderProxy
 {
-    private readonly IHttpContextAccessor contextAccessor;
-    private readonly IBusEventHandlerScopeAccessor messageBusConsumerScopeAccessor;
+    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly IBusEventHandlerScopeAccessor _messageBusConsumerScopeAccessor;
 
     public ServiceProviderProxy(
         IHttpContextAccessor contextAccessor,
         IBusEventHandlerScopeAccessor messageBusConsumerScopeAccessor)
     {
-        this.contextAccessor = contextAccessor;
-        this.messageBusConsumerScopeAccessor = messageBusConsumerScopeAccessor;
+        _contextAccessor = contextAccessor;
+        _messageBusConsumerScopeAccessor = messageBusConsumerScopeAccessor;
     }
 
     public object GetService(Type type)
     {
-        if (contextAccessor.HttpContext is not null)
-            return contextAccessor.HttpContext.RequestServices.GetService(type);
+        if (_contextAccessor.HttpContext is not null)
+            return _contextAccessor.HttpContext.RequestServices.GetService(type);
 
-        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetService(type);
+        return _messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetService(type);
     }
 
     public TService GetRequiredService<TService>()
     {
-        if (contextAccessor.HttpContext is not null)
-            return contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
+        if (_contextAccessor.HttpContext is not null)
+            return _contextAccessor.HttpContext.RequestServices.GetRequiredService<TService>();
 
-        return messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
+        return _messageBusConsumerScopeAccessor.CurrentScope.ServiceProvider.GetRequiredService<TService>();
     }
 }

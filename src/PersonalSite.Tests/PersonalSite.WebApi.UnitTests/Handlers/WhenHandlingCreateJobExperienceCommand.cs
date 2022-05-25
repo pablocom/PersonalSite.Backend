@@ -12,11 +12,11 @@ namespace PersonalSite.API.UnitTests.Handlers;
 [TestFixture]
 public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBase<CreateJobExperienceCommandHandler, CreateJobExperienceCommand, Unit>
 {
-    private IJobExperienceService service;
+    private IJobExperienceService _service;
 
     protected override void AdditionalSetup()
     {
-        service = Substitute.For<IJobExperienceService>();
+        _service = Substitute.For<IJobExperienceService>();
         base.AdditionalSetup();
     }
 
@@ -32,11 +32,11 @@ public class WhenHandlingCreateJobExperienceCommand : RequestQueryHandlerTestBas
         var createJobExperienceCommand = new CreateJobExperienceCommand(company, description, jobPeriodStart, jobPeriodEnd, techStack);
         WhenHandingRequest(createJobExperienceCommand);
 
-        service.Received(1).CreateJobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+        _service.Received(1).CreateJobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
     }
 
     protected override CreateJobExperienceCommandHandler GetRequestHandler()
     {
-        return new CreateJobExperienceCommandHandler(service, UnitOfWork, Substitute.For<IDomainEventDispatcherStore>());
+        return new CreateJobExperienceCommandHandler(_service, UnitOfWork, Substitute.For<IDomainEventDispatcherStore>());
     }
 }

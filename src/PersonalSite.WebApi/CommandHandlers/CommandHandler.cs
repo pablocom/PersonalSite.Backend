@@ -10,13 +10,13 @@ namespace PersonalSite.WebApi.CommandHandlers;
 public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
     where TCommand : IRequest<Unit>
 {
-    private readonly IUnitOfWork unitOfWork;
-    private readonly IDomainEventDispatcherStore domainEventDispatcherStore;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IDomainEventDispatcherStore _domainEventDispatcherStore;
 
     protected CommandHandler(IUnitOfWork unitOfWork, IDomainEventDispatcherStore domainEventDispatcherStore)
     {
-        this.unitOfWork = unitOfWork;
-        this.domainEventDispatcherStore = domainEventDispatcherStore;
+        _unitOfWork = unitOfWork;
+        _domainEventDispatcherStore = domainEventDispatcherStore;
     }
 
     public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken = default)
@@ -24,12 +24,12 @@ public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
         try
         {
             await Process(command);
-            unitOfWork.Commit();
-            domainEventDispatcherStore.RunDomainEventHandlerDispatchers();
+            _unitOfWork.Commit();
+            _domainEventDispatcherStore.RunDomainEventHandlerDispatchers();
         }
         catch (Exception)
         {
-            unitOfWork.Rollback();
+            _unitOfWork.Rollback();
             throw;
         }
 

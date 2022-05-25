@@ -10,13 +10,13 @@ namespace PersonalSite.API.UnitTests.Controllers;
 [TestFixture]
 public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExperienceController>
 {
-    private IMediator mediator;
+    private IMediator _mediator;
 
-    protected override JobExperienceController GetController() => new(mediator);
+    protected override JobExperienceController GetController() => new(_mediator);
 
     protected override void AdditionalSetup()
     {
-        mediator = Substitute.For<IMediator>();
+        _mediator = Substitute.For<IMediator>();
     }
 
     [Test]
@@ -24,6 +24,6 @@ public class WhenHandlingGetAllJobExperiencesRequest : ControllerTestBase<JobExp
     {
         await Controller.GetAll();
 
-        await mediator.Received(1).Send(Arg.Is<GetJobExperiencesQuery>(x => true));
+        await _mediator.Received(1).Send(Arg.Is<GetJobExperiencesQuery>(x => true));
     }
 }

@@ -9,11 +9,11 @@ namespace PersonalSite.UnitTests.Services;
 
 public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 {
-    private IJobExperienceService service;
+    private IJobExperienceService _service;
 
     protected override void AdditionalSetup()
     {
-        service = new JobExperienceService(Repository);
+        _service = new JobExperienceService(Repository);
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
                     .Build()
             });
 
-        var jobExperiences = service.GetJobExperiences().ToArray();
+        var jobExperiences = _service.GetJobExperiences().ToArray();
 
         Assert.That(jobExperiences.Length, Is.EqualTo(2));
         AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);

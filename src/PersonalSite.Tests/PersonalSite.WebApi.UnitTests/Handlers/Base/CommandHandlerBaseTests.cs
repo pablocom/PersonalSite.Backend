@@ -12,10 +12,10 @@ namespace PersonalSite.API.UnitTests.Handlers.Base;
 [TestFixture]
 public class CommandHandlerBaseTests
 {
-    private IUnitOfWork unitOfWork;
-    private IDomainEventDispatcherStore domainEventDispatcherStore;
-    private CommandHandler<FakeCommand> commandHandler;
-    private FakeCommand command = new();
+    private IUnitOfWork _unitOfWork;
+    private IDomainEventDispatcherStore _domainEventDispatcherStore;
+    private CommandHandler<FakeCommand> _commandHandler;
+    private FakeCommand _command = new();
 
     // class intentionally public for mocking concerns
     public class FakeCommand : IRequest<Unit> { }
@@ -23,9 +23,9 @@ public class CommandHandlerBaseTests
     [SetUp]
     public void SetUp()
     {
-        unitOfWork = Substitute.For<IUnitOfWork>();
-        domainEventDispatcherStore = Substitute.For<IDomainEventDispatcherStore>();
-        commandHandler = Substitute.For<CommandHandler<FakeCommand>>(unitOfWork, domainEventDispatcherStore);
+        _unitOfWork = Substitute.For<IUnitOfWork>();
+        _domainEventDispatcherStore = Substitute.For<IDomainEventDispatcherStore>();
+        _commandHandler = Substitute.For<CommandHandler<FakeCommand>>(_unitOfWork, _domainEventDispatcherStore);
     }
 
     [Test]
@@ -33,19 +33,19 @@ public class CommandHandlerBaseTests
     {
         WhenRequestIsHandled();
 
-        await commandHandler.Received(1).Process(command);
+        await _commandHandler.Received(1).Process(_command);
     }
 
     [Test]
     public void RollbackUnitOfWorkOnError()
     {
-        commandHandler
-            .When(x => x.Process(command))
+        _commandHandler
+            .When(x => x.Process(_command))
             .Throw<InvalidOperationException>();
 
         WhenRequestIsHandled();
 
-        unitOfWork.Received(1).Rollback();
+        _unitOfWork.Received(1).Rollback();
     }
 
     [Test]
@@ -53,7 +53,7 @@ public class CommandHandlerBaseTests
     {
         WhenRequestIsHandled();
 
-        unitOfWork.Received(1).Commit();
+        _unitOfWork.Received(1).Commit();
     }
 
     [Test]
@@ -61,21 +61,21 @@ public class CommandHandlerBaseTests
     {
         WhenRequestIsHandled();
 
-        domainEventDispatcherStore.Received(1).RunDomainEventHandlerDispatchers();
+        _domainEventDispatcherStore.Received(1).RunDomainEventHandlerDispatchers();
     }
 
     [Test]
     public void DoesNotRunAggregateDispatchersIfUnitOfWorkFailsToCommit()
     {
-        unitOfWork.When(x => x.Commit()).Throw<Exception>();
+        _unitOfWork.When(x => x.Commit()).Throw<Exception>();
 
         WhenRequestIsHandled();
 
-        domainEventDispatcherStore.DidNotReceive().RunDomainEventHandlerDispatchers();
+        _domainEventDispatcherStore.DidNotReceive().RunDomainEventHandlerDispatchers();
     }
 
     private void WhenRequestIsHandled()
     {
-        commandHandler.Handle(command);
+        _commandHandler.Handle(_command);
     }
 }

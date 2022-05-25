@@ -14,11 +14,11 @@ namespace PersonalSite.UnitTests.Services;
 [TestFixture]
 public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 {
-    private IJobExperienceService service;
+    private IJobExperienceService _service;
 
     protected override void AdditionalSetup()
     {
-        service = new JobExperienceService(Repository);
+        _service = new JobExperienceService(Repository);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
-        service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        _service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
         var jobExperience = Repository.GetAllJobExperiences().Single();
@@ -48,7 +48,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         JobExperienceAdded @event = null;
         using var disposable = DomainEvents.Register<JobExperienceAdded>(ev => @event = ev);
         
-        await service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
         Assert.That(@event, Is.Not.Null);
@@ -67,7 +67,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     {
         AsyncTestDelegate action = async () =>
         {
-            await service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
+            await _service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
         };
         
         var exception = Assert.ThrowsAsync<DomainException>(action);

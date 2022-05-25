@@ -12,24 +12,24 @@ namespace PersonalSite.WebApi.Controllers;
 [Route("[controller]")]
 public class JobExperienceController : ControllerBase
 {
-    private readonly IMediator mediator;
+    private readonly IMediator _mediator;
 
     public JobExperienceController(IMediator mediator)
     {
-        this.mediator = mediator;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var jobExperiences = await mediator.Send(new GetJobExperiencesQuery());
+        var jobExperiences = await _mediator.Send(new GetJobExperiencesQuery());
         return Ok(jobExperiences);
     }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateJobExperienceDto dto)
     {
-        await mediator.Send(
+        await _mediator.Send(
             new CreateJobExperienceCommand(
                 dto.Company,
                 dto.Description,
