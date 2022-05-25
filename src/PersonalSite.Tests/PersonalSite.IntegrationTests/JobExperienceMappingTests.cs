@@ -3,6 +3,7 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalSite.IntegrationTests;
 
@@ -10,7 +11,7 @@ namespace PersonalSite.IntegrationTests;
 public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
 {
     [Test]
-    public void IsPersisted()
+    public async Task IsPersisted()
     {
         var company = "Ryanair";
         var description = "Software Engineer";
@@ -18,12 +19,12 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
-        Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
+        await Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
         CloseContext();
 
-        var jobExperiences = Repository.GetAllJobExperiences().ToArray();
+        var jobExperiences = await Repository.GetAllJobExperiences();
         Assert.That(jobExperiences, Has.Length.EqualTo(1));
-        AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
+        AssertJobExperience(jobExperiences.First(), company, description, startDate, endDate, techStack);
     }
 
     private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateOnly startDate, DateOnly endDate, IEnumerable<string> techStack)

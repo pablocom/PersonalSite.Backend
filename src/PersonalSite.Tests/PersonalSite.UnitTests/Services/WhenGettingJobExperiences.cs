@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Application.Dtos;
@@ -17,7 +18,7 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
     }
 
     [Test]
-    public void MultipleJobExperiencesAreReturned()
+    public async Task MultipleJobExperiencesAreReturned()
     {
         var company = "Ryanair";
         var description = "Software Engineer";
@@ -33,23 +34,23 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 
         AssumeDataInRepository(new[]
         {
-                new JobExperienceBuilder()
-                    .WithCompany(company)
-                    .WithDescription(description)
-                    .WithStartDate(startDate)
-                    .WithEndDate(endDate)
-                    .WithTechStack(techStack)
-                    .Build(),
-                new JobExperienceBuilder()
-                    .WithCompany(otherCompany)
-                    .WithDescription(otherDescription)
-                    .WithStartDate(otherStartDate)
-                    .WithEndDate(otherEndDate)
-                    .WithTechStack(otherTechStack)
-                    .Build()
-            });
+            new JobExperienceBuilder()
+                .WithCompany(company)
+                .WithDescription(description)
+                .WithStartDate(startDate)
+                .WithEndDate(endDate)
+                .WithTechStack(techStack)
+                .Build(),
+            new JobExperienceBuilder()
+                .WithCompany(otherCompany)
+                .WithDescription(otherDescription)
+                .WithStartDate(otherStartDate)
+                .WithEndDate(otherEndDate)
+                .WithTechStack(otherTechStack)
+                .Build()
+        });
 
-        var jobExperiences = _service.GetJobExperiences().ToArray();
+        var jobExperiences = (await _service.GetJobExperiences()).ToArray();
 
         Assert.That(jobExperiences.Length, Is.EqualTo(2));
         AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);

@@ -15,7 +15,7 @@ namespace PersonalSite.Application;
 public interface IJobExperienceService
 {
     Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack);
-    IEnumerable<JobExperienceDto> GetJobExperiences();
+    Task<IEnumerable<JobExperienceDto>> GetJobExperiences();
 }
 
 public class JobExperienceService : IJobExperienceService
@@ -30,12 +30,12 @@ public class JobExperienceService : IJobExperienceService
     public async Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
         var jobExperience = await JobExperience.Create(company, description, jobPeriodStart, jobPeriodEnd, techStack);
-        _repository.Add(jobExperience);
+        await _repository.Add(jobExperience);
     }
 
-    public IEnumerable<JobExperienceDto> GetJobExperiences()
+    public async Task<IEnumerable<JobExperienceDto>> GetJobExperiences()
     {
-        var jobExperiences = _repository.GetAllJobExperiences().ToArray();
+        var jobExperiences = await _repository.GetAllJobExperiences();
         return jobExperiences.Select(JobExperienceDto.From).ToArray();
     }
 }

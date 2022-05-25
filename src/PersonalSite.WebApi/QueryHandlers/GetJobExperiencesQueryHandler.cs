@@ -17,9 +17,9 @@ public class GetJobExperiencesQueryHandler : IRequestHandler<GetJobExperiencesQu
         _jobExperienceService = jobExperienceService;
     }
 
-    public Task<IEnumerable<JobExperienceDto>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<JobExperienceDto>> Handle(GetJobExperiencesQuery request, CancellationToken cancellationToken)
     {
-        var jobExperiences = _jobExperienceService.GetJobExperiences();
-        return Task.FromResult(jobExperiences);
+        var jobExperiences = await _jobExperienceService.GetJobExperiences();
+        return jobExperiences;
     }
 }

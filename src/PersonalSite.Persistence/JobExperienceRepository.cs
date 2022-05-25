@@ -3,6 +3,8 @@ using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PersonalSite.Persistence;
 
@@ -15,13 +17,13 @@ public class JobExperienceRepository : IJobExperienceRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public void Add(JobExperience jobExperience)
+    public async Task Add(JobExperience jobExperience)
     {
-        _context.JobExperiences.Add(jobExperience);
+        await _context.JobExperiences.AddAsync(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAllJobExperiences()
+    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences()
     {
-        return _context.JobExperiences.ToArray();
+        return await _context.JobExperiences.ToArrayAsync();
     }
 }

@@ -22,7 +22,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
     }
 
     [Test]
-    public void CreatesJobExperience()
+    public async Task CreatesJobExperience()
     {
         var company = "Ryanair";
         var description = "Software Engineer";
@@ -30,10 +30,10 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
 
-        _service.CreateJobExperience(company, description, startDate, endDate, techStack);
+        await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
         CloseContext();
 
-        var jobExperience = Repository.GetAllJobExperiences().Single();
+        var jobExperience = (await Repository.GetAllJobExperiences()).Single();
         AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
     }
 

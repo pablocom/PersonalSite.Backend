@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Application;
@@ -23,10 +24,9 @@ public class WhenHandlingGetAllJobExperiencesQuery : RequestQueryHandlerTestBase
     }
 
     [Test]
-    public void ServiceIsCalled()
+    public async Task ServiceIsCalled()
     {
-        Handler.Handle(new GetJobExperiencesQuery(), new CancellationToken());
-
-        _service.Received(1).GetJobExperiences();
+        await Handler.Handle(new GetJobExperiencesQuery(), new CancellationToken());
+        await _service.Received(1).GetJobExperiences();
     }
 }

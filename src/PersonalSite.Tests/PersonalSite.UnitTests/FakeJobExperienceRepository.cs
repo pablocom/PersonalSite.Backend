@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PersonalSite.Application;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
@@ -14,13 +16,13 @@ public class FakeJobExperienceRepository : IJobExperienceRepository
         _dbContext = dbContext;
     }
 
-    public void Add(JobExperience jobExperience)
+    public async Task Add(JobExperience jobExperience)
     {
-        _dbContext.Add(jobExperience);
+        await _dbContext.AddAsync(jobExperience);
     }
 
-    public IEnumerable<JobExperience> GetAllJobExperiences()
+    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences()
     {
-        return _dbContext.JobExperiences.ToArray();
+        return await _dbContext.JobExperiences.ToArrayAsync();
     }
 }

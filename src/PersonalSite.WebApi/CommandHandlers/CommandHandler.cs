@@ -25,7 +25,7 @@ public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
         {
             await Process(command);
             _unitOfWork.Commit();
-            _domainEventDispatcherStore.RunDomainEventHandlerDispatchers();
+            await _domainEventDispatcherStore.RunDomainEventHandlerDispatchers();
         }
         catch (Exception)
         {

@@ -15,7 +15,7 @@ public class CommandHandlerBaseTests
     private IUnitOfWork _unitOfWork;
     private IDomainEventDispatcherStore _domainEventDispatcherStore;
     private CommandHandler<FakeCommand> _commandHandler;
-    private FakeCommand _command = new();
+    private readonly FakeCommand _command = new();
 
     // class intentionally public for mocking concerns
     public class FakeCommand : IRequest<Unit> { }
@@ -43,7 +43,14 @@ public class CommandHandlerBaseTests
             .When(x => x.Process(_command))
             .Throw<InvalidOperationException>();
 
-        WhenRequestIsHandled();
+        try
+        {
+            WhenRequestIsHandled();
+        }
+        catch (Exception)
+        {
+            // intentionally ignored
+        }
 
         _unitOfWork.Received(1).Rollback();
     }
@@ -69,13 +76,20 @@ public class CommandHandlerBaseTests
     {
         _unitOfWork.When(x => x.Commit()).Throw<Exception>();
 
-        WhenRequestIsHandled();
+        try
+        {
+            WhenRequestIsHandled();
+        }
+        catch (Exception)
+        {
+            // intentionally ignored
+        }
 
         _domainEventDispatcherStore.DidNotReceive().RunDomainEventHandlerDispatchers();
     }
 
     private void WhenRequestIsHandled()
     {
-        _commandHandler.Handle(_command);
+        _commandHandler.Handle(_command).GetAwaiter().GetResult();
     }
 }
