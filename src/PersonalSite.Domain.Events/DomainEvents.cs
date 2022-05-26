@@ -4,16 +4,15 @@ namespace PersonalSite.Domain.Events;
 
 public static class DomainEvents
 {
-    private static readonly object HandlerActionLock = new();
-    private static readonly AsyncLocal<IList<Delegate>?> TCurrentHandlerActions = new();
+    private static readonly AsyncLocal<IList<Delegate>?> s_currentHandlerActions = new();
     private static IList<Delegate> HandlerActions
     {
         get
         {
-            if (TCurrentHandlerActions.Value is null)
-                TCurrentHandlerActions.Value = new List<Delegate>();
+            if (s_currentHandlerActions.Value is null)
+                s_currentHandlerActions.Value = new List<Delegate>();
 
-            return TCurrentHandlerActions.Value;
+            return s_currentHandlerActions.Value;
         }
     }
     private static readonly IList<Type> SyncDomainEventHandlerTypes = new List<Type>();
@@ -32,19 +31,9 @@ public static class DomainEvents
     {
         if (eventHandlerAction is null)
             throw new ArgumentNullException(nameof(eventHandlerAction));
-
-        lock (HandlerActionLock)
-        {
-            HandlerActions.Add(eventHandlerAction);
-        }
-
-        return new DomainEventRegistrationRemover(() =>
-        {
-            lock (HandlerActionLock)
-            {
-                HandlerActions.Remove(eventHandlerAction);
-            }
-        });
+        
+        HandlerActions.Add(eventHandlerAction);
+        return new DomainEventRegistrationRemover(() => HandlerActions.Remove(eventHandlerAction));
     }
 
     public static void RegisterSyncHandler(Type domainEventHandlerType)
@@ -66,7 +55,7 @@ public static class DomainEvents
     private static void InvokeRegisteredEventHandlerActions<TDomainEvent>(TDomainEvent domainEvent)
         where TDomainEvent : IDomainEvent
     {
-        if (TCurrentHandlerActions.Value is null)
+        if (s_currentHandlerActions.Value is null)
             return;
 
         foreach (var action in HandlerActions)
