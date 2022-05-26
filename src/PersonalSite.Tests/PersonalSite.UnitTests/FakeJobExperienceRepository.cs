@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PersonalSite.Application;
@@ -21,8 +22,8 @@ public class FakeJobExperienceRepository : IJobExperienceRepository
         await _dbContext.AddAsync(jobExperience);
     }
 
-    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences()
+    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences(CancellationToken cancellationToken)
     {
-        return await _dbContext.JobExperiences.ToArrayAsync();
+        return await _dbContext.JobExperiences.ToArrayAsync(cancellationToken);
     }
 }

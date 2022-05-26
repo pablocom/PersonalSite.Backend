@@ -7,7 +7,6 @@ using PersonalSite.Application;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.UnitTests.Extensions;
 
 namespace PersonalSite.UnitTests.Services;
 

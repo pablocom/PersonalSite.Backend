@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace PersonalSite.Persistence;
 
@@ -22,8 +23,8 @@ public class JobExperienceRepository : IJobExperienceRepository
         await _context.JobExperiences.AddAsync(jobExperience);
     }
 
-    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences()
+    public async Task<IEnumerable<JobExperience>> GetAllJobExperiences(CancellationToken cancellationToken)
     {
-        return await _context.JobExperiences.ToArrayAsync();
+        return await _context.JobExperiences.ToArrayAsync(cancellationToken);
     }
 }

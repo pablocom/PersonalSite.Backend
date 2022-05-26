@@ -40,16 +40,5 @@ public class PersonalSiteDomainTestBase
         CloseContext();
     }
 
-    protected IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent> AssumeDomainEventHandlerWasRegistered<TDomainEvent>() 
-        where TDomainEvent : IDomainEvent
-    {
-        var domainEventHandler = Substitute.For<IHandleDomainEventsSynchronouslyInCurrentScope<TDomainEvent>>();
-        
-        DomainEvents.RegisterSyncHandler(domainEventHandler.GetType());
-        DependencyInjectionContainer.Current.GetService(domainEventHandler.GetType()).Returns(domainEventHandler);
-
-        return domainEventHandler;
-    }
-
     protected virtual void AdditionalSetup() { }
 }

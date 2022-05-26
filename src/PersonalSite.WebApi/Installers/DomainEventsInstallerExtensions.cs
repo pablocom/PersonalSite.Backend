@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using PersonalSite.Application.DomainEventHandlers;
 using PersonalSite.Domain.Events;
 using System;
 using System.Linq;
@@ -9,24 +11,10 @@ public static class DomainEventsInstallerExtensions
 {
     public static IServiceCollection AddDomainEventHandlers(this IServiceCollection services)
     {
-        services.AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>();
-        RegisterSyncDomainEventHandlers(services);
+        services.AddScoped<IDomainEventDispatcherStore, DomainEventDispatcherStore>()
+            .AddMediatR(typeof(JobExperienceAddedHandler));
         RegisterAsyncDomainEventHandlers(services);
         return services;
-    }
-
-    private static void RegisterSyncDomainEventHandlers(IServiceCollection services)
-    {
-        var syncHandlerTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes())
-                    .Where(x => x.GetInterfaces().Any(y => y.IsGenericType &&
-                                y.GetGenericTypeDefinition() == typeof(IHandleDomainEventsSynchronouslyInCurrentScope<>)))
-                    .ToList();
-
-        foreach (var syncHandlerType in syncHandlerTypes)
-        {
-            DomainEvents.RegisterSyncHandler(syncHandlerType);
-            services.AddScoped(syncHandlerType);
-        }
     }
 
     private static void RegisterAsyncDomainEventHandlers(IServiceCollection services)
