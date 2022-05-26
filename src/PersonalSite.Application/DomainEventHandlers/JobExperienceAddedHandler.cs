@@ -13,11 +13,10 @@ public class JobExperienceAddedHandler : IHandleDomainEventsSynchronouslyInCurre
         _jobExperienceRepository = jobExperienceRepository;
     }
 
-    public Task Handle(JobExperienceAdded domainEvent)
+    public async Task Handle(JobExperienceAdded domainEvent)
     {
         Console.WriteLine($"{DateTime.UtcNow:s} - Handling synchronously {nameof(JobExperienceAdded)}...");
 
-        var jobExperiences = _jobExperienceRepository.GetAllJobExperiences();
-        return Task.CompletedTask;
+        var jobExperiences = await _jobExperienceRepository.GetAllJobExperiences();
     }
 }

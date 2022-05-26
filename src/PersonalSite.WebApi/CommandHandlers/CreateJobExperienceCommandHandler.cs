@@ -16,15 +16,13 @@ public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperie
         _service = service;
     }
 
-    public override Task Process(CreateJobExperienceCommand command)
+    public override async Task Process(CreateJobExperienceCommand command)
     {
-        _service.CreateJobExperience(
+        await _service.CreateJobExperience(
             command.Company,
             command.Description,
             command.JobPeriodStart,
             command.JobPeriodEnd,
             command.TechStack);
-
-        return Task.CompletedTask;
     }
 }

@@ -14,7 +14,7 @@ public class JobExperienceRepository : IJobExperienceRepository
 
     public JobExperienceRepository(PersonalSiteDbContext context)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
+        _context = context;
     }
 
     public async Task Add(JobExperience jobExperience)

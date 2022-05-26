@@ -5,6 +5,7 @@ using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.IoC;
 using System;
+using System.Threading.Tasks;
 
 namespace PersonalSite.UnitTests;
 
@@ -31,10 +32,10 @@ public class PersonalSiteDomainTestBase
         DbContext.SaveChanges();
     }
 
-    protected void AssumeDataInRepository(params JobExperience[] entities)
+    protected async Task AssumeDataInRepository(params JobExperience[] entities)
     {
         foreach (var entity in entities)
-            Repository.Add(entity);
+            await Repository.Add(entity);
 
         CloseContext();
     }

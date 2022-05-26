@@ -32,7 +32,7 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
         var otherEndDate = new DateOnly(2018, 09, 01);
         var otherTechStack = new[] { "Node.js", "MongoDB" };
 
-        AssumeDataInRepository(new[]
+        await AssumeDataInRepository(new[]
         {
             new JobExperienceBuilder()
                 .WithCompany(company)
