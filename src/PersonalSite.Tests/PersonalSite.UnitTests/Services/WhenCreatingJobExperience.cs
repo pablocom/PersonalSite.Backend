@@ -45,10 +45,12 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         var endDate = new DateOnly(2021, 07, 01);
         var techStack = new[] { ".Net", "MySQL" };
         JobExperienceAdded @event = null;
-        using var disposable = DomainEvents.Register<JobExperienceAdded>(ev => @event = ev);
-        
-        await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
-        CloseContext();
+
+        using (DomainEvents.Register<JobExperienceAdded>(ev => @event = ev))
+        {
+            await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
+            CloseContext();
+        }
 
         Assert.That(@event, Is.Not.Null);
         Assert.That(@event.Company, Is.EqualTo(company));
