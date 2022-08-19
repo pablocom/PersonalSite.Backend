@@ -24,5 +24,6 @@ public static class DependencyInjectionContainer
 
 public interface IServiceProviderProxy
 {
-    object GetService(Type type);
+    object? GetService(Type type);
+    TService GetRequiredService<TService>() where TService : notnull;
 }
