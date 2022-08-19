@@ -1,22 +1,19 @@
-using System;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.Persistence;
 using Microsoft.Extensions.Logging;
 using PersonalSite.Application;
 using PersonalSite.IoC;
-using PersonalSite.WebApi.Installers;
+using PersonalSite.Persistence;
 using PersonalSite.WebApi.Errors;
 using PersonalSite.WebApi.Infrastructure;
-using PersonalSite.Domain.Events;
-using MassTransit;
-using MassTransit.Context;
+using PersonalSite.WebApi.Installers;
 using PersonalSite.WebApi.MessageBus;
+using System;
 
 namespace PersonalSite.WebApi;
 
@@ -39,7 +36,7 @@ public class Startup
             });
 
         services.AddDbContext<PersonalSiteDbContext>(options =>
-            options.UseNpgsql(Environment.GetEnvironmentVariable("PersonalSiteConnectionString")))
+            options.UseNpgsql(Configuration.GetValue<string>("PersonalSiteConnectionString")))
             .AddScoped<IUnitOfWork, UnitOfWork>()
             .AddScoped<IJobExperienceRepository, JobExperienceRepository>()
             .AddTransient<IMigrator, PersonalSiteDbContextMigrator>()
