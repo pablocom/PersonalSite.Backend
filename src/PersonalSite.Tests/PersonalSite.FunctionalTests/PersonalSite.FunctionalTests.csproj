@@ -3,10 +3,8 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-
+		<EnablePreviewFeatures>True</EnablePreviewFeatures>
         <IsPackable>false</IsPackable>
-
-        <RootNamespace>PersonalSite.FunctionalTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

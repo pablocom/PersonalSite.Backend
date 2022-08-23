@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain.Events;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.CommandHandlers;
 
-namespace PersonalSite.API.UnitTests.Handlers.Base;
+namespace PersonalSite.WebApi.UnitTests;
 
 [TestFixture]
 public class CommandHandlerBaseTests
@@ -17,8 +15,7 @@ public class CommandHandlerBaseTests
     private CommandHandler<FakeCommand> _commandHandler;
     private readonly FakeCommand _command = new();
 
-    // class intentionally public for mocking concerns
-    public class FakeCommand : IRequest<Unit> { }
+    public class FakeCommand : IRequest<Unit> { } // class intentionally public for mocking concerns
 
     [SetUp]
     public void SetUp()
