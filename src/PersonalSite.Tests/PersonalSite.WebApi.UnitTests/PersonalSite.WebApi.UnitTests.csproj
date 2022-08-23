@@ -5,7 +5,8 @@
 
         <IsPackable>false</IsPackable>
 
-        <RootNamespace>PersonalSite.API.UnitTests</RootNamespace>
+		<EnablePreviewFeatures>True</EnablePreviewFeatures>
+		<ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,5 +19,4 @@
     <ItemGroup>
       <ProjectReference Include="..\..\PersonalSite.WebApi\PersonalSite.WebApi.csproj" />
     </ItemGroup>
-
 </Project>

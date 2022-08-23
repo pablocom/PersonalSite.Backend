@@ -25,7 +25,7 @@ public class WhenCreatingAndRetrievingJobExperiences
     };
 
     private HttpClient _client = default!;
-    private readonly WebApplicationFactory<Startup> _applicationFactory = new();
+    private readonly WebApplicationFactory<IAssemblyMarker> _applicationFactory = new();
 
     [SetUp]
     public void Setup()
@@ -36,7 +36,7 @@ public class WhenCreatingAndRetrievingJobExperiences
     [Test]
     public async Task SingleJobExperienceIsCreatedAndRetrieved()
     {
-        var response = await _client.GetAsync("JobExperience");
+        var response = await _client.GetAsync("/jobExperiences");
 
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         var jobExperiences = await response.Content.ReadFromJsonAsync<JobExperienceDto[]>(JsonSerializerOptions);
@@ -49,10 +49,10 @@ public class WhenCreatingAndRetrievingJobExperiences
             new DateOnly(2020, 1, 1),
             new DateOnly(2020, 5, 1),
             new[] { ".Net Core", "NSubstitute" });
-        var createResponse = await _client.PostAsJsonAsync("JobExperience", createJobExperienceDto, JsonSerializerOptions);
+        var createResponse = await _client.PostAsJsonAsync("/jobExperiences", createJobExperienceDto, JsonSerializerOptions);
         Assert.That(createResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
-        var secondResponse = await _client.GetAsync("JobExperience");
+        var secondResponse = await _client.GetAsync("jobExperiences");
         Assert.That(secondResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         var json = await secondResponse.Content.ReadAsStringAsync();
         var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, JsonSerializerOptions);
