@@ -1,14 +1,12 @@
-using Microsoft.EntityFrameworkCore.Migrations;
-using PersonalSite.Application;
-using PersonalSite.IoC;
-using PersonalSite.Persistence;
-using PersonalSite.WebApi.Infrastructure;
-using PersonalSite.WebApi;
 using MediatR;
-using PersonalSite.WebApi.Installers;
-using PersonalSite.WebApi.Endpoints.Internal;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
+using PersonalSite.Application;
+using PersonalSite.Persistence;
+using PersonalSite.WebApi;
+using PersonalSite.WebApi.Converters;
+using PersonalSite.WebApi.Endpoints.Internal;
 using PersonalSite.WebApi.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +29,6 @@ builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
 builder.Services.AddMediatR(typeof(IAssemblyMarker));
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton<IBusEventHandlerScopeAccessor, BusEventHandlerScopeAccessor>();
-builder.Services.AddSingleton<IServiceProviderProxy, ServiceProviderProxy>();
-builder.Services.AddDomainEventHandlers();
 
 var app = builder.Build();
 
@@ -49,8 +44,5 @@ using (var scope = app.Services.CreateScope())
     var migrationRunner = scope.ServiceProvider.GetRequiredService<IMigrator>();
     await migrationRunner.MigrateAsync();
 }
-
-
-DependencyInjectionContainer.Init(app.Services.GetRequiredService<IServiceProviderProxy>());
 
 await app.RunAsync();

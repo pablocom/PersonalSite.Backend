@@ -12,7 +12,7 @@ using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi;
 using PersonalSite.WebApi.Dtos;
-using PersonalSite.WebApi.Infrastructure;
+using PersonalSite.WebApi.Converters;
 
 namespace PersonalSite.FunctionalTests;
 

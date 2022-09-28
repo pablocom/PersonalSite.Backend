@@ -29,7 +29,7 @@ public class JobExperienceService : IJobExperienceService
 
     public async Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
-        var jobExperience = await JobExperience.Create(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+        var jobExperience = new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
         await _repository.Add(jobExperience);
     }
 

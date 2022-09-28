@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Persistence.Mappings;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using PersonalSite.Persistence.Mappings;
 
 namespace PersonalSite.UnitTests;
 
@@ -16,10 +16,10 @@ public class FakeInMemoryPersonalSiteDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        AddPersonalSiteMappings(modelBuilder);
+        ApplyMappingOverrides(modelBuilder);
     }
 
-    private static void AddPersonalSiteMappings(ModelBuilder modelBuilder)
+    private static void ApplyMappingOverrides(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new JobExperienceMappingOverride());
     }

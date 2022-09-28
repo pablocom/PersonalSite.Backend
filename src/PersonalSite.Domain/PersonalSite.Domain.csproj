@@ -6,8 +6,4 @@
     <AssemblyName>PersonalSite.Domain</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj" />
-  </ItemGroup>
-
 </Project>
