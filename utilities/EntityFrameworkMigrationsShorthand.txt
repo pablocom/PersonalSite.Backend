@@ -1,1 +1,1 @@
-dotnet ef migrations add InitialMigration -p PersonalSite.Domain.Persistence -s PersonalSite.Domain.API --verbose
+dotnet ef migrations add AddPersistableEvent -p PersonalSite.Persistence -s PersonalSite.WebApi --verbose
