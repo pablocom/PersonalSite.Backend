@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using PersonalSite.Application;
 using PersonalSite.Persistence;
@@ -10,8 +11,8 @@ namespace PersonalSite.IntegrationTests;
 public class PersonalSiteIntegrationTestBase
 {
     private IDbContextTransaction _transaction;
-    protected IJobExperienceRepository Repository;
-    private PersonalSiteDbContext _dbContext;
+    protected IJobExperienceRepository Repository { get; private set; }
+    protected PersonalSiteDbContext DbContext { get; private set; }
 
     [SetUp]
     protected void Setup()
@@ -22,14 +23,14 @@ public class PersonalSiteIntegrationTestBase
             .EnableSensitiveDataLogging()
             .Options;
 
-        _dbContext = new PersonalSiteDbContext(options);
-        Repository = new JobExperienceRepository(_dbContext);
-        _transaction = _dbContext.Database.BeginTransaction();
+        DbContext = new PersonalSiteDbContext(options);
+        Repository = new JobExperienceRepository(DbContext);
+        _transaction = DbContext.Database.BeginTransaction();
 
         AdditionalSetup();
     }
 
-    protected void CloseContext() => _dbContext.SaveChanges();
+    protected void CloseContext() => DbContext.SaveChanges();
 
     protected virtual void AdditionalSetup() { }
 

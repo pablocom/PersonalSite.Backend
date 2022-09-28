@@ -3,3 +3,7 @@
 public interface IDomainEvent
 {
 }
+
+public interface IIntegrationEvent
+{ 
+}

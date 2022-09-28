@@ -5,7 +5,7 @@ using PersonalSite.Domain.Extensions;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
-public class JobExperience : Entity<int>, IAggregateRoot
+public class JobExperience : Entity, IAggregateRoot
 {
     public string Company { get; protected set; }
     public string Description { get; protected set; }

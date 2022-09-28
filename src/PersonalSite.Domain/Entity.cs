@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PersonalSite.Domain;
 
-public abstract class Entity<TId> : IEquatable<Entity<TId>>
+public abstract class Entity : IEquatable<Entity>
 {
-    public TId Id { get; protected set; }
+    public IList<IDomainEvent> DomainEvents { get; } = new List<IDomainEvent>();
+    public int Id { get; protected set; }
 
-    public bool Equals(Entity<TId> other)
+    public bool Equals(Entity other)
     {
         if (ReferenceEquals(null, other)) 
             return false;
@@ -25,11 +27,16 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>
         if (other.GetType() != GetType()) 
             return false;
         
-        return Equals((Entity<TId>) other);
+        return Equals((Entity) other);
     }
 
     public override int GetHashCode()
     {
         return Id.GetHashCode();
+    }
+
+    protected void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        DomainEvents.Add(domainEvent);
     }
 }
