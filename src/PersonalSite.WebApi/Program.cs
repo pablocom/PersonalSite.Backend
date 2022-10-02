@@ -39,8 +39,6 @@ builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
 builder.Services.AddMediatR(typeof(PersonalSite.WebApi.IAssemblyMarker));
 builder.Services.AddMediatR(typeof(PersonalSite.Persistence.IAssemblyMarker));
 
-builder.Services.AddHttpContextAccessor(); // TODO: Delete me
-
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
