@@ -2,24 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalSite.Persistence;
 
 #nullable disable
 
-namespace PersonalSite.Persistence.Migrations
+namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
-    [Migration("20220105182924_ChangeJobPeriodStartAndEndToDateOnlyTypes")]
-    partial class ChangeJobPeriodStartAndEndToDateOnlyTypes
+    partial class PersonalSiteDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -44,6 +42,31 @@ namespace PersonalSite.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobExperiences");
+                });
+
+            modelBuilder.Entity("PersonalSite.Persistence.Events.PersistableEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasPrecision(5)
+                        .HasColumnType("timestamp(5) with time zone");
+
+                    b.Property<string>("FullyQualifiedTypeName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SerializedData")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.ToTable("PersistableEvents");
                 });
 
             modelBuilder.Entity("PersonalSite.Domain.Model.JobExperienceAggregate.JobExperience", b =>

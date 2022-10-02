@@ -3,7 +3,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using PersonalSite.Domain;
 using PersonalSite.Persistence.Events;
 
 namespace PersonalSite.IntegrationTests;
@@ -12,7 +11,7 @@ namespace PersonalSite.IntegrationTests;
 public class PersistableEventsMappingTests : PersonalSiteIntegrationTestBase
 {
     [Test]
-    public async Task IsPersistedAsync()
+    public async Task IsPersisted()
     {
         var createdAt = new DateTime(2022, 2, 22, 1, 2, 3, 234, DateTimeKind.Utc);
         var serializedEventData = JsonSerializer.Serialize(new DummyEvent(1, "text", new DateTime(2022, 9, 22)));
@@ -35,7 +34,7 @@ public class PersistableEventsMappingTests : PersonalSiteIntegrationTestBase
         Assert.That(savedEvents[0].CreatedAt, Is.EqualTo(createdAt));
     }
 
-    private class DummyEvent : IIntegrationEvent
+    private class DummyEvent 
     {
         public int SomeId { get; set; }
         public string SomeText { get; set; }

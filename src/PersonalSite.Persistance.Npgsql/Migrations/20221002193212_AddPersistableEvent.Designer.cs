@@ -9,10 +9,10 @@ using PersonalSite.Persistence;
 
 #nullable disable
 
-namespace PersonalSite.Persistence.Migrations
+namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
-    [Migration("20220928225423_AddPersistableEvent")]
+    [Migration("20221002193212_AddPersistableEvent")]
     partial class AddPersistableEvent
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

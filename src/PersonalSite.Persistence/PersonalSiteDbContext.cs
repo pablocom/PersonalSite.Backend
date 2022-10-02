@@ -13,8 +13,8 @@ public class PersonalSiteDbContext : DbContext
         : base(options)
     { }
 
-    public DbSet<PersistableEvent> PersistableEvents { get; set; }
-    public DbSet<JobExperience> JobExperiences { get; set; }
+    public DbSet<PersistableEvent>? PersistableEvents { get; set; }
+    public DbSet<JobExperience>? JobExperiences { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -14,7 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\PersonalSite.Application\PersonalSite.Application.csproj" />
-      <ProjectReference Include="..\..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
+      <ProjectReference Include="..\..\PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj" />
     </ItemGroup>
 
 </Project>

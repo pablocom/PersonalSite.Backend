@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.FunctionalTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi", "PersonalSite.WebApi\PersonalSite.WebApi.csproj", "{E0B435A0-FBD8-45FE-852A-532611492300}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.Persistance.Npgsql", "PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj", "{D2E46104-9B2B-4FF9-832A-2496E939BA72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{E0B435A0-FBD8-45FE-852A-532611492300}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0B435A0-FBD8-45FE-852A-532611492300}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0B435A0-FBD8-45FE-852A-532611492300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E46104-9B2B-4FF9-832A-2496E939BA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E46104-9B2B-4FF9-832A-2496E939BA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E46104-9B2B-4FF9-832A-2496E939BA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E46104-9B2B-4FF9-832A-2496E939BA72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

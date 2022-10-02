@@ -1,14 +1,32 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace PersonalSite.Persistence.Migrations
+namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     public partial class AddPersistableEvent : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "JobExperiences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Company = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    JobPeriod_Start = table.Column<DateOnly>(type: "date", nullable: true),
+                    JobPeriod_End = table.Column<DateOnly>(type: "date", nullable: true),
+                    TechStack = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobExperiences", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "PersistableEvents",
                 columns: table => new
@@ -31,6 +49,9 @@ namespace PersonalSite.Persistence.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "JobExperiences");
+
             migrationBuilder.DropTable(
                 name: "PersistableEvents");
         }

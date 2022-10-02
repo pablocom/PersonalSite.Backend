@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using PersonalSite.Application;
 using PersonalSite.Persistence;
+using PersonalSite.Persistence.Npgsql;
 using PersonalSite.WebApi;
 using PersonalSite.WebApi.Converters;
 using PersonalSite.WebApi.Endpoints.Internal;
@@ -20,13 +21,19 @@ builder.Services.Configure<JsonOptions>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<PersonalSiteDbContext>(options => options.UseNpgsql(builder.Configuration.GetValue<string>("PersonalSiteConnectionString")));
+builder.Services.AddDbContext<PersonalSiteDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetValue<string>("PersonalSiteConnectionString"), b =>
+    {
+        b.MigrationsAssembly(typeof(PersonalSite.Persistence.Npgsql.IAssemblyMarker).Assembly.FullName);
+    });
+});
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
-builder.Services.AddScoped<IMigrator, PersonalSiteDbContextMigrator>();
+builder.Services.AddScoped<IMigrator, PersonalSiteDbMigrator>();
 builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
 
-builder.Services.AddMediatR(typeof(IAssemblyMarker));
+builder.Services.AddMediatR(typeof(PersonalSite.WebApi.IAssemblyMarker));
 
 builder.Services.AddHttpContextAccessor();
 

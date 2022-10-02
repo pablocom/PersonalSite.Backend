@@ -18,13 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalSite.Application\PersonalSite.Application.csproj" />
-    <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Message.cs" />
-    <Compile Remove="MessageConsumer.cs" />
-    <Compile Remove="Worker.cs" />
+    <ProjectReference Include="..\PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj" />
   </ItemGroup>
 
 </Project>
