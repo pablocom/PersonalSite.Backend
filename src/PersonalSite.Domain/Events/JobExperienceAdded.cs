@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PersonalSite.Domain.Events;
 
-public class JobExperienceAdded : IDomainEvent, IIntegrationEvent
+public class JobExperienceAdded : IDomainEvent
 {
     public string Company { get; set; }
     public string Description { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Extensions;
 
@@ -24,5 +26,7 @@ public class JobExperience : Entity, IAggregateRoot
         Description = description;
         JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
         TechStack = techStack;
+
+        DomainEvents.Add(new JobExperienceAdded(Company, Description, JobPeriod.Start, JobPeriod.End, TechStack.ToArray()));
     }
 }

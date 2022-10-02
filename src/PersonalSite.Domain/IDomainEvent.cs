@@ -1,9 +1,7 @@
-﻿namespace PersonalSite.Domain;
+﻿using MediatR;
 
-public interface IDomainEvent
+namespace PersonalSite.Domain;
+
+public interface IDomainEvent : INotification
 {
-}
-
-public interface IIntegrationEvent
-{ 
 }
