@@ -9,10 +9,11 @@
     {
         public void Publish<TMessage>(TMessage message) where TMessage : class
         {
-            if (Random.Shared.Next(0, 4) == 0)
-            {
-                throw new Exception("Failed to send message to message bus.");
-            }
+            //var num = new Random().Next(0, 10);
+            //if (num == 0)
+            //{
+            //    throw new Exception("Failed to send message to message bus.");
+            //}
         }
     }
 }

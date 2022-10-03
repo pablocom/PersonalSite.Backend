@@ -16,11 +16,18 @@ public class IntegrationEventsPublishHeartbeat : BackgroundService
     {
         while (await _periodicTimer.WaitForNextTickAsync(ct) && !ct.IsCancellationRequested)
         {
-            await using var scope = _serviceProvider.CreateAsyncScope();
-            var integrationEventsPublisher = scope.ServiceProvider.GetRequiredService<IntegrationEventsPublisher>();
+            try
+            {
+                await using var scope = _serviceProvider.CreateAsyncScope();
+                var integrationEventsPublisher = scope.ServiceProvider.GetRequiredService<IntegrationEventsPublisher>();
 
-            _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            await integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
+                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                await integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error publishing integration events");
+            }
         }
     }
 }
