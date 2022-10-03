@@ -67,7 +67,7 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt");
+                    b.HasIndex("IsProcessed");
 
                     b.ToTable("PersistableEvents");
                 });

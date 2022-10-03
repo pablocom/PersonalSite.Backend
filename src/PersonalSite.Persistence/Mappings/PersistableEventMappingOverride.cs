@@ -13,6 +13,6 @@ public class PersistableEventMappingOverride : IEntityTypeConfiguration<Persista
         builder.Property(o => o.SerializedData).IsRequired();
         builder.Property(o => o.FullyQualifiedTypeName).IsRequired();
 
-        builder.HasIndex(x => x.CreatedAt);
+        builder.HasIndex(x => x.IsProcessed);
     }
 }

@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PersonalSite.Persistence.Npgsql.Migrations
 {
-    public partial class AddPersistableEvent : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,7 +34,8 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FullyQualifiedTypeName = table.Column<string>(type: "text", nullable: false),
                     SerializedData = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp(5) with time zone", precision: 5, nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp(5) with time zone", precision: 5, nullable: false),
+                    IsProcessed = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,9 +43,9 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersistableEvents_CreatedAt",
+                name: "IX_PersistableEvents_IsProcessed",
                 table: "PersistableEvents",
-                column: "CreatedAt");
+                column: "IsProcessed");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

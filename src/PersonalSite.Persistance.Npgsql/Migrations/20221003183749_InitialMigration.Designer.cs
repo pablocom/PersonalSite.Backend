@@ -12,8 +12,8 @@ using PersonalSite.Persistence;
 namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
-    [Migration("20221002193212_AddPersistableEvent")]
-    partial class AddPersistableEvent
+    [Migration("20221003183749_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,13 +60,16 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsProcessed")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("SerializedData")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt");
+                    b.HasIndex("IsProcessed");
 
                     b.ToTable("PersistableEvents");
                 });
