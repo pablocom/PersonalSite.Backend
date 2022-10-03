@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using PersonalSite.WebApi.Commands;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Endpoints.Internal;
 using PersonalSite.WebApi.Queries;
 using System.Net.Mime;
-using IMediator = MediatR.IMediator;
 
 namespace PersonalSite.WebApi.Endpoints;
 

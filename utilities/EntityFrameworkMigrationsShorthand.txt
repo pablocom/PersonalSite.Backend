@@ -1,1 +1,1 @@
-dotnet ef migrations add AddPersistableEvent -p PersonalSite.Persistence -s PersonalSite.WebApi --verbose
+dotnet ef migrations add AddPersistableEvent -p .\PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj -s PersonalSite.WebApi --verbose

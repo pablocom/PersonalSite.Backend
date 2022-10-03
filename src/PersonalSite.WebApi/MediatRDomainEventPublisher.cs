@@ -12,9 +12,11 @@ public class MediatRDomainEventPublisher : IDomainEventPublisher
         _publisher = publisher;
     }
 
-    public async Task PublishAsync(IEnumerable<IDomainEvent> domainEvent)
+    public async Task Publish(IEnumerable<IDomainEvent> domainEvents)
     {
-        foreach (var domainEventItem in domainEvent)
-            await _publisher.Publish(domainEventItem);
+        foreach (var @event in domainEvents)
+        {
+            await _publisher.Publish(@event, CancellationToken.None);
+        }
     }
 }

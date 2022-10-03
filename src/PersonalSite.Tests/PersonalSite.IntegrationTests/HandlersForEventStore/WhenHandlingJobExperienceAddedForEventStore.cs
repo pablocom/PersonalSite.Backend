@@ -37,6 +37,7 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         Assert.That(savedEvents, Has.Length.EqualTo(1));
         Assert.That(savedEvents[0].FullyQualifiedTypeName, Is.EqualTo(typeof(JobExperienceAdded).FullName));
         Assert.That(savedEvents[0].SerializedData, Is.EqualTo(JsonSerializer.Serialize(@event, JsonSerializerOptions)));
+        Assert.That(savedEvents[0].IsProcessed, Is.False);
     }
 
     private class DateOnlyJsonConverter : JsonConverter<DateOnly>

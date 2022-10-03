@@ -8,6 +8,7 @@ public class PersistableEvent
     public string FullyQualifiedTypeName { get; protected set; }
     public string SerializedData { get; protected set; }
     public DateTime CreatedAt { get; protected set; }
+    public bool IsProcessed { get; protected set; }
 
     protected PersistableEvent()
     {
@@ -19,5 +20,11 @@ public class PersistableEvent
         FullyQualifiedTypeName = fullyQualifiedTypeName;
         SerializedData = serializedData;
         CreatedAt = createdAt;
+        IsProcessed = false;
+    }
+
+    public void MarkAsProcessed()
+    {
+        IsProcessed = true;
     }
 }

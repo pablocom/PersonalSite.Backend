@@ -52,7 +52,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
 
         _domainEventPublisherMock.Verify(
-            publisher => publisher.PublishAsync(It.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(
+            publisher => publisher.Publish(It.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(
                     @events.Single() as JobExperienceAdded, company, description, startDate, endDate, techStack))
             ),
             Times.Once

@@ -5,5 +5,5 @@ namespace PersonalSite.Domain;
 
 public interface IDomainEventPublisher
 {
-    Task PublishAsync(IEnumerable<IDomainEvent> domainEvent);
+    Task Publish(IEnumerable<IDomainEvent> domainEvent);
 }

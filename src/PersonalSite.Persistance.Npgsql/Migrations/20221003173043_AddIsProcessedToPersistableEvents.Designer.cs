@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PersonalSite.Persistence;
@@ -11,9 +12,10 @@ using PersonalSite.Persistence;
 namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
-    partial class PersonalSiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221003173043_AddIsProcessedToPersistableEvents")]
+    partial class AddIsProcessedToPersistableEvents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

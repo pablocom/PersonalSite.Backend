@@ -35,7 +35,7 @@ public class JobExperienceService : IJobExperienceService
         var jobExperience = new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
 
         await _repository.Add(jobExperience);
-        await _domainEventPublisher.PublishAsync(jobExperience.DomainEvents);
+        await _domainEventPublisher.Publish(jobExperience.DomainEvents);
     }
 
     public async Task<IEnumerable<JobExperienceDto>> GetJobExperiences()
