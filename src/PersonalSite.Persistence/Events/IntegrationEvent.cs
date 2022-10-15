@@ -2,29 +2,29 @@
 
 namespace PersonalSite.Persistence.Events;
 
-public class PersistableEvent
+public class IntegrationEvent
 {
     public Guid Id { get; protected set; }
     public string FullyQualifiedTypeName { get; protected set; }
     public string SerializedData { get; protected set; }
-    public DateTime CreatedAt { get; protected set; }
-    public bool IsProcessed { get; protected set; }
+    public DateTimeOffset CreatedAt { get; protected set; }
+    public bool IsPublished { get; protected set; }
 
-    protected PersistableEvent()
+    protected IntegrationEvent()
     {
     }
 
-    public PersistableEvent(Guid id, string fullyQualifiedTypeName, string serializedData, DateTime createdAt)
+    public IntegrationEvent(Guid id, string fullyQualifiedTypeName, string serializedData, DateTimeOffset createdAt)
     {
         Id = id;
         FullyQualifiedTypeName = fullyQualifiedTypeName;
         SerializedData = serializedData;
         CreatedAt = createdAt;
-        IsProcessed = false;
+        IsPublished = false;
     }
 
     public void MarkAsProcessed()
     {
-        IsProcessed = true;
+        IsPublished = true;
     }
 }

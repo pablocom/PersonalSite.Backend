@@ -15,7 +15,7 @@ builder.ConfigureServices((builderContext, services) =>
         });
     });
     services.AddScoped<IntegrationEventsPublisher>();
-    services.AddScoped<IMessageBusPublisher, DummyMessageBusPublisher>();
+    services.AddScoped<IMessageBus, DummyMessageBus>();
 });
 
 var host = builder.Build();

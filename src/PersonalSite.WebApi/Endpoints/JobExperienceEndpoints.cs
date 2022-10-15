@@ -10,7 +10,7 @@ namespace PersonalSite.WebApi.Endpoints;
 
 public class JobExperienceEndpoints : IEndpoints
 {
-    private const string BaseRoute = "jobExperiences";
+    private const string BaseRoute = "/jobExperiences";
 
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {

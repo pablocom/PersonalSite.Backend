@@ -72,7 +72,7 @@ public class WhenCreatingAndRetrievingJobExperiences
             await using var scope = _applicationFactory.Services.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<PersonalSiteDbContext>();
             dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
-            dbContext.PersistableEvents.RemoveRange(dbContext.PersistableEvents);
+            dbContext.IntegrationEvents.RemoveRange(dbContext.IntegrationEvents);
             await dbContext.SaveChangesAsync();
         }
         _applicationFactory.Dispose();

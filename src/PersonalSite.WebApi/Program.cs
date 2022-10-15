@@ -35,6 +35,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IJobExperienceRepository, JobExperienceRepository>();
 builder.Services.AddScoped<IMigrator, PersonalSiteDbMigrator>();
 builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
+builder.Services.AddSingleton<IClock, Clock>();
 
 builder.Services.AddMediatR(typeof(PersonalSite.WebApi.IAssemblyMarker));
 builder.Services.AddMediatR(typeof(PersonalSite.Persistence.IAssemblyMarker));

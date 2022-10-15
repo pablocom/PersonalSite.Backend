@@ -7,7 +7,7 @@ namespace PersonalSite.Persistence;
 
 public class PersonalSiteDbContext : DbContext
 {
-    public DbSet<PersistableEvent> PersistableEvents { get; set; }
+    public DbSet<IntegrationEvent> IntegrationEvents { get; set; }
     public DbSet<JobExperience> JobExperiences { get; set; }
 
     public PersonalSiteDbContext(DbContextOptions<PersonalSiteDbContext> options)
@@ -19,6 +19,6 @@ public class PersonalSiteDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new JobExperienceMappingOverride());
-        modelBuilder.ApplyConfiguration(new PersistableEventMappingOverride());
+        modelBuilder.ApplyConfiguration(new IntegrationEventMappingOverride());
     }
 }
