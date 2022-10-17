@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain.Events;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.CommandHandlers;
 
@@ -11,7 +10,6 @@ namespace PersonalSite.WebApi.UnitTests;
 public class CommandHandlerBaseTests
 {
     private IUnitOfWork _unitOfWork;
-    private IDomainEventDispatcherStore _domainEventDispatcherStore;
     private CommandHandler<FakeCommand> _commandHandler;
     private readonly FakeCommand _command = new();
 
@@ -21,8 +19,7 @@ public class CommandHandlerBaseTests
     public void SetUp()
     {
         _unitOfWork = Substitute.For<IUnitOfWork>();
-        _domainEventDispatcherStore = Substitute.For<IDomainEventDispatcherStore>();
-        _commandHandler = Substitute.For<CommandHandler<FakeCommand>>(_unitOfWork, _domainEventDispatcherStore);
+        _commandHandler = Substitute.For<CommandHandler<FakeCommand>>(_unitOfWork);
     }
 
     [Test]
@@ -53,36 +50,11 @@ public class CommandHandlerBaseTests
     }
 
     [Test]
-    public void UnitOfWorkEndsAfterProcessing()
+    public void UnitOfWorkCommitsAfterProcessing()
     {
         WhenRequestIsHandled();
 
         _unitOfWork.Received(1).Commit();
-    }
-
-    [Test]
-    public void RunDomainEventHandlerDispatchersInStore()
-    {
-        WhenRequestIsHandled();
-
-        _domainEventDispatcherStore.Received(1).RunDomainEventHandlerDispatchers();
-    }
-
-    [Test]
-    public void DoesNotRunAggregateDispatchersIfUnitOfWorkFailsToCommit()
-    {
-        _unitOfWork.When(x => x.Commit()).Throw<Exception>();
-
-        try
-        {
-            WhenRequestIsHandled();
-        }
-        catch (Exception)
-        {
-            // intentionally ignored
-        }
-
-        _domainEventDispatcherStore.DidNotReceive().RunDomainEventHandlerDispatchers();
     }
 
     private void WhenRequestIsHandled()

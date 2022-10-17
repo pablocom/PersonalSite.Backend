@@ -10,8 +10,8 @@ public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperie
 {
     private readonly IJobExperienceService _service;
 
-    public CreateJobExperienceCommandHandler(IJobExperienceService service, IUnitOfWork unitOfWork, IDomainEventDispatcherStore dispatcherStore) 
-        : base(unitOfWork, dispatcherStore)
+    public CreateJobExperienceCommandHandler(IJobExperienceService service, IUnitOfWork unitOfWork) 
+        : base(unitOfWork)
     {
         _service = service;
     }

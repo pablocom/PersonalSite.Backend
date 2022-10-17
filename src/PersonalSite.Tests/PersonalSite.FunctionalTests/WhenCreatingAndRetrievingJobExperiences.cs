@@ -12,7 +12,7 @@ using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi;
 using PersonalSite.WebApi.Dtos;
-using PersonalSite.WebApi.Infrastructure;
+using PersonalSite.WebApi.Converters;
 
 namespace PersonalSite.FunctionalTests;
 
@@ -25,7 +25,7 @@ public class WhenCreatingAndRetrievingJobExperiences
     };
 
     private HttpClient _client = default!;
-    private readonly WebApplicationFactory<IAssemblyMarker> _applicationFactory = new();
+    private readonly WebApplicationFactory<PersonalSite.WebApi.IAssemblyMarker> _applicationFactory = new();
 
     [SetUp]
     public void Setup()
@@ -72,7 +72,8 @@ public class WhenCreatingAndRetrievingJobExperiences
             await using var scope = _applicationFactory.Services.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<PersonalSiteDbContext>();
             dbContext.JobExperiences.RemoveRange(dbContext.JobExperiences);
-            dbContext.SaveChanges();
+            dbContext.IntegrationEvents.RemoveRange(dbContext.IntegrationEvents);
+            await dbContext.SaveChangesAsync();
         }
         _applicationFactory.Dispose();
     }

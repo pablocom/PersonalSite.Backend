@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 
-namespace PersonalSite.UnitTests;
+namespace PersonalSite.IntegrationEventsPublishWorker.UnitTests;
 
 public class FakeInMemoryPersonalSiteDbContext : PersonalSiteDbContext
 {
@@ -10,10 +9,8 @@ public class FakeInMemoryPersonalSiteDbContext : PersonalSiteDbContext
     {
     }
 
-    public DbSet<JobExperience> JobExperiences { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseInMemoryDatabase(databaseName: "FakePersonalSiteDbContext");
+        optionsBuilder.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
     }
 }

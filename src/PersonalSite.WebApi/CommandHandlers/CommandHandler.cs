@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using PersonalSite.Domain.Events;
+﻿using MediatR;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.WebApi.CommandHandlers;
@@ -11,12 +7,10 @@ public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
     where TCommand : IRequest<Unit>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IDomainEventDispatcherStore _domainEventDispatcherStore;
 
-    protected CommandHandler(IUnitOfWork unitOfWork, IDomainEventDispatcherStore domainEventDispatcherStore)
+    protected CommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _domainEventDispatcherStore = domainEventDispatcherStore;
     }
 
     public async Task<Unit> Handle(TCommand command, CancellationToken cancellationToken = default)
@@ -24,8 +18,7 @@ public abstract class CommandHandler<TCommand> : IRequestHandler<TCommand, Unit>
         try
         {
             await Process(command);
-            _unitOfWork.Commit();
-            await _domainEventDispatcherStore.RunDomainEventHandlerDispatchers();
+            _unitOfWork.Commit(); // TODO: here will the events be saved using the same transaction
         }
         catch (Exception)
         {

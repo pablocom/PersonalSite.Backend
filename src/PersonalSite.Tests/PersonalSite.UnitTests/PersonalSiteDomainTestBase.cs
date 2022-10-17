@@ -1,26 +1,21 @@
-﻿using NSubstitute;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using PersonalSite.Application;
-using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using PersonalSite.IoC;
-using System;
-using System.Threading.Tasks;
+using PersonalSite.Persistence;
 
 namespace PersonalSite.UnitTests;
 
 public class PersonalSiteDomainTestBase
 {
-    private static readonly IServiceProviderProxy ServiceProvider = Substitute.For<IServiceProviderProxy>();
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
     [SetUp]
     public void SetUp()
     {
-        DependencyInjectionContainer.Init(ServiceProvider);
-
-        DbContext = new FakeInMemoryPersonalSiteDbContext();
+        DbContext = new FakeInMemoryPersonalSiteDbContext(new DbContextOptions<PersonalSiteDbContext>());
         DbContext.Database.EnsureDeleted();
         Repository = new FakeJobExperienceRepository(DbContext);
 

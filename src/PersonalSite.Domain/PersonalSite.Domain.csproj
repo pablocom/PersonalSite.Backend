@@ -5,9 +5,8 @@
     <RootNamespace>PersonalSite.Domain</RootNamespace>
     <AssemblyName>PersonalSite.Domain</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj" />
+    <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
@@ -19,15 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalSite.Application\PersonalSite.Application.csproj" />
-    <ProjectReference Include="..\PersonalSite.Domain.Events\PersonalSite.Domain.Events.csproj" />
-    <ProjectReference Include="..\PersonalSite.IoC\PersonalSite.IoC.csproj" />
-    <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Message.cs" />
-    <Compile Remove="MessageConsumer.cs" />
-    <Compile Remove="Worker.cs" />
+    <ProjectReference Include="..\PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj" />
   </ItemGroup>
 
 </Project>

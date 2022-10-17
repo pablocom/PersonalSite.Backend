@@ -1,4 +1,5 @@
 ﻿using PersonalSite.Application.Dtos;
+using PersonalSite.Domain;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
@@ -21,16 +22,20 @@ public interface IJobExperienceService
 public class JobExperienceService : IJobExperienceService
 {
     private readonly IJobExperienceRepository _repository;
+    private readonly IDomainEventPublisher _domainEventPublisher;
 
-    public JobExperienceService(IJobExperienceRepository repository)
+    public JobExperienceService(IJobExperienceRepository repository, IDomainEventPublisher domainEventPublisher)
     {
         _repository = repository;
+        _domainEventPublisher = domainEventPublisher;
     }
 
     public async Task CreateJobExperience(string company, string description, DateOnly jobPeriodStart, DateOnly? jobPeriodEnd, string[] techStack)
     {
-        var jobExperience = await JobExperience.Create(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+        var jobExperience = new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
+
         await _repository.Add(jobExperience);
+        await _domainEventPublisher.Publish(jobExperience.DomainEvents);
     }
 
     public async Task<IEnumerable<JobExperienceDto>> GetJobExperiences()

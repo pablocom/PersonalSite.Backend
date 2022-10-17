@@ -1,13 +1,13 @@
-﻿using PersonalSite.Domain.Events;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
-public class JobExperience : Entity<int>, IAggregateRoot
+public class JobExperience : Entity, IAggregateRoot
 {
     public string Company { get; protected set; }
     public string Description { get; protected set; }
@@ -26,13 +26,7 @@ public class JobExperience : Entity<int>, IAggregateRoot
         Description = description;
         JobPeriod = new JobPeriod(jobPeriodStart, jobPeriodEnd);
         TechStack = techStack;
-    }
 
-    public static async Task<JobExperience> Create(string company, string description, DateOnly jobPeriodStart,
-        DateOnly? jobPeriodEnd, ICollection<string> techStack)
-    {
-        var jobExperience = new JobExperience(company, description, jobPeriodStart, jobPeriodEnd, techStack);
-        await DomainEvents.Raise(new JobExperienceAdded(company, description, jobPeriodStart, jobPeriodEnd, techStack));
-        return jobExperience;
+        DomainEvents.Add(new JobExperienceAdded(Company, Description, JobPeriod.Start, JobPeriod.End, TechStack.ToArray()));
     }
 }
