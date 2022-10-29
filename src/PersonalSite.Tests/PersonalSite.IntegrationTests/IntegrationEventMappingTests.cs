@@ -8,25 +8,25 @@ using PersonalSite.Persistence.Events;
 namespace PersonalSite.IntegrationTests;
 
 [TestFixture]
-public class PersistableEventsMappingTests : PersonalSiteIntegrationTestBase
+public class IntegrationEventMappingTests : PersonalSiteIntegrationTestBase
 {
     [Test]
     public async Task IsPersisted()
     {
-        var createdAt = new DateTime(2022, 2, 22, 1, 2, 3, 234, DateTimeKind.Utc);
+        var createdAt = new DateTimeOffset(2022, 2, 22, 1, 2, 3, 234, TimeSpan.Zero);
         var serializedEventData = JsonSerializer.Serialize(new DummyEvent(1, "text", new DateTime(2022, 9, 22)));
         var id = Guid.Parse("81a130d2-502f-4cf1-a376-63edeb000e9f");
-        var persistableEvent = new PersistableEvent(
+        var integrationEvent = new IntegrationEvent(
             id,
             typeof(DummyEvent).FullName,
             serializedEventData,
             createdAt
         );
 
-        DbContext.PersistableEvents.Add(persistableEvent);
+        DbContext.IntegrationEvents.Add(integrationEvent);
         CloseContext();
 
-        var savedEvents = await DbContext.PersistableEvents.ToArrayAsync();
+        var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
         Assert.That(savedEvents, Has.Length.EqualTo(1));
         Assert.That(savedEvents[0].Id, Is.EqualTo(id));
         Assert.That(savedEvents[0].FullyQualifiedTypeName, Is.EqualTo(typeof(DummyEvent).FullName));

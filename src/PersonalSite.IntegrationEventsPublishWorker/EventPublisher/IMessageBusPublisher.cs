@@ -1,19 +1,30 @@
-﻿namespace PersonalSite.IntegrationEventsPublishWorker.EventPublisher
+﻿using PersonalSite.Domain;
+
+namespace PersonalSite.IntegrationEventsPublishWorker.EventPublisher;
+
+/// <summary>
+/// Dummy message bus for POC
+/// </summary>
+public interface IMessageBus
 {
-    public interface IMessageBusPublisher
+    void Publish<TMessage>(TMessage message) where TMessage : class;
+}
+
+public class DummyMessageBus : IMessageBus
+{
+    private readonly ILogger<DummyMessageBus> _logger;
+    private readonly IClock _clock;
+
+    public DummyMessageBus(ILogger<DummyMessageBus> logger, IClock clock)
     {
-        void Publish<TMessage>(TMessage message) where TMessage : class;
+        _logger = logger;
+        _clock = clock;
     }
 
-    public class DummyMessageBusPublisher : IMessageBusPublisher
+    public void Publish<TMessage>(TMessage message) where TMessage : class
     {
-        public void Publish<TMessage>(TMessage message) where TMessage : class
-        {
-            //var num = new Random().Next(0, 10);
-            //if (num == 0)
-            //{
-            //    throw new Exception("Failed to send message to message bus.");
-            //}
-        }
+        _logger.LogInformation("{Timestamp} - Publishing {MessageType} message...", 
+            _clock.UtcNow, 
+            message.GetType().Name);
     }
 }

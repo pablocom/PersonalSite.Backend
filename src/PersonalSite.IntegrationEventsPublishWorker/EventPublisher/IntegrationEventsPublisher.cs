@@ -6,26 +6,24 @@ namespace PersonalSite.IntegrationEventsPublishWorker.EventPublisher;
 public sealed class IntegrationEventsPublisher
 {
     private readonly PersonalSiteDbContext _dbContext;
-    private readonly IMessageBusPublisher _messageBusPublisher;
+    private readonly IMessageBus _messageBusPublisher;
+    private readonly ILogger<IntegrationEventsPublisher> _logger;
 
-    public IntegrationEventsPublisher(PersonalSiteDbContext dbContext, IMessageBusPublisher messageBusPublisher)
+    public IntegrationEventsPublisher(PersonalSiteDbContext dbContext, IMessageBus messageBusPublisher, ILogger<IntegrationEventsPublisher> logger)
     {
         _dbContext = dbContext;
         _messageBusPublisher = messageBusPublisher;
+        _logger = logger;
     }
 
     public async Task PublishIntegrationEventsToServiceBus()
     {
-        var events = await _dbContext.PersistableEvents.Where(x => x.IsProcessed == false).ToArrayAsync();
-        Console.WriteLine($"{DateTimeOffset.UtcNow} - Publishing {events.Length} integration events...");
+        var integrationEvents = await _dbContext.IntegrationEvents.Where(x => x.IsPublished == false).ToArrayAsync();
+        Console.WriteLine($"{DateTimeOffset.UtcNow} - Publishing {integrationEvents.Length} integration events...");
 
-        foreach (var @event in events)
+        foreach (var @event in integrationEvents)
         {
             _messageBusPublisher.Publish(@event);
-        }
-
-        foreach (var @event in events)
-        {
             @event.MarkAsProcessed();
         }
 

@@ -6,6 +6,7 @@ using MediatR;
 using PersonalSite.Domain.Events;
 using System.Globalization;
 using System.Text.Json.Serialization;
+using PersonalSite.Domain;
 
 namespace PersonalSite.Persistence.Events;
 
@@ -16,16 +17,22 @@ public class JobExperienceAddedHandlerForEventStore : INotificationHandler<JobEx
         Converters = { new DateOnlyJsonConverter() }
     };
     private readonly PersonalSiteDbContext _dbContext;
+    private readonly IClock _clock;
 
-    public JobExperienceAddedHandlerForEventStore(PersonalSiteDbContext dbContext)
+    public JobExperienceAddedHandlerForEventStore(PersonalSiteDbContext dbContext, IClock clock)
     {
         _dbContext = dbContext;
+        _clock = clock;
     }
 
     public Task Handle(JobExperienceAdded ev, CancellationToken cancellationToken)
     {
-        // TODO: Guid and DateTime should come from a provider to be easily testable
-        var eventToPersist = new PersistableEvent(Guid.NewGuid(), ev.GetType().FullName, JsonSerializer.Serialize(ev, JsonSerializerOptions), DateTime.UtcNow);
+        var eventToPersist = new IntegrationEvent(
+            Guid.NewGuid(), 
+            ev.GetType().FullName, 
+            JsonSerializer.Serialize(ev, JsonSerializerOptions), 
+            _clock.UtcNow);
+
         _dbContext.Add(eventToPersist);
         return Task.CompletedTask;
     }

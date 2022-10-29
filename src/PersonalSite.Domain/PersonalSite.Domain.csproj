@@ -5,7 +5,6 @@
     <RootNamespace>PersonalSite.Domain</RootNamespace>
     <AssemblyName>PersonalSite.Domain</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
   </ItemGroup>

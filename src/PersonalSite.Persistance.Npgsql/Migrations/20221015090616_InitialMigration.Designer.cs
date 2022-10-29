@@ -12,7 +12,7 @@ using PersonalSite.Persistence;
 namespace PersonalSite.Persistence.Npgsql.Migrations
 {
     [DbContext(typeof(PersonalSiteDbContext))]
-    [Migration("20221003183749_InitialMigration")]
+    [Migration("20221015090616_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,13 +46,13 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
                     b.ToTable("JobExperiences");
                 });
 
-            modelBuilder.Entity("PersonalSite.Persistence.Events.PersistableEvent", b =>
+            modelBuilder.Entity("PersonalSite.Persistence.Events.IntegrationEvent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasPrecision(5)
                         .HasColumnType("timestamp(5) with time zone");
 
@@ -60,7 +60,7 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsProcessed")
+                    b.Property<bool>("IsPublished")
                         .HasColumnType("boolean");
 
                     b.Property<string>("SerializedData")
@@ -69,9 +69,9 @@ namespace PersonalSite.Persistence.Npgsql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsProcessed");
+                    b.HasIndex("IsPublished");
 
-                    b.ToTable("PersistableEvents");
+                    b.ToTable("IntegrationEvents");
                 });
 
             modelBuilder.Entity("PersonalSite.Domain.Model.JobExperienceAggregate.JobExperience", b =>
