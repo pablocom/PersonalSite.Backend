@@ -6,6 +6,6 @@ services:
     container_name: personal_site_postgresql
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"

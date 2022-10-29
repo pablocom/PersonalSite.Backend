@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
-public class JobPeriod : ValueObject
+public sealed class JobPeriod : ValueObject
 {
     public DateOnly Start { get; }
     public DateOnly? End { get; }
-
-    protected JobPeriod() { }
 
     public JobPeriod(DateOnly start, DateOnly? end)
     {

@@ -23,7 +23,9 @@ public class JobExperienceEndpoints : IEndpoints
             .Produces<IEnumerable<CreateJobExperienceDto>>(StatusCodes.Status200OK);
     }
 
-    private static async Task<IResult> CreateJobExperience([FromBody] CreateJobExperienceDto dto, IMediator mediator)
+    private static async Task<IResult> CreateJobExperience(
+        [FromBody] CreateJobExperienceDto dto, 
+        [FromServices] IMediator mediator)
     {
         await mediator.Send(new CreateJobExperienceCommand(dto.Company, dto.Description, dto.JobPeriodStart,
             dto.JobPeriodEnd, dto.TechStack));

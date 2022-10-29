@@ -12,6 +12,7 @@ public class JobExperienceMappingOverride : IEntityTypeConfiguration<JobExperien
 {
     public void Configure(EntityTypeBuilder<JobExperience> builder)
     {
+        builder.Ignore(o => o.DomainEvents);
         builder.HasKey(o => o.Id);
         builder.OwnsOne(o => o.JobPeriod,
             x =>

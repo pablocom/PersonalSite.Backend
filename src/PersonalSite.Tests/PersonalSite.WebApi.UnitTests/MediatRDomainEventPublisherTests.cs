@@ -19,7 +19,7 @@ public class MediatRDomainEventPublisherTests
     }
 
     [Test]
-    public async Task PublishesDomainEvent()
+    public async Task PublishesDomainEvents()
     {
         var events = new[]
         {
