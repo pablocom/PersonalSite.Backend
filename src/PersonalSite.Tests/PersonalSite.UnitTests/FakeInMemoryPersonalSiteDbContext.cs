@@ -10,8 +10,6 @@ public class FakeInMemoryPersonalSiteDbContext : PersonalSiteDbContext
     {
     }
 
-    public DbSet<JobExperience> JobExperiences { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseInMemoryDatabase(databaseName: "FakePersonalSiteDbContext");
