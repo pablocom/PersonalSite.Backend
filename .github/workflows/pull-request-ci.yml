@@ -27,11 +27,11 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '7.0.x'
         include-prerelease: false
     - name: Install dependencies
       run: dotnet restore src
-    - name: Update database
+    - name: Run database migrations
       env: 
         PersonalSiteConnectionString: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
       run: |
@@ -41,7 +41,7 @@ jobs:
         dotnet ef database update --project PersonalSite.Persistence --startup-project PersonalSite.WebApi 
     - name: Build
       run: dotnet build src --configuration Release --no-restore
-    - name: Test
+    - name: Run tests
       env: 
          PersonalSiteConnectionString: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
       run: dotnet test src --no-restore --verbosity normal

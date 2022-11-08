@@ -23,9 +23,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.WebApi", "Pers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.Persistance.Npgsql", "PersonalSite.Persistance.Npgsql\PersonalSite.Persistance.Npgsql.csproj", "{D2E46104-9B2B-4FF9-832A-2496E939BA72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.IntegrationEventsPublishWorker", "PersonalSite.IntegrationEventsPublishWorker\PersonalSite.IntegrationEventsPublishWorker.csproj", "{2F367CBF-47EA-4A44-9A60-77C2F5DCDB12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationEventsPublishWorker", "PersonalSite.IntegrationEventsPublishWorker\PersonalSite.IntegrationEventsPublishWorker.csproj", "{2F367CBF-47EA-4A44-9A60-77C2F5DCDB12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalSite.IntegrationEventsPublishWorker.UnitTests", "PersonalSite.IntegrationEventsPublishWorker.UnitTests\PersonalSite.IntegrationEventsPublishWorker.UnitTests.csproj", "{D518DB76-6A3E-4EC9-A15C-2A406C412D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationEventsPublishWorker.UnitTests", "PersonalSite.IntegrationEventsPublishWorker.UnitTests\PersonalSite.IntegrationEventsPublishWorker.UnitTests.csproj", "{D518DB76-6A3E-4EC9-A15C-2A406C412D78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E328AA1-EAC1-47E1-B482-842353B5831D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\pull-request-ci.yml = ..\.github\workflows\pull-request-ci.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
