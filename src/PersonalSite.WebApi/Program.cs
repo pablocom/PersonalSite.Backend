@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PersonalSiteDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetValue<string>("PersonalSiteConnectionString"), b =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PersonalSiteDatabase"), b =>
     {
         b.MigrationsAssembly(typeof(PersonalSite.Persistence.Npgsql.IAssemblyMarker).Assembly.FullName);
     });

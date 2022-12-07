@@ -16,7 +16,7 @@ public class PersonalSiteIntegrationTestBase
     [SetUp]
     protected void Setup()
     {
-        var connectionString = Environment.GetEnvironmentVariable("PersonalSiteConnectionString");
+        var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__PersonalSiteDatabase");
         var options = new DbContextOptionsBuilder<PersonalSiteDbContext>()
             .UseNpgsql(connectionString)
             .EnableSensitiveDataLogging()
