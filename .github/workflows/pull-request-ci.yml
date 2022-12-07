@@ -33,7 +33,7 @@ jobs:
       run: dotnet restore src
     - name: Run database migrations
       env: 
-        PersonalSiteConnectionString: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
+        ConnectionStrings__PersonalSiteDatabase: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
       run: |
         dotnet tool install --global dotnet-ef
         dotnet tool restore
@@ -43,5 +43,5 @@ jobs:
       run: dotnet build src --configuration Release --no-restore
     - name: Run tests
       env: 
-         PersonalSiteConnectionString: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
+         ConnectionStrings__PersonalSiteDatabase: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
       run: dotnet test src --no-restore --verbosity normal
