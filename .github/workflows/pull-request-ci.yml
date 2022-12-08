@@ -31,6 +31,8 @@ jobs:
         include-prerelease: false
     - name: Install dependencies
       run: dotnet restore src
+    - name: Build
+      run: dotnet build src --configuration Release --no-restore
     - name: Run database migrations
       env: 
         ConnectionStrings__PersonalSiteDatabase: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;
@@ -39,8 +41,6 @@ jobs:
         dotnet tool restore
         cd /home/runner/work/PersonalSite.Backend/PersonalSite.Backend/src/
         dotnet ef database update --project PersonalSite.Persistence --startup-project PersonalSite.WebApi 
-    - name: Build
-      run: dotnet build src --configuration Release --no-restore
     - name: Run tests
       env: 
          ConnectionStrings__PersonalSiteDatabase: User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=personal_site_db;

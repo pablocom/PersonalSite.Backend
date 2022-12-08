@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
-using PersonalSite.Domain.Extensions;
 
 namespace PersonalSite.Domain.Model.JobExperienceAggregate;
 
