@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using PersonalSite.Application.Dtos;
+using PersonalSite.Domain.Dtos;
 
 namespace PersonalSite.WebApi.Queries;
 

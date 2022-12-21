@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using PersonalSite.Application;
+using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.Commands;

@@ -2,7 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using NUnit.Framework;
-using PersonalSite.Application;
+using PersonalSite.Domain;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.IntegrationTests;

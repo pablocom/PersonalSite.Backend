@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PersonalSite.Application;
+using PersonalSite.Domain;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
 namespace PersonalSite.UnitTests;

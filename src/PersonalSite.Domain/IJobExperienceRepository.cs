@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Application;
+namespace PersonalSite.Domain;
 
 public interface IJobExperienceRepository
 {

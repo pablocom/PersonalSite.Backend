@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using PersonalSite.Application.Dtos;
+using PersonalSite.Domain.Dtos;
 using PersonalSite.Persistence;
-using PersonalSite.WebApi;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Converters;
 

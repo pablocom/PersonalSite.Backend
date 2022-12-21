@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using PersonalSite.Application;
+using PersonalSite.Domain;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 

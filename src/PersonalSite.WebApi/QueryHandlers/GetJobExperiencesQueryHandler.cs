@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using PersonalSite.Application;
-using PersonalSite.Application.Dtos;
+using PersonalSite.Domain;
+using PersonalSite.Domain.Dtos;
 using PersonalSite.WebApi.Queries;
 
 namespace PersonalSite.WebApi.QueryHandlers;

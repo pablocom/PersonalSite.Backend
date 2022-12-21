@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalSite.IntegrationEve
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E328AA1-EAC1-47E1-B482-842353B5831D}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		..\utilities\EntityFrameworkMigrationsShorthand.txt = ..\utilities\EntityFrameworkMigrationsShorthand.txt
 		..\.github\workflows\pull-request-ci.yml = ..\.github\workflows\pull-request-ci.yml
 	EndProjectSection
 EndProject

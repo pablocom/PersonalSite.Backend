@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using PersonalSite.Application;
+using PersonalSite.Domain;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;

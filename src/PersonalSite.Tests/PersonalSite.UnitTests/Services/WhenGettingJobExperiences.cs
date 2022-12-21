@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using PersonalSite.Application;
-using PersonalSite.Application.Dtos;
+using PersonalSite.Domain;
+using PersonalSite.Domain.Dtos;
 using PersonalSite.Domain;
 using PersonalSite.UnitTests.Builders;
 
