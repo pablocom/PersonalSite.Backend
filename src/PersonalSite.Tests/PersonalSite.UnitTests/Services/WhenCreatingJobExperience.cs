@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
-using PersonalSite.Domain;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
@@ -16,12 +15,12 @@ namespace PersonalSite.UnitTests.Services;
 public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 {
     private IJobExperienceService _service;
-    private Mock<IDomainEventPublisher> _domainEventPublisherMock;
+    private IDomainEventPublisher _domainEventPublisherMock;
 
     protected override void AdditionalSetup()
     {
-        _domainEventPublisherMock = new Mock<IDomainEventPublisher>();
-        _service = new JobExperienceService(Repository, _domainEventPublisherMock.Object);
+        _domainEventPublisherMock = Substitute.For<IDomainEventPublisher>();
+        _service = new JobExperienceService(Repository, _domainEventPublisherMock);
     }
 
     [Test]
@@ -51,12 +50,9 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 
         await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
 
-        _domainEventPublisherMock.Verify(
-            publisher => publisher.Publish(It.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(
-                    @events.Single() as JobExperienceAdded, company, description, startDate, endDate, techStack))
-            ),
-            Times.Once
-        );
+        await _domainEventPublisherMock.Received(1).Publish(Arg.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(
+                    @events.Single() as JobExperienceAdded, company, description, startDate, endDate, techStack)
+            ));
     }
 
     [TestCase(null, null)]

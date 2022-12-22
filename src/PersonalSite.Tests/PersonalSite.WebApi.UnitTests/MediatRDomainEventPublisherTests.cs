@@ -29,8 +29,8 @@ public class MediatRDomainEventPublisherTests
 
         await _domainEventPublisher.Publish(events);
 
-        _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[0]), Arg.Any<CancellationToken>());
-        _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[1]), Arg.Any<CancellationToken>());
+        await _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[0]), Arg.Any<CancellationToken>());
+        await _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[1]), Arg.Any<CancellationToken>());
     }
 
     [Test]
@@ -40,7 +40,7 @@ public class MediatRDomainEventPublisherTests
 
         await _domainEventPublisher.Publish(events);
 
-        _mediatRPublisherMock.Received(0).Publish(Arg.Any<IDomainEvent>(), Arg.Any<CancellationToken>());
+        await _mediatRPublisherMock.Received(0).Publish(Arg.Any<IDomainEvent>(), Arg.Any<CancellationToken>());
     }
 
     private sealed class DummyEvent : IDomainEvent
