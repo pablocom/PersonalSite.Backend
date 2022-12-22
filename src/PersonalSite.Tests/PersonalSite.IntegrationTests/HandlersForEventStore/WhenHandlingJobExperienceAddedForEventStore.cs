@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
@@ -15,7 +15,7 @@ namespace PersonalSite.IntegrationTests.HandlersForEventStore;
 
 public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrationTestBase
 {
-    private Mock<IClock> _clock;
+    private IClock _clock;
     private static readonly DateTimeOffset Date = new(2022, 2, 5, 0, 0, 0, TimeSpan.Zero);
     
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
@@ -28,8 +28,8 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
     {
         base.AdditionalSetup();
 
-        _clock = new Mock<IClock>();
-        _clock.Setup(c => c.UtcNow).Returns(Date);
+        _clock = Substitute.For<IClock>();
+        _clock.UtcNow.Returns(Date);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         var techStack = new[] { ".Net", "MySQL" };
         var @event = new JobExperienceAdded(company, description, startDate, endDate, techStack);
 
-        var handler = new JobExperienceAddedHandlerForEventStore(DbContext, _clock.Object);
+        var handler = new JobExperienceAddedHandlerForEventStore(DbContext, _clock);
         await handler.Handle(@event, CancellationToken.None);
         CloseContext();
 
