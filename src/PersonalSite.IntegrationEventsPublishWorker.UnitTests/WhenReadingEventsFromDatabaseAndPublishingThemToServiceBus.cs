@@ -28,7 +28,6 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
     {
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
         _messageBusPublisherMock.DidNotReceive().Publish(Arg.Any<IntegrationEvent>());
     }
 
@@ -43,7 +42,6 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
 
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
         _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1"));
         _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2"));
     }
@@ -61,7 +59,6 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
 
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
         _messageBusPublisherMock.Received(0).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1"));
         _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2"));
     }
