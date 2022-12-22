@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain;
 
@@ -8,14 +8,14 @@ namespace PersonalSite.WebApi.UnitTests;
 [TestFixture]
 public class MediatRDomainEventPublisherTests
 {
-    private Mock<IPublisher> _mediatRPublisherMock;
+    private IPublisher _mediatRPublisherMock;
     private MediatRDomainEventPublisher _domainEventPublisher;
 
     [SetUp]
     public void SetUp()
     {
-        _mediatRPublisherMock = new Mock<IPublisher>();
-        _domainEventPublisher = new MediatRDomainEventPublisher(_mediatRPublisherMock.Object);
+        _mediatRPublisherMock = Substitute.For<IPublisher>();
+        _domainEventPublisher = new MediatRDomainEventPublisher(_mediatRPublisherMock);
     }
 
     [Test]
@@ -29,10 +29,8 @@ public class MediatRDomainEventPublisherTests
 
         await _domainEventPublisher.Publish(events);
 
-        _mediatRPublisherMock.Verify(
-            x => x.Publish(It.Is<IDomainEvent>(ev => ev == events[0]), It.IsAny<CancellationToken>()), Times.Once);
-        _mediatRPublisherMock.Verify(
-            x => x.Publish(It.Is<IDomainEvent>(ev => ev == events[1]), It.IsAny<CancellationToken>()), Times.Once);
+        _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[0]), Arg.Any<CancellationToken>());
+        _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[1]), Arg.Any<CancellationToken>());
     }
 
     [Test]
@@ -42,8 +40,7 @@ public class MediatRDomainEventPublisherTests
 
         await _domainEventPublisher.Publish(events);
 
-        _mediatRPublisherMock.Verify(
-            x => x.Publish(It.IsAny<IDomainEvent>(), It.IsAny<CancellationToken>()), Times.Never);
+        _mediatRPublisherMock.Received(0).Publish(Arg.Any<IDomainEvent>(), Arg.Any<CancellationToken>());
     }
 
     private sealed class DummyEvent : IDomainEvent
