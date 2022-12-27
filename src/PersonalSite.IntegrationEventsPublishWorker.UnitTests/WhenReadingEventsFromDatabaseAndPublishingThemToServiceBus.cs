@@ -8,19 +8,19 @@ namespace PersonalSite.IntegrationEventsPublishWorker.UnitTests;
 
 public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
 {
-    private readonly Mock<IMessageBus> _messageBusPublisherMock;
+    private readonly IMessageBus _messageBusPublisherMock;
     private readonly FakeInMemoryPersonalSiteDbContext _dbContext;
     private readonly IntegrationEventsPublisher _integrationEventsPublisher;
     
     public WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus()
     {
-        _messageBusPublisherMock = new Mock<IMessageBus>();
+        _messageBusPublisherMock = Substitute.For<IMessageBus>();
         _dbContext = new FakeInMemoryPersonalSiteDbContext(new DbContextOptions<PersonalSiteDbContext>());
 
         _integrationEventsPublisher = new IntegrationEventsPublisher(
             _dbContext,
-            _messageBusPublisherMock.Object,
-            Mock.Of<ILogger<IntegrationEventsPublisher>>());
+            _messageBusPublisherMock,
+            Substitute.For<ILogger<IntegrationEventsPublisher>>());
     }
 
     [Fact]
@@ -28,8 +28,7 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
     {
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
-        _messageBusPublisherMock.Verify(x => x.Publish(It.IsAny<IntegrationEvent>()), Times.Never);
+        _messageBusPublisherMock.DidNotReceive().Publish(Arg.Any<IntegrationEvent>());
     }
 
     [Fact]
@@ -43,11 +42,8 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
 
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
-        _messageBusPublisherMock
-            .Verify(x => x.Publish(It.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1")), Times.Exactly(1));
-        _messageBusPublisherMock
-            .Verify(x => x.Publish(It.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2")), Times.Exactly(1));
+        _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1"));
+        _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2"));
     }
 
     [Fact]
@@ -63,18 +59,13 @@ public class WhenReadingEventsFromDatabaseAndPublishingThemToServiceBus
 
         await _integrationEventsPublisher.PublishIntegrationEventsToServiceBus();
 
-        var events = _dbContext.IntegrationEvents.ToArray();
-        _messageBusPublisherMock
-            .Verify(x => x.Publish(It.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1")), Times.Never);
-        _messageBusPublisherMock
-            .Verify(x => x.Publish(It.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2")), Times.Exactly(1));
+        _messageBusPublisherMock.Received(0).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName1"));
+        _messageBusPublisherMock.Received(1).Publish(Arg.Is<IntegrationEvent>(x => x.FullyQualifiedTypeName == "fullName2"));
     }
 
     [Fact]
     public async Task MarksAsPublishedEventsAfterPublishingToMessageBus()
     {
-        
-
         AssumeEventsAreStored(new[]
         {
             new IntegrationEvent(Guid.Parse("A01B92E2-1A73-4065-9CD5-B49C0A168021"), "fullName1", "serializedData1", new DateTime(1996, 9, 20)),

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Dtos;
-using PersonalSite.Domain;
 using PersonalSite.UnitTests.Builders;
 
 namespace PersonalSite.UnitTests.Services;
@@ -16,7 +15,7 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 
     protected override void AdditionalSetup()
     {
-        _service = new JobExperienceService(Repository, Mock.Of<IDomainEventPublisher>());
+        _service = new JobExperienceService(Repository, Substitute.For<IDomainEventPublisher>());
     }
 
     [Test]
