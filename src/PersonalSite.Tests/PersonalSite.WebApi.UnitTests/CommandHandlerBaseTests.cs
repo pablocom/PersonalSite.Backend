@@ -1,12 +1,11 @@
 ﻿using MediatR;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.CommandHandlers;
+using Xunit;
 
 namespace PersonalSite.WebApi.UnitTests;
 
-[TestFixture]
 public class CommandHandlerBaseTests
 {
     private IUnitOfWork _unitOfWork;
@@ -15,14 +14,13 @@ public class CommandHandlerBaseTests
 
     public class FakeCommand : IRequest<Unit> { } // class intentionally public for mocking concerns
 
-    [SetUp]
-    public void SetUp()
+    public CommandHandlerBaseTests()
     {
         _unitOfWork = Substitute.For<IUnitOfWork>();
         _commandHandler = Substitute.For<CommandHandler<FakeCommand>>(_unitOfWork);
     }
 
-    [Test]
+    [Fact]
     public async Task ProcessCommandWhenRequestIsHandled()
     {
         WhenRequestIsHandled();
@@ -30,7 +28,7 @@ public class CommandHandlerBaseTests
         await _commandHandler.Received(1).Process(_command);
     }
 
-    [Test]
+    [Fact]
     public void RollbackUnitOfWorkOnError()
     {
         _commandHandler
@@ -49,7 +47,7 @@ public class CommandHandlerBaseTests
         _unitOfWork.Received(1).Rollback();
     }
 
-    [Test]
+    [Fact]
     public void UnitOfWorkCommitsAfterProcessing()
     {
         WhenRequestIsHandled();

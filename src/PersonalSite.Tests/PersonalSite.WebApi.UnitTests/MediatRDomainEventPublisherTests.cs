@@ -1,24 +1,22 @@
 ﻿using MediatR;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Domain;
+using Xunit;
 
 namespace PersonalSite.WebApi.UnitTests;
 
-[TestFixture]
 public class MediatRDomainEventPublisherTests
 {
     private IPublisher _mediatRPublisherMock;
     private MediatRDomainEventPublisher _domainEventPublisher;
 
-    [SetUp]
-    public void SetUp()
+    public MediatRDomainEventPublisherTests()
     {
         _mediatRPublisherMock = Substitute.For<IPublisher>();
         _domainEventPublisher = new MediatRDomainEventPublisher(_mediatRPublisherMock);
     }
 
-    [Test]
+    [Fact]
     public async Task PublishesDomainEvent()
     {
         var events = new[]
@@ -33,7 +31,7 @@ public class MediatRDomainEventPublisherTests
         await _mediatRPublisherMock.Received(1).Publish(Arg.Is<IDomainEvent>(ev => ev == events[1]), Arg.Any<CancellationToken>());
     }
 
-    [Test]
+    [Fact]
     public async Task DoesNotPublishAnyEventIfEventListIsEmpty()
     {
         var events = Array.Empty<IDomainEvent>();
