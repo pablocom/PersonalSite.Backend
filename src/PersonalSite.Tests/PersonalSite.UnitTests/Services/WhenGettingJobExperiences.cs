@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Dtos;
 using PersonalSite.UnitTests.Builders;
+using Xunit;
 
 namespace PersonalSite.UnitTests.Services;
 
@@ -18,7 +18,7 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
         _service = new JobExperienceService(Repository, Substitute.For<IDomainEventPublisher>());
     }
 
-    [Test]
+    [Fact]
     public async Task MultipleJobExperiencesAreReturned()
     {
         var company = "Ryanair";
@@ -53,17 +53,17 @@ public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 
         var jobExperiences = (await _service.GetJobExperiences()).ToArray();
 
-        Assert.That(jobExperiences.Length, Is.EqualTo(2));
+        Assert.Equal(2, jobExperiences.Length);
         AssertJobExperience(jobExperiences[0], company, description, startDate, endDate, techStack);
         AssertJobExperience(jobExperiences[1], otherCompany, otherDescription, otherStartDate, otherEndDate, otherTechStack);
     }
 
     private static void AssertJobExperience(JobExperienceDto jobExperience, string company, string description, DateOnly startDate, DateOnly endDate, string[] techStack)
     {
-        Assert.That(jobExperience.Company, Is.EqualTo(company));
-        Assert.That(jobExperience.Description, Is.EqualTo(description));
-        Assert.That(jobExperience.JobPeriodStart, Is.EqualTo(startDate));
-        Assert.That(jobExperience.JobPeriodEnd, Is.EqualTo(endDate));
-        CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
+        Assert.Equal(jobExperience.Company, company);
+        Assert.Equal(jobExperience.Description, description);
+        Assert.Equal(jobExperience.JobPeriodStart, startDate);
+        Assert.Equal(jobExperience.JobPeriodEnd, endDate);
+        Assert.Equal(techStack, jobExperience.TechStack);
     }
 }

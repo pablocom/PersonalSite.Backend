@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
+using Xunit;
 
 namespace PersonalSite.UnitTests.Services;
 
-[TestFixture]
 public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 {
     private IJobExperienceService _service;
@@ -23,7 +22,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         _service = new JobExperienceService(Repository, _domainEventPublisherMock);
     }
 
-    [Test]
+    [Fact]
     public async Task CreatesJobExperience()
     {
         var company = "Ryanair";
@@ -39,7 +38,7 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
         AssertJobExperience(jobExperience, company, description, startDate, endDate, techStack);
     }
 
-    [Test]
+    [Fact]
     public async Task JobExperienceAddedEventIsPublished()
     {
         var company = "Ryanair";
@@ -55,39 +54,40 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
             ));
     }
 
-    [TestCase(null, null)]
-    [TestCase("", null)]
-    [TestCase(null, "")]
-    [TestCase("", "")]
-    public void RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("", null)]
+    [InlineData(null, "")]
+    [InlineData("", "")]
+    public async Task RaisesArgumentExceptionIfCompanyOrDescriptionIsNullOrWhiteSpace(string company, string description)
     {
         async Task Action()
         {
             await _service.CreateJobExperience(company, description, new DateOnly(), new DateOnly(), Array.Empty<string>());
         }
 
-        var exception = Assert.ThrowsAsync<DomainException>(Action);
-        Assert.That(exception.Message, Is.EqualTo("Job experience company and description must have value"));
+        var exception = await Assert.ThrowsAsync<DomainException>(Action);
+        Assert.Equal("Job experience company and description must have value", exception.Message);
     }
 
     private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateOnly startDate, 
         DateOnly endDate, IEnumerable<string> techStack)
     {
-        Assert.That(jobExperience.Company, Is.EqualTo(company));
-        Assert.That(jobExperience.Description, Is.EqualTo(description));
-        Assert.That(jobExperience.JobPeriod.Start, Is.EqualTo(startDate));
-        Assert.That(jobExperience.JobPeriod.End, Is.EqualTo(endDate));
-        CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
+        Assert.Equal(jobExperience.Company, company);
+        Assert.Equal(jobExperience.Description, description);
+        Assert.Equal(jobExperience.JobPeriod.Start, startDate);
+        Assert.Equal(jobExperience.JobPeriod.End, endDate);
+        Assert.Equal(techStack, jobExperience.TechStack);
     }
 
     private static bool AssertJobExperienceAddedEvent(JobExperienceAdded @event, string company, string description, DateOnly startDate, 
         DateOnly endDate, IEnumerable<string> techStack)
     {
-        Assert.That(@event.Company, Is.EqualTo(company));
-        Assert.That(@event.Description, Is.EqualTo(description));
-        Assert.That(@event.JobPeriodStart, Is.EqualTo(startDate));
-        Assert.That(@event.JobPeriodEnd, Is.EqualTo(endDate));
-        Assert.That(@event.TechStack, Is.EquivalentTo(techStack));
+        Assert.Equal(@event.Company, company);
+        Assert.Equal(@event.Description, description);
+        Assert.Equal(@event.JobPeriodStart, startDate);
+        Assert.Equal(@event.JobPeriodEnd, endDate);
+        Assert.Equal(@event.TechStack, techStack);
         return true;
     }
 }

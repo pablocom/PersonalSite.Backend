@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
@@ -12,8 +11,7 @@ public class PersonalSiteDomainTestBase
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
-    [SetUp]
-    public void SetUp()
+    public PersonalSiteDomainTestBase()
     {
         DbContext = new FakeInMemoryPersonalSiteDbContext(new DbContextOptions<PersonalSiteDbContext>());
         DbContext.Database.EnsureDeleted();

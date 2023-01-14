@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PersonalSite.Domain.Model.JobExperienceAggregate;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.UnitTests;
