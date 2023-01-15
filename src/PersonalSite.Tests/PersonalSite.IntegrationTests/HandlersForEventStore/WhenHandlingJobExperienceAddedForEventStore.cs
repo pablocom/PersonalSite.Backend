@@ -6,10 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Persistence.Events;
+using Xunit;
 
 namespace PersonalSite.IntegrationTests.HandlersForEventStore;
 
@@ -32,7 +32,7 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         _clock.UtcNow.Returns(Date);
     }
 
-    [Test]
+    [Fact]
     public async Task StoresEvent()
     {
         var company = "Ryanair";
@@ -47,11 +47,11 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         CloseContext();
 
         var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
-        Assert.That(savedEvents, Has.Length.EqualTo(1));
-        Assert.That(savedEvents[0].FullyQualifiedTypeName, Is.EqualTo(typeof(JobExperienceAdded).FullName));
-        Assert.That(savedEvents[0].SerializedData, Is.EqualTo(JsonSerializer.Serialize(@event, JsonSerializerOptions)));
-        Assert.That(savedEvents[0].IsPublished, Is.False);
-        Assert.That(savedEvents[0].CreatedAt, Is.EqualTo(Date));
+        Assert.Single(savedEvents);
+        Assert.Equal(savedEvents[0].FullyQualifiedTypeName, typeof(JobExperienceAdded).FullName);
+        Assert.Equal(savedEvents[0].SerializedData, JsonSerializer.Serialize(@event, JsonSerializerOptions));
+        Assert.False(savedEvents[0].IsPublished);
+        Assert.Equal(savedEvents[0].CreatedAt, Date);
     }
 
     private class DateOnlyJsonConverter : JsonConverter<DateOnly>
