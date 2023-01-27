@@ -54,7 +54,7 @@ public class WhenCreatingAndRetrievingJobExperiences : IDisposable
         var json = await secondResponse.Content.ReadAsStringAsync();
         var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, JsonSerializerOptions);
         Assert.Single(secondJobExperiences);
-        Assert.Equal(secondJobExperiences![0].Company, createJobExperienceDto.Company);
+        Assert.Equal(secondJobExperiences[0].Company, createJobExperienceDto.Company);
         Assert.Equal(secondJobExperiences[0].Description, createJobExperienceDto.Description);
         Assert.Equal(secondJobExperiences[0].JobPeriodEnd, createJobExperienceDto.JobPeriodEnd);
         Assert.Equal(secondJobExperiences[0].JobPeriodStart, createJobExperienceDto.JobPeriodStart);
