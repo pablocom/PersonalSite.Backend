@@ -1,18 +1,21 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using PersonalSite.Domain;
 using PersonalSite.Persistence;
+using Xunit;
 
 namespace PersonalSite.IntegrationTests;
 
-public class PersonalSiteIntegrationTestBase : IDisposable
+[Collection(nameof(PersonalSiteIntegrationTestBase))]
+public abstract class PersonalSiteIntegrationTestBase : IAsyncDisposable
 {
     private IDbContextTransaction _transaction;
-    protected IJobExperienceRepository Repository { get; private set; }
-    protected PersonalSiteDbContext DbContext { get; private set; }
+    protected IJobExperienceRepository Repository { get; }
+    protected PersonalSiteDbContext DbContext { get; }
 
-    public PersonalSiteIntegrationTestBase()
+    protected PersonalSiteIntegrationTestBase()
     {
         var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__PersonalSiteDatabase");
         var options = new DbContextOptionsBuilder<PersonalSiteDbContext>()
@@ -22,17 +25,18 @@ public class PersonalSiteIntegrationTestBase : IDisposable
 
         DbContext = new PersonalSiteDbContext(options);
         Repository = new JobExperienceRepository(DbContext);
-        _transaction = DbContext.Database.BeginTransaction();
 
-        AdditionalSetup();
+        _transaction = DbContext.Database.BeginTransaction();
     }
 
-    protected void CloseContext() => DbContext.SaveChanges();
-
-    protected virtual void AdditionalSetup() { }
-
-    void IDisposable.Dispose()
+    protected async Task SaveChangesAndClearTracking()
     {
-        _transaction.Rollback();
+        await DbContext.SaveChangesAsync();
+        DbContext.ChangeTracker.Clear();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _transaction.RollbackAsync();
     }
 }

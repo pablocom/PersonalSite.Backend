@@ -15,7 +15,7 @@ namespace PersonalSite.IntegrationTests.HandlersForEventStore;
 
 public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrationTestBase
 {
-    private IClock _clock;
+    private readonly IClock _clock;
     private static readonly DateTimeOffset Date = new(2022, 2, 5, 0, 0, 0, TimeSpan.Zero);
     
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
@@ -24,10 +24,8 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         PropertyNameCaseInsensitive = true
     };
 
-    protected override void AdditionalSetup()
+    public WhenHandlingJobExperienceAddedForEventStore()
     {
-        base.AdditionalSetup();
-
         _clock = Substitute.For<IClock>();
         _clock.UtcNow.Returns(Date);
     }
@@ -44,7 +42,7 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
 
         var handler = new JobExperienceAddedHandlerForEventStore(DbContext, _clock);
         await handler.Handle(@event, CancellationToken.None);
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
         Assert.Single(savedEvents);
@@ -54,7 +52,7 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         Assert.Equal(savedEvents[0].CreatedAt, Date);
     }
 
-    private class DateOnlyJsonConverter : JsonConverter<DateOnly>
+    public class DateOnlyJsonConverter : JsonConverter<DateOnly>
     {
         private const string DateFormat = "yyyy-MM-dd";
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using PersonalSite.Persistence;
 
 namespace PersonalSite.UnitTests;
@@ -11,6 +12,6 @@ public class FakeInMemoryPersonalSiteDbContext : PersonalSiteDbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseInMemoryDatabase(databaseName: "FakePersonalSiteDbContext");
+        optionsBuilder.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
     }
 }

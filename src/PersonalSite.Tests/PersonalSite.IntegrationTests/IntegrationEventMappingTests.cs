@@ -23,7 +23,7 @@ public class IntegrationEventMappingTests : PersonalSiteIntegrationTestBase
         );
 
         DbContext.IntegrationEvents.Add(integrationEvent);
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
         Assert.Single(savedEvents);

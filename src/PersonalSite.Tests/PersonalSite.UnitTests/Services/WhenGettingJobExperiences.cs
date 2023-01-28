@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Domain;
-using PersonalSite.Domain.Dtos;
 using PersonalSite.UnitTests.Builders;
 using Xunit;
 
@@ -11,9 +11,9 @@ namespace PersonalSite.UnitTests.Services;
 
 public class WhenGettingJobExperiences : PersonalSiteDomainTestBase
 {
-    private IJobExperienceService _service;
+    private readonly IJobExperienceService _service;
 
-    protected override void AdditionalSetup()
+    public WhenGettingJobExperiences()
     {
         _service = new JobExperienceService(Repository, Substitute.For<IDomainEventPublisher>());
     }

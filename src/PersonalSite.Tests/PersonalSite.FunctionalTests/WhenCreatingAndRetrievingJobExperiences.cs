@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalSite.Domain.Dtos;
+using PersonalSite.Application.Dtos;
 using PersonalSite.Persistence;
 using PersonalSite.WebApi.Dtos;
 using PersonalSite.WebApi.Converters;
@@ -22,7 +22,7 @@ public class WhenCreatingAndRetrievingJobExperiences : IDisposable
         PropertyNameCaseInsensitive = true
     };
 
-    private HttpClient _client = default!;
+    private readonly HttpClient _client;
     private readonly WebApplicationFactory<PersonalSite.WebApi.IAssemblyMarker> _applicationFactory = new();
 
     public WhenCreatingAndRetrievingJobExperiences()
@@ -49,16 +49,15 @@ public class WhenCreatingAndRetrievingJobExperiences : IDisposable
         var createResponse = await _client.PostAsJsonAsync("/jobExperiences", createJobExperienceDto, JsonSerializerOptions);
         Assert.Equal(HttpStatusCode.OK, createResponse.StatusCode);
 
-        var secondResponse = await _client.GetAsync("jobExperiences");
+        var secondResponse = await _client.GetAsync("/jobExperiences");
         Assert.Equal(HttpStatusCode.OK, secondResponse.StatusCode);
-        var json = await secondResponse.Content.ReadAsStringAsync();
-        var secondJobExperiences = JsonSerializer.Deserialize<JobExperienceDto[]>(json, JsonSerializerOptions);
-        Assert.NotNull(secondJobExperiences);
-        Assert.Equal(secondJobExperiences[0].Company, createJobExperienceDto.Company);
-        Assert.Equal(secondJobExperiences[0].Description, createJobExperienceDto.Description);
-        Assert.Equal(secondJobExperiences[0].JobPeriodEnd, createJobExperienceDto.JobPeriodEnd);
-        Assert.Equal(secondJobExperiences[0].JobPeriodStart, createJobExperienceDto.JobPeriodStart);
-        Assert.Equal(secondJobExperiences[0].TechStack, createJobExperienceDto.TechStack);
+        var createdJobExperiences = await secondResponse.Content.ReadFromJsonAsync<JobExperienceDto[]>();
+        Assert.NotNull(createdJobExperiences);
+        Assert.Equal(createdJobExperiences[0].Company, createJobExperienceDto.Company);
+        Assert.Equal(createdJobExperiences[0].Description, createJobExperienceDto.Description);
+        Assert.Equal(createdJobExperiences[0].JobPeriodEnd, createJobExperienceDto.JobPeriodEnd);
+        Assert.Equal(createdJobExperiences[0].JobPeriodStart, createJobExperienceDto.JobPeriodStart);
+        Assert.Equal(createdJobExperiences[0].TechStack, createJobExperienceDto.TechStack);
     }
 
     public void Dispose()

@@ -6,18 +6,16 @@ using PersonalSite.Persistence;
 
 namespace PersonalSite.UnitTests;
 
-public class PersonalSiteDomainTestBase
+public abstract class PersonalSiteDomainTestBase
 {
     protected IJobExperienceRepository Repository { get; set; }
     private FakeInMemoryPersonalSiteDbContext DbContext { get; set; }
 
-    public PersonalSiteDomainTestBase()
+    protected PersonalSiteDomainTestBase()
     {
         DbContext = new FakeInMemoryPersonalSiteDbContext(new DbContextOptions<PersonalSiteDbContext>());
         DbContext.Database.EnsureDeleted();
         Repository = new FakeJobExperienceRepository(DbContext);
-
-        AdditionalSetup();
     }
 
     protected void CloseContext()
@@ -32,6 +30,4 @@ public class PersonalSiteDomainTestBase
 
         CloseContext();
     }
-
-    protected virtual void AdditionalSetup() { }
 }

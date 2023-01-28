@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 
-namespace PersonalSite.Domain.Dtos;
+namespace PersonalSite.Application.Dtos;
 
 [Serializable]
 public class JobExperienceDto
 {
-    public string Company { get; set; }
-    public string Description { get; set; }
+    public string Company { get; set; } = default!;
+    public string Description { get; set; } = default!;
     public DateOnly JobPeriodStart { get; set; }
     public DateOnly? JobPeriodEnd { get; set; }
-    public IEnumerable<string> TechStack { get; set; }
+    public IEnumerable<string> TechStack { get; set; } = default!;
 
-    public JobExperienceDto() { }
-
+    public JobExperienceDto()
+    {
+        // Parameterless ctor for deserialization
+    }
+    
     private JobExperienceDto(string company, string description, JobPeriod jobPeriod, IEnumerable<string> techStack)
     {
         Company = company;

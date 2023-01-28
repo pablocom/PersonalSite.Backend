@@ -13,13 +13,13 @@ namespace PersonalSite.UnitTests.Services;
 
 public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 {
-    private IJobExperienceService _service;
-    private IDomainEventPublisher _domainEventPublisherMock;
+    private readonly IJobExperienceService _service;
+    private readonly IDomainEventPublisher _domainEventPublisher;
 
-    protected override void AdditionalSetup()
+    public WhenCreatingJobExperience()
     {
-        _domainEventPublisherMock = Substitute.For<IDomainEventPublisher>();
-        _service = new JobExperienceService(Repository, _domainEventPublisherMock);
+        _domainEventPublisher = Substitute.For<IDomainEventPublisher>();
+        _service = new JobExperienceService(Repository, _domainEventPublisher);
     }
 
     [Fact]
@@ -49,9 +49,9 @@ public class WhenCreatingJobExperience : PersonalSiteDomainTestBase
 
         await _service.CreateJobExperience(company, description, startDate, endDate, techStack);
 
-        await _domainEventPublisherMock.Received(1).Publish(Arg.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(
-                    @events.Single() as JobExperienceAdded, company, description, startDate, endDate, techStack)
-            ));
+        await _domainEventPublisher.Received(1).Publish(
+            Arg.Is<IEnumerable<IDomainEvent>>(@events => AssertJobExperienceAddedEvent(@events.Single() as JobExperienceAdded, company, description, startDate, endDate, techStack)
+        ));
     }
 
     [Theory]

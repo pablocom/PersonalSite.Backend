@@ -19,7 +19,7 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
         var techStack = new[] { ".Net", "MySQL" };
 
         await Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var jobExperiences = await Repository.GetAllJobExperiences();
         Assert.Single(jobExperiences);
