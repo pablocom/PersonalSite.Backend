@@ -6,16 +6,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NSubstitute;
-using NUnit.Framework;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Persistence.Events;
+using Xunit;
 
 namespace PersonalSite.IntegrationTests.HandlersForEventStore;
 
 public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrationTestBase
 {
-    private IClock _clock;
+    private readonly IClock _clock;
     private static readonly DateTimeOffset Date = new(2022, 2, 5, 0, 0, 0, TimeSpan.Zero);
     
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
@@ -24,15 +24,13 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
         PropertyNameCaseInsensitive = true
     };
 
-    protected override void AdditionalSetup()
+    public WhenHandlingJobExperienceAddedForEventStore()
     {
-        base.AdditionalSetup();
-
         _clock = Substitute.For<IClock>();
         _clock.UtcNow.Returns(Date);
     }
 
-    [Test]
+    [Fact]
     public async Task StoresEvent()
     {
         var company = "Ryanair";
@@ -44,17 +42,17 @@ public class WhenHandlingJobExperienceAddedForEventStore : PersonalSiteIntegrati
 
         var handler = new JobExperienceAddedHandlerForEventStore(DbContext, _clock);
         await handler.Handle(@event, CancellationToken.None);
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
-        Assert.That(savedEvents, Has.Length.EqualTo(1));
-        Assert.That(savedEvents[0].FullyQualifiedTypeName, Is.EqualTo(typeof(JobExperienceAdded).FullName));
-        Assert.That(savedEvents[0].SerializedData, Is.EqualTo(JsonSerializer.Serialize(@event, JsonSerializerOptions)));
-        Assert.That(savedEvents[0].IsPublished, Is.False);
-        Assert.That(savedEvents[0].CreatedAt, Is.EqualTo(Date));
+        Assert.Single(savedEvents);
+        Assert.Equal(savedEvents[0].FullyQualifiedTypeName, typeof(JobExperienceAdded).FullName);
+        Assert.Equal(savedEvents[0].SerializedData, JsonSerializer.Serialize(@event, JsonSerializerOptions));
+        Assert.False(savedEvents[0].IsPublished);
+        Assert.Equal(savedEvents[0].CreatedAt, Date);
     }
 
-    private class DateOnlyJsonConverter : JsonConverter<DateOnly>
+    public class DateOnlyJsonConverter : JsonConverter<DateOnly>
     {
         private const string DateFormat = "yyyy-MM-dd";
 

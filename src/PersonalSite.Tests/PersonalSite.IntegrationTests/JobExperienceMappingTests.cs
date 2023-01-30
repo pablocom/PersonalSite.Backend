@@ -1,16 +1,15 @@
-using NUnit.Framework;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace PersonalSite.IntegrationTests;
 
-[TestFixture]
 public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
 {
-    [Test]
+    [Fact]
     public async Task IsPersisted()
     {
         var company = "Ryanair";
@@ -20,19 +19,19 @@ public class JobExperienceMappingTests : PersonalSiteIntegrationTestBase
         var techStack = new[] { ".Net", "MySQL" };
 
         await Repository.Add(new JobExperience(company, description, startDate, endDate, techStack));
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var jobExperiences = await Repository.GetAllJobExperiences();
-        Assert.That(jobExperiences, Has.Length.EqualTo(1));
+        Assert.Single(jobExperiences);
         AssertJobExperience(jobExperiences.First(), company, description, startDate, endDate, techStack);
     }
 
     private static void AssertJobExperience(JobExperience jobExperience, string company, string description, DateOnly startDate, DateOnly endDate, IEnumerable<string> techStack)
     {
-        Assert.That(jobExperience.Company, Is.EqualTo(company));
-        Assert.That(jobExperience.Description, Is.EqualTo(description));
-        Assert.That(jobExperience.JobPeriod.Start, Is.EqualTo(startDate));
-        Assert.That(jobExperience.JobPeriod.End, Is.EqualTo(endDate));
-        CollectionAssert.AreEquivalent(techStack, jobExperience.TechStack);
+        Assert.Equal(jobExperience.Company, company);
+        Assert.Equal(jobExperience.Description, description);
+        Assert.Equal(jobExperience.JobPeriod.Start, startDate);
+        Assert.Equal(jobExperience.JobPeriod.End, endDate);
+        Assert.Equal(techStack, jobExperience.TechStack);
     }
 }

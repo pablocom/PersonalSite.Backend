@@ -2,15 +2,14 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using PersonalSite.Persistence.Events;
+using Xunit;
 
 namespace PersonalSite.IntegrationTests;
 
-[TestFixture]
 public class IntegrationEventMappingTests : PersonalSiteIntegrationTestBase
 {
-    [Test]
+    [Fact]
     public async Task IsPersisted()
     {
         var createdAt = new DateTimeOffset(2022, 2, 22, 1, 2, 3, 234, TimeSpan.Zero);
@@ -24,14 +23,14 @@ public class IntegrationEventMappingTests : PersonalSiteIntegrationTestBase
         );
 
         DbContext.IntegrationEvents.Add(integrationEvent);
-        CloseContext();
+        await SaveChangesAndClearTracking();
 
         var savedEvents = await DbContext.IntegrationEvents.ToArrayAsync();
-        Assert.That(savedEvents, Has.Length.EqualTo(1));
-        Assert.That(savedEvents[0].Id, Is.EqualTo(id));
-        Assert.That(savedEvents[0].FullyQualifiedTypeName, Is.EqualTo(typeof(DummyEvent).FullName));
-        Assert.That(savedEvents[0].SerializedData, Is.EqualTo(serializedEventData));
-        Assert.That(savedEvents[0].CreatedAt, Is.EqualTo(createdAt));
+        Assert.Single(savedEvents);
+        Assert.Equal(savedEvents[0].Id, id);
+        Assert.Equal(savedEvents[0].FullyQualifiedTypeName, typeof(DummyEvent).FullName);
+        Assert.Equal(savedEvents[0].SerializedData, serializedEventData);
+        Assert.Equal(savedEvents[0].CreatedAt, createdAt);
     }
 
     private class DummyEvent 
