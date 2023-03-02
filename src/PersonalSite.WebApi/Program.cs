@@ -38,6 +38,7 @@ builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
 builder.Services.AddSingleton<IClock, Clock>();
 
 builder.Services.AddMediatR(typeof(PersonalSite.WebApi.IAssemblyMarker));
+builder.Services.AddMediatR(typeof(PersonalSite.Application.IAssemblyMarker));
 builder.Services.AddMediatR(typeof(PersonalSite.Persistence.IAssemblyMarker));
 
 var app = builder.Build();
