@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
+using PersonalSite.Application;
 using PersonalSite.Domain;
 using PersonalSite.Persistence;
 using PersonalSite.Persistence.Npgsql;

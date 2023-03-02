@@ -6,7 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
+        <ProjectReference Include="..\PersonalSite.Domain\PersonalSite.Domain.csproj" />
+        <ProjectReference Include="..\PersonalSite.Persistence\PersonalSite.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="11.0.0" />
     </ItemGroup>
 
 </Project>

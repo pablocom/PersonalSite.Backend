@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using NSubstitute;
+using PersonalSite.Application.CommandHandlers;
 using PersonalSite.Persistence;
-using PersonalSite.WebApi.CommandHandlers;
 using Xunit;
 
 namespace PersonalSite.WebApi.UnitTests;

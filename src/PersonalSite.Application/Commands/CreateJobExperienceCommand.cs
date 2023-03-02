@@ -1,7 +1,7 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using MediatR;
 
-namespace PersonalSite.WebApi.Commands;
+namespace PersonalSite.Application.Commands;
 
 public class CreateJobExperienceCommand : IRequest<Unit>
 {

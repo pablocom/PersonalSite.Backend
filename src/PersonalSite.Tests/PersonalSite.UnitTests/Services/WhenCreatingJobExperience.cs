@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
+using PersonalSite.Application;
 using PersonalSite.Domain;
 using PersonalSite.Domain.Events;
 using PersonalSite.Domain.Exceptions;

@@ -1,8 +1,6 @@
 ﻿using PersonalSite.Domain;
 using PersonalSite.Domain.Model.JobExperienceAggregate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
