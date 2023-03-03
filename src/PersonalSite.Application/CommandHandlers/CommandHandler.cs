@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using PersonalSite.Persistence;
 
 namespace PersonalSite.Application.CommandHandlers;
 
