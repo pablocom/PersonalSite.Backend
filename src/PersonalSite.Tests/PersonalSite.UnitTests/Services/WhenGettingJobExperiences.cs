@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
+using PersonalSite.Application;
 using PersonalSite.Application.Dtos;
 using PersonalSite.Domain;
 using PersonalSite.UnitTests.Builders;

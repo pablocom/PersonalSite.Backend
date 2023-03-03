@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
+using PersonalSite.Application;
 using PersonalSite.Domain;
 using PersonalSite.Persistence;
 using PersonalSite.Persistence.Npgsql;
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IJobExperienceService, JobExperienceService>();
 builder.Services.AddSingleton<IClock, Clock>();
 
 builder.Services.AddMediatR(typeof(PersonalSite.WebApi.IAssemblyMarker));
+builder.Services.AddMediatR(typeof(PersonalSite.Application.IAssemblyMarker));
 builder.Services.AddMediatR(typeof(PersonalSite.Persistence.IAssemblyMarker));
 
 var app = builder.Build();

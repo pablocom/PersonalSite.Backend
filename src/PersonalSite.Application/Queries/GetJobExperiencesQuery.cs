@@ -2,7 +2,7 @@
 using MediatR;
 using PersonalSite.Application.Dtos;
 
-namespace PersonalSite.WebApi.Queries;
+namespace PersonalSite.Application.Queries;
 
 public class GetJobExperiencesQuery : IRequest<IEnumerable<JobExperienceDto>>
 { }

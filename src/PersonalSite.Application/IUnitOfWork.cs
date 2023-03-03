@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalSite.Persistence;
+namespace PersonalSite.Application;
 
 public interface IUnitOfWork : IDisposable
 {

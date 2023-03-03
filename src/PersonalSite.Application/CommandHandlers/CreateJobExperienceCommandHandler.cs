@@ -1,10 +1,7 @@
 ﻿using System.Threading.Tasks;
-using PersonalSite.Domain;
-using PersonalSite.Domain.Events;
-using PersonalSite.Persistence;
-using PersonalSite.WebApi.Commands;
+using PersonalSite.Application.Commands;
 
-namespace PersonalSite.WebApi.CommandHandlers;
+namespace PersonalSite.Application.CommandHandlers;
 
 public class CreateJobExperienceCommandHandler : CommandHandler<CreateJobExperienceCommand>
 {
